@@ -80,7 +80,7 @@
                     </button>
                 </div>
                 <div class="text-center mt-4 font-weight-light">
-                    Already have an account? <a href="{{ url('/login2')}}" class="text-primary">Login</a>
+                    Already have an account? <a href="{{ url('/login')}}" class="text-primary">Login</a>
                 </div>
             </form>
         </div>

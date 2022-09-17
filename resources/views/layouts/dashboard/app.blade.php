@@ -23,7 +23,18 @@
   <!-- inject:css -->
   <link rel="stylesheet" href="{{ asset('vendors/css/style.css') }}">
   <!-- endinject -->
-  <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}"/>
+  
+  <style>
+    .hover-show:hover {
+        color: blue;
+    }
+    .hover-edit:hover {
+        color: darkgreen;
+    }
+    .hover-delete:hover {
+        color: red;
+    }
+  </style>
 </head>
 <body>
   <div class="container-scroller">

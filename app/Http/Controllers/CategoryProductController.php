@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\CategoryProduct;
 use Illuminate\Http\Request;
 
 class CategoryProductController extends Controller
@@ -13,7 +14,8 @@ class CategoryProductController extends Controller
      */
     public function index()
     {
-        //
+        $category = CategoryProduct::latest()->get();
+        return view('dashboard.product.category.index', compact('category'));
     }
 
     /**
@@ -23,7 +25,7 @@ class CategoryProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.product.category.create');
     }
 
     /**
@@ -34,7 +36,16 @@ class CategoryProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = request()->validate([
+            'image' => 'required|file|image|mimes:jpeg,jpg,png,gif|max:1024',
+            'name' => 'required|string|unique:category_products,name',
+        ]);
+
+        $validated['image'] = $request->file('image')->store('category-product');
+
+        CategoryProduct::create($validated);
+
+        return redirect()->route('category_product.index');
     }
 
     /**
@@ -45,7 +56,8 @@ class CategoryProductController extends Controller
      */
     public function show($id)
     {
-        //
+        $category = CategoryProduct::find($id);
+        return view('dashboard.product.category.show', compact('category'));
     }
 
     /**
@@ -56,7 +68,8 @@ class CategoryProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = CategoryProduct::find($id);
+        return view('dashboard.product.category.edit', compact('category'));
     }
 
     /**
@@ -68,7 +81,27 @@ class CategoryProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $category = CategoryProduct::find($id);
+
+        if ($request->name !== $category->name) {
+            $validated = request()->validate([
+                'image' => 'file|image|mimes:jpeg,jpg,png,gif|max:1024',
+                'name' => 'required|string|unique:category_products,name',
+            ]);
+        } else {
+            $validated = request()->validate([
+                'image' => 'file|image|mimes:jpeg,jpg,png,gif|max:1024',
+                'name' => 'required|string',
+            ]);
+        }
+
+        if ($request->file('image')) {
+            $validated['image'] = $request->file('image')->store('category-product');
+            unlink(public_path('storage/' . $category->image));
+        }
+
+        CategoryProduct::where('id', $category->id)->update($validated);
+        return redirect()->route('category_product.index');
     }
 
     /**
@@ -79,6 +112,10 @@ class CategoryProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = CategoryProduct::find($id);
+        unlink(public_path('storage/' . $category->image));
+        $category->delete();
+
+        return redirect()->route('category_product.index');
     }
 }
