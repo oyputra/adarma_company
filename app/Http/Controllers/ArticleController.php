@@ -12,11 +12,11 @@ class ArticleController extends Controller
     }
     public function index()
     {
-        return view('admin.article.index');
+        return view('dashboard.article.index');
     }
     public function create()
     {
-        return view('admin.article.create');
+        return view('dashboard.article.create');
     }
     public function store(Request $request)
     {
@@ -40,6 +40,6 @@ class ArticleController extends Controller
     }
     public function category()
     {
-        return view('admin.article.category');
+        return view('dashboard.article.category');
     }
 }

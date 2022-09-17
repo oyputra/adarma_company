@@ -53,8 +53,7 @@
         <div class="collapse" id="product">
             <ul class="nav flex-column sub-menu">
               <li class="nav-item"> <a class="nav-link" href="#">Item</a></li>
-              <li class="nav-item"> <a class="nav-link" href="#">Add</a></li>
-              <li class="nav-item"> <a class="nav-link" href="#">Delete</a></li>
+              <li class="nav-item"> <a class="nav-link" href="#">Category</a></li>
             </ul>
         </div>
       </li>

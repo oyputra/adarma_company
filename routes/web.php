@@ -37,4 +37,5 @@ Route::get('/article/post', 'ArticleController@index')->name('article.post');
 Route::get('/article/add', 'ArticleController@create')->name('article.add');
 Route::get('/article/category', 'ArticleController@category')->name('article.category');
 
+Route::get('/product/item', []);
 Auth::routes();

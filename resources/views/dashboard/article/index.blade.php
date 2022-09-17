@@ -1,4 +1,4 @@
-@extends('layouts.admin.app')
+@extends('layouts.dashboard.app')
 
 @section('content')
 
@@ -11,7 +11,7 @@
                 <div class="card-body">
                     <div>
                         <div class="d-flex align-items-center justify-content-between">
-                            <h4 class="card-title">Category Of Article</h4>
+                            <h4 class="card-title">Post Of Article</h4>
                             <a href="{{ url('article/add') }}">
                                 <i class="icon-plus icon-sm text-primary"></i>
                             </a>
@@ -25,7 +25,10 @@
                         <thead>
                             <tr>
                                 <th class="font-weight-bold text-black">
-                                    Image
+                                    Creator
+                                </th>
+                                <th class="font-weight-bold text-black">
+                                    Article Title
                                 </th>
                                 <th class="font-weight-bold text-black">
                                     Category
@@ -41,7 +44,10 @@
                         <tbody>
                             <tr>
                                 <td class="py-1">
-                                    <img class="img-lg" src="{{ asset('images/agricultural.png') }}" alt="image"/>
+                                    <img class="img-circle" src="../../images/faces/face1.jpg" alt="image"/>
+                                </td>
+                                <td>
+                                    Membuat Web Dengan Tampilan Yang Estetik
                                 </td>
                                 <td>
                                     Web Design
@@ -60,7 +66,10 @@
                             </tr>
                             <tr>
                                 <td class="py-1">
-                                    <img class="img-lg" src="{{ asset('images/agricultural.png') }}" alt="image"/>
+                                    <img class="img-circle" src="../../images/faces/face1.jpg" alt="image"/>
+                                </td>
+                                <td>
+                                    Membuat Web Dengan Tampilan Yang Estetik
                                 </td>
                                 <td>
                                     Web Design
@@ -79,7 +88,10 @@
                             </tr>
                             <tr>
                                 <td class="py-1">
-                                    <img class="img-lg" src="{{ asset('images/agricultural.png') }}" alt="image"/>
+                                    <img class="img-circle" src="../../images/faces/face1.jpg" alt="image"/>
+                                </td>
+                                <td>
+                                    Membuat Web Dengan Tampilan Yang Estetik
                                 </td>
                                 <td>
                                     Web Design
