@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\CategoryProduct;
+use App\Model\Product;
 use Illuminate\Http\Request;
 
 class CategoryProductController extends Controller
@@ -113,8 +114,20 @@ class CategoryProductController extends Controller
     public function destroy($id)
     {
         $category = CategoryProduct::find($id);
-        unlink(public_path('storage/' . $category->image));
-        $category->delete();
+        $product = Product::get();
+
+        if ($product->where('category_id', $category->id)->first() !== null) {
+            unlink(public_path('storage/' . $category->image));
+            $category->delete();
+
+            foreach ($product->where('category_id', $category->id) as $row) {
+                unlink(public_path('storage/' . $row->image));
+                $row->delete();
+            }
+        } else {
+            unlink(public_path('storage/' . $category->image));
+            $category->delete();
+        }
 
         return redirect()->route('category_product.index');
     }

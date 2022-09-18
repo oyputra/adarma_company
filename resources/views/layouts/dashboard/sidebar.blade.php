@@ -52,7 +52,7 @@
         </a>            
         <div class="collapse" id="product">
             <ul class="nav flex-column sub-menu">
-              <li class="nav-item"> <a class="nav-link" href="#">Item</a></li>
+              <li class="nav-item"> <a class="nav-link" href="{{ route('product.index') }}">Item</a></li>
               <li class="nav-item"> <a class="nav-link" href="{{ route('category_product.index') }}">Category</a></li>
             </ul>
         </div>

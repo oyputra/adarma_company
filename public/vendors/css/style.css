@@ -12112,8 +12112,8 @@ fieldset:disabled .ajax-upload-dragdrop a.ajax-file-upload,
 .btn-primary:focus,
 .btn-primary.focus {
   color: #fff;
-  background-color: #e811fb;
-  border-color: #e705fb;
+  background-color: #10551f;
+  border-color: #10551f;
   box-shadow: 0 0 0 0.2rem rgba(239, 85, 252, 0.5);
 }
 
@@ -12128,14 +12128,14 @@ fieldset:disabled .ajax-upload-dragdrop a.ajax-file-upload,
 .btn-primary:not(:disabled):not(.disabled).active,
 .show>.btn-primary.dropdown-toggle {
   color: #fff;
-  background-color: #e705fb;
-  border-color: #dc04f0;
+  background-color: #10551f;
+  border-color: #10551f;
 }
 
 .btn-primary:not(:disabled):not(.disabled):active:focus,
 .btn-primary:not(:disabled):not(.disabled).active:focus,
 .show>.btn-primary.dropdown-toggle:focus {
-  box-shadow: 0 0 0 0.2rem rgba(239, 85, 252, 0.5);
+  box-shadow: #10551f;
 }
 
 .btn-secondary {
@@ -16529,14 +16529,14 @@ a.close.disabled {
 }
 
 .bg-primary {
-  background-color: #ec37fc !important;
+  background-color: blue !important;
 }
 
 a.bg-primary:hover,
 a.bg-primary:focus,
 button.bg-primary:hover,
 button.bg-primary:focus {
-  background-color: #e705fb !important;
+  background-color: darkblue !important;
 }
 
 .bg-secondary {
@@ -22592,12 +22592,12 @@ code {
 
 .form-check-primary.form-check label input[type="checkbox"]+.input-helper:before,
 .form-check-primary.form-check label input[type="radio"]+.input-helper:before {
-  border-color: #ec37fc;
+  border-color: #146a27;
 }
 
 .form-check-primary.form-check label input[type="checkbox"]:checked+.input-helper:before,
 .form-check-primary.form-check label input[type="radio"]:checked+.input-helper:before {
-  background: #ec37fc;
+  background: #146a27;
 }
 
 .form-check-secondary.form-check label input[type="checkbox"]+.input-helper:before,

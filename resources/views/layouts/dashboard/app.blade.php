@@ -23,7 +23,6 @@
   <!-- inject:css -->
   <link rel="stylesheet" href="{{ asset('vendors/css/style.css') }}">
   <!-- endinject -->
-  
   <style>
     .hover-show:hover {
         color: blue;
@@ -80,6 +79,14 @@
   <script src="{{ asset('js/typeahead.js') }}"></script>
   <script src="{{ asset('js/select2.js') }}"></script>
   <!-- End custom js for this page-->
+  {{-- CK Editor --}}
+  <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+  <script type="text/javascript">
+      $(document).ready(function() {
+        $('.ckeditor').ckeditor();
+      });
+  </script>
+  {{-- CK EditorEnd --}}
 </body>
 
 </html>
