@@ -25,8 +25,22 @@
                             <div class="col-md-12 d-flex">
                                 <img src="{{ asset('storage/' . $category->image) }}" class="img-fluid col-md-6" alt="">
                                 <div class="col-md-6">
-                                    <p>Name: {{ $category->name }}</p>
-                                    <p>Published: {{ $category->created_at }}</p>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            Name
+                                        </div>
+                                        <div class="col-md-8 text-black">
+                                            : {{ $category->name }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            Published
+                                        </div>
+                                        <div class="col-md-8 text-black">
+                                            : {{ $category->created_at }}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

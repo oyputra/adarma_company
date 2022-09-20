@@ -127,13 +127,13 @@
                                             <div class="d-flex">
                                                 <div class="form-check form-check-primary mr-3">
                                                     <label for="status" class="form-check-label">
-                                                    <input type="radio" class="form-check-input" name="status" id="status" value="Available" @if(old('status')) checked @endif>
+                                                    <input type="radio" class="form-check-input" name="status" id="status" value="Available" @if(old('status') === "Available") checked @endif>
                                                     Available
                                                     <i class="input-helper"></i></label>
                                                 </div>
                                                 <div class="form-check form-check-primary">
                                                     <label class="form-check-label">
-                                                    <input type="radio" class="form-check-input" name="status" id="status" value="Not Available" @if(old('status')) checked @endif>
+                                                    <input type="radio" class="form-check-input" name="status" id="status" value="Not Available" @if(old('status') === "Not Available") checked @endif>
                                                     Not Available
                                                     <i class="input-helper"></i></label>
                                                 </div>
