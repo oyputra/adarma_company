@@ -57,7 +57,7 @@
                                             {{ $row->category->name }}
                                         </td>
                                         <td>
-                                            {{ $row->price }}/{{ $row->unit }}
+                                            Rp{{ number_format($row->price) }}/{{ $row->unit }}
                                         </td>
                                         <td>
                                             <span class="@if($row->status ===  'Available') bg-primary @else bg-danger @endif py-2 px-3 text-white rounded-pill">{{ $row->status }}</span>

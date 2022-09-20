@@ -46,7 +46,7 @@
                                             Price/Unit
                                         </div>
                                         <div class="col-md-8 text-black">
-                                            : {{ $product->price }}/{{ $product->unit }}
+                                            : Rp{{ number_format($product->price) }}/{{ $product->unit }}
                                         </div>
                                     </div>
                                     <div class="row">
