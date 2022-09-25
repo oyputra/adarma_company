@@ -21,8 +21,8 @@ class CreateArticlesTable extends Migration
             $table->string('slug');
             $table->integer('editor');
             $table->string('writer');
-            $table->integer('relate_article_first_id');
-            $table->integer('relate_article_second_id');
+            $table->integer('relate_article_first')->nullable();
+            $table->integer('relate_article_second')->nullable();
             $table->string('body');
             $table->timestamps();
         });

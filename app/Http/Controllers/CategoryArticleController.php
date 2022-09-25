@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Article;
+use App\Model\CategoryArticle;
 use Illuminate\Http\Request;
 
 class CategoryArticleController extends Controller
@@ -13,7 +15,8 @@ class CategoryArticleController extends Controller
      */
     public function index()
     {
-        //
+        $category = CategoryArticle::latest()->get();
+        return view('dashboard.article.category.index', compact('category'));
     }
 
     /**
@@ -23,7 +26,7 @@ class CategoryArticleController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.article.category.create');
     }
 
     /**
@@ -34,7 +37,16 @@ class CategoryArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = request()->validate([
+            'image' => 'required|file|image|mimes:jpeg,jpg,png,gif|max:1024',
+            'name' => 'required|string|unique:category_articles,name',
+        ]);
+
+        $validated['image'] = $request->file('image')->store('category-article');
+
+        CategoryArticle::create($validated);
+
+        return redirect()->route('category_article.index');
     }
 
     /**
@@ -45,7 +57,8 @@ class CategoryArticleController extends Controller
      */
     public function show($id)
     {
-        //
+        $category = CategoryArticle::find($id);
+        return view('dashboard.article.category.show', compact('category'));
     }
 
     /**
@@ -56,7 +69,8 @@ class CategoryArticleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = CategoryArticle::find($id);
+        return view('dashboard.article.category.edit', compact('category'));
     }
 
     /**
@@ -68,7 +82,27 @@ class CategoryArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $category = CategoryArticle::find($id);
+
+        if ($request->name !== $category->name) {
+            $validated = request()->validate([
+                'image' => 'file|image|mimes:jpeg,jpg,png,gif|max:1024',
+                'name' => 'required|string|unique:category_articles,name',
+            ]);
+        } else {
+            $validated = request()->validate([
+                'image' => 'file|image|mimes:jpeg,jpg,png,gif|max:1024',
+                'name' => 'required|string',
+            ]);
+        }
+
+        if ($request->file('image')) {
+            $validated['image'] = $request->file('image')->store('category-article');
+            unlink(public_path('storage/' . $category->image));
+        }
+
+        CategoryArticle::where('id', $category->id)->update($validated);
+        return redirect()->route('category_article.index');
     }
 
     /**
@@ -79,6 +113,22 @@ class CategoryArticleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = CategoryArticle::find($id);
+        $article = Article::get();
+
+        if ($article->where('category_id', $category->id)->first() !== null) {
+            unlink(public_path('storage/' . $category->image));
+            $category->delete();
+
+            foreach ($article->where('category_id', $category->id) as $row) {
+                unlink(public_path('storage/' . $row->image));
+                $row->delete();
+            }
+        } else {
+            unlink(public_path('storage/' . $category->image));
+            $category->delete();
+        }
+
+        return redirect()->route('category_article.index');
     }
 }

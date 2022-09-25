@@ -40,7 +40,7 @@
         <div class="collapse" id="article">
             <ul class="nav flex-column sub-menu">
               <li class="nav-item"> <a class="nav-link" href="{{ url('/article/post') }}">Post</a></li>
-              <li class="nav-item"> <a class="nav-link" href="{{ url('/article/category') }}">Category</a></li>
+              <li class="nav-item"> <a class="nav-link" href="{{ route('category_article.index') }}">Category</a></li>
             </ul>
         </div>
       </li>
