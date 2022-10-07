@@ -3,7 +3,7 @@
         <div class="row justify-content-md-between pb-5">
             <div class="col-md-3 col mt-5 d-flex flex-md-column justify-content-between justify-content-md-start align-items-center">
                 <div class="d-flex justify-content-center">
-                    <img src="images/logo.png" width="70" height="70">
+                    <img src="{{ asset('images/logo.png') }}" width="70" height="70">
                 </div>
                 <div class="d-flex mt-md-4">
                     <div class="mx-3">
@@ -52,7 +52,7 @@
                     <div class="input-group">
                         <input type="text" name="email-send" class="form-control pl-3 py-4" placeholder="Email Address" style="border-radius: 25px 0 0 25px; box-shadow: none; border: none;">
                         <button class="btn bg-white" type="button" id="button-addon2"  style="border-radius: 0 25px 25px 0;">
-                            <img src="images/button-send.png" alt="" class="" width="30">
+                            <img src="{{ asset('images/button-send.png') }}" alt="" class="" width="30">
                         </button>
                     </div>
                 </div>

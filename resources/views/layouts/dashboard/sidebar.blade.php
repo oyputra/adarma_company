@@ -12,24 +12,16 @@
     </div>
     <ul class="nav">
       <li class="nav-item">
-        <a class="nav-link" href="{{ url('/home') }}">
+        <a class="nav-link" href="{{ route('dashboard') }}">
           <i class="icon-box menu-icon"></i>
           <span class="menu-title">Dashboard</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-          <i class="icon-content-left menu-icon"></i>
+        <a class="nav-link" href="#">
+          <i class="icon-box menu-icon"></i>
           <span class="menu-title">Landing Page</span>
-          <i class="menu-arrow"></i>
         </a>
-        <div class="collapse" id="ui-basic">
-          <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="#">Home</a></li>
-            <li class="nav-item"> <a class="nav-link" href="#">About</a></li>
-            <li class="nav-item"> <a class="nav-link" href="#">Profile</a></li>
-          </ul>
-        </div>
       </li>
       <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#article" aria-expanded="false" aria-controls="article">
@@ -39,7 +31,7 @@
         </a>            
         <div class="collapse" id="article">
             <ul class="nav flex-column sub-menu">
-              <li class="nav-item"> <a class="nav-link" href="{{ url('/article/post') }}">Post</a></li>
+              <li class="nav-item"> <a class="nav-link" href="{{ route('article.index') }}">Post</a></li>
               <li class="nav-item"> <a class="nav-link" href="{{ route('category_article.index') }}">Category</a></li>
             </ul>
         </div>

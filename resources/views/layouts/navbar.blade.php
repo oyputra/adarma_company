@@ -3,12 +3,12 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <a class="navbar-toggler my-4" href="{{ url('/') }}">
-        <img src="images/logo.png" width="50" height="50" class="d-inline-block align-text-top">
+        <img src="{{ asset('images/logo.png') }}" width="50" height="50" class="d-inline-block align-text-top">
     </a>
     <div class="collapse navbar-collapse bg-navbar-responsive" id="navbarTogglerDemo03">
         <div class="d-flex me-auto">
             <a class="navbar-brand hidden-responsive" href="{{ url('/') }}">
-                <img src="images/logo.png" width="50" height="50" class="d-inline-block align-text-top">
+                <img src="{{ asset('images/logo.png') }}" width="50" height="50" class="d-inline-block align-text-top">
             </a>
             <div>
                 <div class="fw-bolder fs-3">CV. Arta Mandiri</div>
@@ -24,10 +24,13 @@
                 <a class="nav-link px-4 text-white" aria-current="page" href="{{ url('/#about') }}">About</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link px-4 text-white" aria-current="page" href="{{ ('/#profil') }}">Profile</a>
+                <a class="nav-link px-4 text-white" aria-current="page" href="{{ url('/#profil') }}">Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link px-4 text-white" aria-current="page" href="{{ route('product') }}">Product</a>
             </li>
             <li class="nav-item margin-right-1">
-                <a class="nav-link px-4 text-white" aria-current="page" href="{{ url('article') }}">Article</a>
+                <a class="nav-link px-4 text-white" aria-current="page" href="{{ route('article') }}">Article</a>
             </li>
 
             @guest
@@ -44,14 +47,14 @@
                         <li class="text-green px-3">{{ Auth::user()->name }}</li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" href="{{ url('/home') }}">
+                            <a class="dropdown-item d-flex align-items-center" href="{{ route('dashboard') }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-patch-check-fill text-green" viewBox="0 0 16 16">
                                     <path d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708z"/>
                                 </svg>
                                 <span class="ml-3">Dashboard</span>
                             </a>
                         </li>
-                        <li>
+                        {{-- <li>
                             <a class="dropdown-item d-flex align-items-center" href="#">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-shield-lock" viewBox="0 0 16 16">
                                     <path d="M5.338 1.59a61.44 61.44 0 0 0-2.837.856.481.481 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.725 10.725 0 0 0 2.287 2.233c.346.244.652.42.893.533.12.057.218.095.293.118a.55.55 0 0 0 .101.025.615.615 0 0 0 .1-.025c.076-.023.174-.061.294-.118.24-.113.547-.29.893-.533a10.726 10.726 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067c-.53 0-1.552.223-2.662.524zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.775 11.775 0 0 1-2.517 2.453 7.159 7.159 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7.158 7.158 0 0 1-1.048-.625 11.777 11.777 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 62.456 62.456 0 0 1 5.072.56z"/>
@@ -59,7 +62,7 @@
                                 </svg>
                                 <span class="ml-3">Password</span>
                             </a>
-                        </li>
+                        </li> --}}
                         <li><hr class="dropdown-divider"></li>
                         <li>
                             <a class="dropdown-item d-flex align-items-center" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

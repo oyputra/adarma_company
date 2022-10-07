@@ -70,13 +70,13 @@
                                         </td>
                                         <td>
                                             <div class="d-flex align-items-center">
-                                                <a href="{{ route('article.show', $row->id) }}" class="mr-3">
+                                                <a href="{{ route('article.show', $row->slug) }}" class="mr-3">
                                                     <i class="fa fa-eye fa-lg text-black hover-show"></i>
                                                 </a>
-                                                <a href="{{ route('article.edit', $row->id) }}" class="mr-2">
+                                                <a href="{{ route('article.edit', $row->slug) }}" class="mr-2">
                                                     <i class="fa fa-pencil-square-o fa-lg text-black hover-edit"></i>
                                                 </a>
-                                                <form action="{{ route('article.destroy', $row->id) }}" method="POST">
+                                                <form action="{{ route('article.destroy', $row->slug) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                     <button type="submit" style="border: none; background-color:transparent;">

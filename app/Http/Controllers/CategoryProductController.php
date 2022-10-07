@@ -15,8 +15,10 @@ class CategoryProductController extends Controller
      */
     public function index()
     {
+        $title = 'Category Product';
+
         $category = CategoryProduct::latest()->get();
-        return view('dashboard.product.category.index', compact('category'));
+        return view('dashboard.product.category.index', compact('category', 'title'));
     }
 
     /**
@@ -26,7 +28,9 @@ class CategoryProductController extends Controller
      */
     public function create()
     {
-        return view('dashboard.product.category.create');
+        $title = 'Add Category Product';
+
+        return view('dashboard.product.category.create', compact('title'));
     }
 
     /**
@@ -57,8 +61,10 @@ class CategoryProductController extends Controller
      */
     public function show($id)
     {
+        $title = 'Show Category Product';
+
         $category = CategoryProduct::find($id);
-        return view('dashboard.product.category.show', compact('category'));
+        return view('dashboard.product.category.show', compact('category', 'title'));
     }
 
     /**
@@ -69,8 +75,10 @@ class CategoryProductController extends Controller
      */
     public function edit($id)
     {
+        $title = 'Edit Category Product';
+
         $category = CategoryProduct::find($id);
-        return view('dashboard.product.category.edit', compact('category'));
+        return view('dashboard.product.category.edit', compact('category', 'title'));
     }
 
     /**

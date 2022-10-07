@@ -14,14 +14,18 @@ class ArticleController extends Controller
     }
     public function index()
     {
+        $title = 'Article';
+
         $article = Article::latest()->get();
-        return view('dashboard.article.index', compact('article'));
+        return view('dashboard.article.index', compact('article', 'title'));
     }
     public function create()
     {
+        $title = 'Add Article';
+
         $category = CategoryArticle::get();
         $article = Article::get();
-        return view('dashboard.article.create', compact('category', 'article'));
+        return view('dashboard.article.create', compact('category', 'article', 'title'));
     }
     public function store(Request $request)
     {
@@ -38,24 +42,25 @@ class ArticleController extends Controller
         ]);
         
         $validated['image'] = $request->file('image')->store('article');
-
+        $validated['slug'] = str_replace(' ', '-', strtolower($validated['slug']));
         Article::create($validated);
 
         return redirect()->route('article.index');
     }
-    public function show($id)
+    public function show(Article $article)
     {
-        $article = Article::find($id);
+        $title = 'Show Article';
 
-        return view('dashboard.article.show', compact('article'));
+        return view('dashboard.article.show', compact('article', 'title'));
     }
-    public function edit($id)
+    public function edit(Article $article)
     {
-        $article = Article::find($id);
+        $title = 'Edit Article';
+
         $articles = Article::get();
         $category = CategoryArticle::get();
 
-        return view('dashboard.article.edit', compact('article', 'articles', 'category'));
+        return view('dashboard.article.edit', compact('article', 'articles', 'category', 'title'));
     }
     public function update(Request $request, $id)
     {
@@ -77,15 +82,15 @@ class ArticleController extends Controller
             $validated['image'] = $request->file('image')->store('article');
             unlink(public_path('storage/' . $article->image));
         }
-
+        $validated['slug'] = str_replace(' ', '-', strtolower($validated['slug']));
+        
         Article::where('id', $article->id)->update($validated);
 
         return redirect()->route('article.index');
     }
-    public function destroy($id)
+    public function destroy(Article $article)
     {
         $articles = Article::get();
-        $article = Article::find($id);
 
         foreach ($articles as $row) {
             $row->where('relate_article_first', $article->id)->update([

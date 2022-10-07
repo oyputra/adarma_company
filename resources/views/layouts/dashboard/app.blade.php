@@ -5,7 +5,7 @@
   <!-- Required meta tags --> 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Adarma Mandiri - Dashboard dashboard</title>
+  <title>Adarma Mandiri | {{ $title }}</title>
   <link rel="icon" type="image/x-icon" href="{{ asset('images/logo.png') }}">
   <!-- base:css -->
   <link rel="stylesheet" href="{{ asset('vendors/mdi/css/materialdesignicons.min.css') }}">

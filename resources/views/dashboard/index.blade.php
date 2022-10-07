@@ -6,37 +6,47 @@
   <div class="content-wrapper">
     <div class="row">
       <div class="col-sm-12 mb-4 mb-xl-0">
-        <h4 class="font-weight-bold text-dark">Hi, welcome back!</h4>
+        <h4 class="font-weight-bold text-dark">Hi <span class="text-primary">{{ auth()->user()->name }}</span>, welcome back!</h4>
         <div hidden>{{ date_default_timezone_set('Asia/Jakarta') }}</div>
         <p class="font-weight-normal mb-2 text-muted">{{ date("F d, Y") }}</p>
       </div>
     </div>
     <div class="row mt-3">
-      <div class="col-xl-3 flex-column d-flex grid-margin stretch-card">
+      <div class="col-xl-12 flex-column d-flex grid-margin stretch-card">
         <div class="row flex-grow">
-          <div class="col-sm-12 grid-margin stretch-card">
+          <div class="col-xl-4 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Customers</h4>
-                    <p>23% increase in conversion</p>
-                    <h4 class="text-dark font-weight-bold mb-2">43,981</h4>
-                    <canvas id="customers"></canvas>
+                    <p>Total</p>
+                    <h4 class="text-dark font-weight-bold mb-2">{{ count($user) }} User</h4>
+                    <a href="">View</a>
                 </div>
               </div>
           </div>
-          <div class="col-sm-12 stretch-card">
+          <div class="col-xl-4 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Orders</h4>
-                    <p>6% decrease in earnings</p>
-                    <h4 class="text-dark font-weight-bold mb-2">55,543</h4>
-                    <canvas id="orders"></canvas>
+                  <h4 class="card-title">Products</h4>
+                  <p>Total</p>
+                  <h4 class="text-dark font-weight-bold mb-2">{{ count($products) }} Product</h4>
+                  <a href="{{ route('product.index') }}">View</a>
                 </div>
               </div>
-        </div>
+          </div>
+          <div class="col-xl-4 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Articles</h4>
+                  <p>Total</p>
+                  <h4 class="text-dark font-weight-bold mb-2">{{ count($articles) }} Article</h4>
+                  <a href="{{ route('article.index') }}">View</a>
+                </div>
+              </div>
+          </div>
         </div>
       </div>
-      <div class="col-xl-9 d-flex grid-margin stretch-card">
+      {{-- <div class="col-xl-9 d-flex grid-margin stretch-card">
           <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Website Audience Metrics</h4>
@@ -56,7 +66,7 @@
                   
               </div>
             </div>
-      </div>
+      </div> --}}
     </div>
     <div class="row">
         <div class="col-xl-4 grid-margin stretch-card">
@@ -199,7 +209,7 @@
           <div class="card-body">
               <h4 class="card-title">Top Sellers</h4>
               <div class="table-responsive mt-3">
-                <table class="table table-header-bg">
+                <table id="example" class="table table-striped table-bordered table-header-bg">
                   <thead>
                     <tr>
                       <th>

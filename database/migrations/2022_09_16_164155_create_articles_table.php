@@ -18,12 +18,12 @@ class CreateArticlesTable extends Migration
             $table->string('image');
             $table->string('title');
             $table->integer('category_id');
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->integer('editor');
             $table->string('writer');
             $table->integer('relate_article_first')->nullable();
             $table->integer('relate_article_second')->nullable();
-            $table->string('body');
+            $table->longText('body');
             $table->timestamps();
         });
     }
