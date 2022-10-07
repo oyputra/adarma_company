@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->integer('category_id');
             $table->string('image');
             $table->string('slug')->unique();
-            $table->float('price', 10, 2);
+            $table->string('price');
             $table->string('unit');
             $table->string('status');
             $table->longText('description');

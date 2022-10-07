@@ -45,7 +45,8 @@ class ProductController extends Controller
         $validated = request()->validate([
             'name' => 'required|string',
             'category_id' => 'required|integer',
-            'price' => 'required|numeric',
+            'slug' => 'required|string|unique:products,slug',
+            'price' => 'required|string',
             'unit' => 'required|string',
             'status' => 'required|string',
             'description' => 'required|string',
@@ -53,6 +54,7 @@ class ProductController extends Controller
         ]);
 
         $validated['image'] = $request->file('image')->store('product');
+        $validated['slug'] = str_replace(' ', '-', strtolower($validated['slug']));
 
         Product::create($validated);
 
@@ -100,20 +102,36 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
 
-        $validated = request()->validate([
-            'name' => 'required|string',
-            'category_id' => 'required|integer',
-            'price' => 'required|numeric',
-            'unit' => 'required|string',
-            'status' => 'required|string',
-            'description' => 'required|string',
-            'image' => 'file|image|mimes:jpeg,jpg,png,gif|max:1024',
-        ]);
+        if ($request->slug !== $product->slug) {
+            $validated = request()->validate([
+                'name' => 'required|string',
+                'category_id' => 'required|integer',
+                'slug' => 'required|string|unique:products,slug',
+                'price' => 'required|string',
+                'unit' => 'required|string',
+                'status' => 'required|string',
+                'description' => 'required|string',
+                'image' => 'file|image|mimes:jpeg,jpg,png,gif|max:1024',
+            ]);
+        } else {
+            $validated = request()->validate([
+                'name' => 'required|string',
+                'category_id' => 'required|integer',
+                'slug' => 'required|string',
+                'price' => 'required|string',
+                'unit' => 'required|string',
+                'status' => 'required|string',
+                'description' => 'required|string',
+                'image' => 'file|image|mimes:jpeg,jpg,png,gif|max:1024',
+            ]);
+        }
+
 
         if ($request->file('image')) {
             $validated['image'] = $request->file('image')->store('product');
             unlink(public_path('storage/' . $product->image));
         }
+        $validated['slug'] = str_replace(' ', '-', strtolower($validated['slug']));
 
         Product::where('id', $product->id)->update($validated);
 

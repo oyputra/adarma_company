@@ -72,6 +72,21 @@
                         </div>
 
                         <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group row">
+                                    <label for="slug" class="col-md-2 col-form-label">Slug</label>
+                                    <div class="col-sm-10">
+                                        <input id="slug" name="slug" type="text" class="form-control @error('slug') is-invalid @enderror" value="{{ $product->slug }}"/>
+
+                                        @error('slug')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group row">
                                     <label for="price" class="col-md-4 col-form-label">Price</label>

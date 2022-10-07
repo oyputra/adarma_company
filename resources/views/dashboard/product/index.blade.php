@@ -21,7 +21,7 @@
                             {{ count($product) }} Products
                         </p>
                         <div class="table-responsive">
-                            <table class="table table-striped">
+                            <table id="myTable" class="table table-striped">
                             <thead>
                                 <tr>
                                     <th class="font-weight-bold text-black">
@@ -57,9 +57,9 @@
                                             {{ $row->category->name }}
                                         </td>
                                         <td>
-                                            Rp{{ number_format($row->price) }}/{{ $row->unit }}
+                                            {{ $row->price }}/{{ $row->unit }}
                                         </td>
-                                        <td>
+                                        <td style="white-space: nowrap;">
                                             <span class="@if($row->status ===  'Available') bg-primary @else bg-danger @endif py-2 px-3 text-white rounded-pill">{{ $row->status }}</span>
                                         </td>
                                         <td>

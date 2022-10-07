@@ -27,7 +27,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [FrontEndController::class, 'home'])->name('home');
 
 Route::get('/product', [FrontEndController::class, 'product'])->name('product');
-Route::get('/product/', [FrontEndController::class, 'product'])->name('product');
+Route::get('/product', [FrontEndController::class, 'product'])->name('product');
 Route::post('/product', [FrontEndController::class, 'product_filter'])->name('product.filter');
 
 Route::get('/article', [FrontEndController::class, 'article'])->name('article');

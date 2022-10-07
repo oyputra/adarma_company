@@ -23,6 +23,7 @@
   <!-- inject:css -->
   <link rel="stylesheet" href="{{ asset('vendors/css/style.css') }}">
   <!-- endinject -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
   <style>
     .hover-show:hover {
         color: blue;
@@ -79,6 +80,7 @@
   <script src="{{ asset('js/typeahead.js') }}"></script>
   <script src="{{ asset('js/select2.js') }}"></script>
   <!-- End custom js for this page-->
+</body>
   {{-- CK Editor --}}
   <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
   <script type="text/javascript">
@@ -87,6 +89,37 @@
       });
   </script>
   {{-- CK EditorEnd --}}
-</body>
-
+  {{-- DataTables --}}
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script>
+      $(document).ready( function () {
+          $('#myTable').DataTable({
+            // "scrollX": true
+          });
+      } );
+    </script>
+  {{-- DataTables End --}}
+  {{-- Format IDR --}}
+  <script>
+    document.querySelectorAll('input[type-currency="IDR"]').forEach((element) => {
+      element.addEventListener('keyup', function(e) {
+      let cursorPostion = this.selectionStart;
+        let value = parseInt(this.value.replace(/[^,\d]/g, ''));
+        let originalLenght = this.value.length;
+        if (isNaN(value)) {
+          this.value = "";
+        } else {    
+          this.value = value.toLocaleString('id-ID', {
+            currency: 'IDR',
+            style: 'currency',
+            minimumFractionDigits: 0
+          });
+          cursorPostion = this.value.length - originalLenght + cursorPostion;
+          this.setSelectionRange(cursorPostion, cursorPostion);
+        }
+      });
+    });
+  </script>
+  {{-- Format IDR End --}}
 </html>

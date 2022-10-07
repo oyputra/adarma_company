@@ -75,11 +75,26 @@
                             </div>
 
                             <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <label for="slug" class="col-md-2 col-form-label">Slug</label>
+                                        <div class="col-sm-10">
+                                            <input id="slug" name="slug" type="text" class="form-control @error('slug') is-invalid @enderror" value="{{ old('slug') }}"/>
+
+                                            @error('slug')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group row">
                                         <label for="price" class="col-md-4 col-form-label">Price</label>
                                         <div class="col-sm-8">
-                                            <input id="price" name="price" type="text" class="form-control @error('price') is-invalid @enderror" value="{{ old('price') }}"/>
+                                            <input id="price" name="price" type="text" type-currency="IDR" placeholder="Rp" class="form-control input-currency @error('price') is-invalid @enderror" value="{{ old('price') }}"/>
 
                                             @error('price')
                                                 <span class="text-danger">{{ $message }}</span>
@@ -89,7 +104,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label for="unit" class="col-md-3 col-form-label">Unit</label>
+                                        <label for="unit" class="col-md-3 col-form-label">/ Unit</label>
                                         <div class="col-sm-9">
                                             <input id="unit" name="unit" type="text" class="form-control @error('unit') is-invalid @enderror" value="{{ old('unit') }}"/>
 
