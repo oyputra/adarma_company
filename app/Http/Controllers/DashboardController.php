@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\Article;
 use App\Model\Product;
+use App\Model\Role;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -28,10 +29,11 @@ class DashboardController extends Controller
     {
         $title = 'Dashboard';
 
-        $user = User::get();
+        $user = User::where('role_id', 1)->get();
         $products = Product::get();
         $articles = Article::get();
-        return view('dashboard.index', compact('title', 'user', 'products', 'articles'));
+        $roles = Role::get();
+        return view('dashboard.index', compact('title', 'user', 'products', 'articles', 'roles'));
     }
 
     /**

@@ -13,10 +13,13 @@
                     <div class="position-absolute top-100 mt-landing-1">
                         <div class="mb-3 rounded-shadow-card bg-white">
                             <div class="row g-0">
-                                <img src="{{ 'storage/' . $article->image }}" class="col-md-4 object-cover rounded-shadow-card-left rounded-shadow-card-top" alt="...">
+                                <img src="{{ asset('storage/' . $article->image) }}" class="col-md-4 object-cover rounded-shadow-card-left rounded-shadow-card-top" alt="...">
                                 <div class="col-md-8">
                                     <div class="mx-4 my-4">
-                                        <h1 class="fw-bolder fs-2 pb-4">{{ $article->title }}</h1>
+                                        <div class="pb-4">
+                                            <h1 class="fw-bolder fs-2">{{ $article->title }}</h1>
+                                            <p class="text-muted">{{ $article->category->name }}</p>
+                                        </div>
                                         <div class="d-flex justify-content-between">
                                             <div class="d-flex">
                                                 <div class="lh-xs">
@@ -35,7 +38,7 @@
                                         </div>
                                         <div class="mt-3">
                                             <p class="card-text text-justify">{!! strip_tags(Str::limit($article->body, 200, '...')) !!}</p>
-                                            <a href="{{ route('article.show', $article->slug) }}" class="btn btn-primary text-white rounded-pill mt-5"><span class="px-1">Selengkapnya</span></a>
+                                            <a href="{{ route('article.show', $article->slug) }}" class="btn btn-dark text-white rounded-pill mt-5"><span class="px-1">Selengkapnya</span></a>
                                         </div>
                                     </div>
                                 </div>
@@ -49,16 +52,34 @@
     @if (isset($article))
         <section class="mt-landing-3">
             <div class="container">
+                <div class="row">
+                    <div class="my-3 d-flex justify-content-between">
+                        <div>
+                            <h3 class="mr-3">{{ count($articles) }} Article</h3>
+                        </div>
+                        <div class="dropdown">
+                            <button class="border-category dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                              Filter Category
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="{{ route('article') }}">All Product</a></li>
+                                @foreach ($category as $row)
+                                    <li><a class="dropdown-item" href="{{ route('article.filter', $row->name) }}">{{ $row->name }}</a></li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                </div>
                 <div class="row row-cols-md-3 row-cols-2">
                     @foreach ($articles as $item)
                         <div class="col my-3">
                             <div class="card rounded-shadow-card">
-                                <img src="{{ asset('storage/' . $item->image) }}" class="card-img-top rounded-shadow-card-top" alt="...">
+                                <img src="{{ asset('storage/' . $item->image) }}" class="card-img-top rounded-shadow-card-top object-cover" style="height: 250px">
                                 <div class="card-body">
                                     <div>
-                                        <p class="card-text text-muted">{{ $item->category->name }}</p>
-                                        <h5 class="card-title">{{ $item->title }}</h5>
-                                        <a href="{{ route('article.show', $item->slug) }}" class="btn btn-primary text-white rounded-pill mt-3"><span class="px-1">Selengkapnya</span></a>
+                                        <p class="card-text text-muted text-xs-phone">{{ $item->category->name }}</p>
+                                        <h5 class="card-title text-sm-phone">{{ $item->title }}</h5>
+                                        <a href="{{ route('article.show', $item->slug) }}" class="btn btn-dark text-white rounded-pill mt-3"><span class="px-1 text-sm-phone">Selengkapnya</span></a>
                                     </div>
                                 </div>
                             </div>

@@ -109,34 +109,29 @@
             <h1 class="fw-bolder fs-3">Our Product</h1>
             <h1 class="fw-bolder fs-landing-2 text-green ">High Quality Product from trusted Farmer and Manufacture</h1>
         </div> 
-        <div class="py-5 col align-items-center">
-            <div class="card rounded-shadow-card">
-                <div class="row card-body">
-                    <div class="col-md-8 col-12 position-relative mt-3">
-                        <img src="images/agricultural.png" class="img-fluid rounded-img">
-                        <h1 class="position-absolute bottom-50 col-8 text-white px-5 fw-bold fs-landing-3">Agricultural Product</h1>
-                        <div class="d-flex position-absolute top-50 mt-5 px-5">
-                            <button type="button" class="btn bg-green btn-lg text-white fw-bold"><span class="px-3">Detail</span></button>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-12 d-flex d-md-grid gap-3 mt-3">
-                        <div class="row position-relative">
-                            <img src="images/agricultural.png" class="img-fluid rounded-img" style="filter: blur(8px); -webkit-filter: blur(3px);">
-                            <div class="position-absolute d-flex justify-content-center align-self-center">
-                                <h1 class="text-white fw-bold fs-landing-2">Agricultural</h1>
-                            </div>
-                        </div>
-                        <div class="row position-relative">
-                            <img src="images/agricultural.png" class="img-fluid rounded-img" style="filter: blur(8px); -webkit-filter: blur(3px);">
-                            <div class="position-absolute d-flex justify-content-center align-self-center">
-                                <h1 class="text-white fw-bold fs-landing-2">Industrial</h1>
-                            </div>
-                        </div>
-                    </div>
+
+        <div class="py-5 row">
+            <div class="row">
+                <div class="d-flex justify-content-between">
+                    <h3 class="font-weight-bold">Category Product</h3>
+                    <p><a href="{{ route('product') }}">View All <i class="fa fa-long-arrow-right"></i></a></p>
                 </div>
             </div>
+            <div class="row row-cols-3">
+                @foreach ($category as $item)
+                    <div class="col">
+                        <a href="{{ route('product.filter', $item->name) }}">
+                            <div class="position-relative my-3">
+                                <img src="{{ asset('storage/' . $item->image) }}" class="img-fluid" style="height:250px; object-fit: cover;">
+                                <h1 class="position-absolute text-center text-white z-10 fw-bold fs-landing-4" style="inset: 100px 0;">{{ $item->name }}</h1>
+                                <div class="position-absolute card-link"></div>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
+            </div>
         </div>
-</section>
+    </section>
 
 @endsection
 

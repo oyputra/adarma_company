@@ -28,18 +28,24 @@ Route::get('/', [FrontEndController::class, 'home'])->name('home');
 
 Route::get('/product', [FrontEndController::class, 'product'])->name('product');
 Route::get('/product', [FrontEndController::class, 'product'])->name('product');
-Route::post('/product', [FrontEndController::class, 'product_filter'])->name('product.filter');
+Route::get('/product/{product:slug}', [FrontEndController::class, 'product_show'])->name('product.show');
+Route::get('/product/category/{name}', [FrontEndController::class, 'product_filter'])->name('product.filter');
 
 Route::get('/article', [FrontEndController::class, 'article'])->name('article');
 Route::get('/article/{article:slug}', [FrontEndController::class, 'article_show'])->name('article.show');
+Route::get('/article/category/{name}', [FrontEndController::class, 'article_filter'])->name('article.filter');
 
-Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
+Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'role:users']], function () {
+    Route::group(['middleware' => ['auth', 'role:admin']], function () {
+
+    });
+
     Route::get('index', [DashboardController::class, 'index'])->name('dashboard');
     
     Route::get('/product/item', [ProductController::class, 'index'])->name('product.index');
     Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
     Route::post('/product/store', [ProductController::class, 'store'])->name('product.store');
-    Route::get('/product/{id}/show', [ProductController::class, 'show'])->name('product.show');
+    // Route::get('/product/{id}/show', [ProductController::class, 'show'])->name('product.show');
     Route::get('/product/{id}/edit', [ProductController::class, 'edit'])->name('product.edit');
     Route::put('/product/{id}/update', [ProductController::class, 'update'])->name('product.update');
     Route::delete('/product/{id}/destroy', [ProductController::class, 'destroy'])->name('product.destroy');
@@ -67,6 +73,8 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
     Route::get('/category-article/{id}/edit', [CategoryArticleController::class, 'edit'])->name('category_article.edit');
     Route::put('/category-article/{id}/update', [CategoryArticleController::class, 'update'])->name('category_article.update');
     Route::delete('/category-article/{id}/destroy', [CategoryArticleController::class, 'destroy'])->name('category_article.destroy');
+
+    Route::post('/article/comment', [FrontEndController::class, 'comment_article'])->name('comment.article');
 });
 
 Auth::routes();

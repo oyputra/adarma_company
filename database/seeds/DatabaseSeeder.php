@@ -1,6 +1,7 @@
 <?php
 
 use App\User;
+use App\Model\Role;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -29,5 +30,11 @@ class DatabaseSeeder extends Seeder
         ];
 
         User::insert($users);
+
+        $roles = [
+            'name' => 'users'
+        ];
+
+        Role::insert($roles);
     }
 }

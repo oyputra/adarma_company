@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Model\Article;
+use App\Model\CategoryArticle;
 use App\Model\CategoryProduct;
+use App\Model\Comment;
 use App\Model\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -12,18 +14,21 @@ class FrontEndController extends Controller
 {
     public function home()
     {
-        return view('frontend.home');
+        $category = CategoryProduct::latest()->limit(3)->get();
+        
+        return view('frontend.home', compact('category'));
     }
     public function article()
     {
         $title = 'Articles';
         $article = Article::latest()->first();
+        $category = CategoryArticle::get();
         if (isset($article)) {
             $articles = Article::where('id', '!=', $article->id)->latest()->get();
         } else {
             $articles = $article;
         }
-        return view('frontend.article.index', compact('article', 'title', 'articles'));
+        return view('frontend.article.index', compact('article', 'title', 'articles', 'category'));
     }
     public function article_show(Article $article)
     {
@@ -31,8 +36,47 @@ class FrontEndController extends Controller
         $articles_latest = Article::where('id', '!=', $article->id)->latest()->limit(2)->get();
         $article_relate_1 = Article::where('id', $article->relate_article_first)->first();
         $article_relate_2 = Article::where('id', $article->relate_article_second)->first();
+        if (auth()->user()) {
+            $count_articles = count(Article::where('editor', auth()->user()->id)->get());
+            $article_self = Article::where('editor', auth()->user()->id)->pluck('id');
+            $count_comment = count(Comment::whereIn('article_id', $article_self)->get());
+        } else {
+            $count_articles = [];
+            $count_comment = [];
+        }
+        $comments = Comment::latest()->where('article_id', $article->id)->get();
+        $comments_top = Comment::selectRaw('count(`article_id`) as `count_article_id`, `article_id`')
+                                ->groupBy('article_id')
+                                ->orderBy('count_article_id', 'DESC')
+                                ->limit(3)
+                                ->get();
         
-        return view('frontend.article.show', compact('article', 'articles_latest', 'title', 'article_relate_1', 'article_relate_2'));
+        return view('frontend.article.show', compact('article', 'articles_latest', 'title', 
+                                                     'article_relate_1', 'article_relate_2', 'count_articles', 
+                                                     'comments', 'comments_top', 'count_comment'));
+    }
+    public function article_filter($name)
+    {
+        $title = 'Articles - Category: ' . $name;
+        $category = CategoryArticle::get();
+        $category_name = CategoryArticle::where('name', $name)->first();
+        $article = Article::latest()->first();
+        if (isset($article)) {
+            $articles = Article::where('id', '!=', $article->id)->where('category_id', $category_name->id)->latest()->get();
+        } else {
+            $articles = $article;
+        }
+        return view('frontend.article.index', compact('article', 'title', 'articles', 'category'));
+    }
+    public function comment_article(Request $request)
+    {
+        $validated = request()->validate([
+            'comment' => 'required|string',
+            'user_id' => 'required|numeric',
+            'article_id' => 'required|numeric',
+        ]);
+        Comment::create($validated);
+        return redirect()->back();
     }
     public function product()
     {
@@ -41,15 +85,23 @@ class FrontEndController extends Controller
         $products = Product::latest()->get();
         return view('frontend.product.index', compact('title', 'products', 'category'));
     }
-    public function product_filter(Request $request)
+    public function product_show(Product $product)
+    {
+        $title = 'Products - ' . $product->name;
+        $products = Product::latest()->limit(4)->where('id', '!=', $product->id)->get();
+
+        return view('frontend.product.show', compact('title', 'product', 'products'));
+    }
+    public function product_filter(Request $request, $name)
     {
         $title = 'Products';
         $category = CategoryProduct::get();
-        if ($request->has('filter')) {
-            $products = Product::where('category_id', $request->filter)->latest()->get();
-        } else {
-            $products = Product::latest()->get();
-        }
+        $category_filter = CategoryProduct::where('name', $name)->first();
+        $products = Product::where('category_id', $category_filter->id)->latest()->get();
+        // if ($request->has('filter')) {
+        // } else {
+        //     $products = Product::latest()->get();
+        // }
         return view('frontend.product.index', compact('title', 'products', 'category'));
     }
 }
