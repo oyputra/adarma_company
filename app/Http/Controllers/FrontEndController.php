@@ -33,7 +33,7 @@ class FrontEndController extends Controller
     public function article_show(Article $article)
     {
         $title = 'Article - ' . $article->title;
-        $articles_latest = Article::where('id', '!=', $article->id)->latest()->limit(2)->get();
+        $articles_latest = Article::where('id', '!=', $article->id)->latest()->limit(3)->get();
         $article_relate_1 = Article::where('id', $article->relate_article_first)->first();
         $article_relate_2 = Article::where('id', $article->relate_article_second)->first();
         if (auth()->user()) {
@@ -53,9 +53,10 @@ class FrontEndController extends Controller
                                 ->limit(3)
                                 ->get();
         Article::where('id', $article->id)->increment('views', 1);
-        
+        $articles_popular = Article::orderBy('views', 'DESC')->limit(3)->get();
+
         return view('frontend.article.show', compact('article', 'title', 
-                                                     'articles_latest','article_relate_1', 'article_relate_2', 
+                                                     'articles_latest', 'articles_popular','article_relate_1', 'article_relate_2', 
                                                      'comments', 'comments_top', 
                                                      'count_articles', 'count_comment', 'count_views'));
     }

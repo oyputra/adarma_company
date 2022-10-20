@@ -162,37 +162,29 @@
                             </section>
                             <hr>
                         @endif
-                        <section class="mb-5">
-                            <h1 class="fw-bolder fs-4 mb-4">Postingan Terpopuler</h1>
-                            <div class="mt-3 d-flex">
-                                <div class="col-4 p-0">
-                                    <img src="{{ asset('images/agricultural.png') }}" class="img-fluid object-cover rounded" alt="...">
-                                </div>
-                                <div class="col-8 p-0">
-                                    <div class="pl-2 d-flex align-items-between flex-column h-100">
-                                        <p class="mb-auto card-text lh-1 text-sm">Perbedaan Reseller dan Dropshiper ? Berikut Kelebihan dan Kekurangannya</p>
-                                        <div class="text-xs mt-2 d-flex justify-content-between">
-                                            <p class="text-muted p-0">25 Juli 2022</p>
-                                            <p class="text-muted p-0">Author: Ricardo</p>
+                        @if (count($articles_popular) != 0)
+                            <section class="mb-5">
+                                <h1 class="fw-bolder fs-4 mb-4">Postingan Terpopuler</h1>
+                                @foreach ($articles_popular as $item)
+                                    <a href="{{ route('article.show', $item->slug) }}" style="text-decoration:none; color:black;">
+                                        <div class="mt-3 d-flex">
+                                            <div class="col-4 p-0">
+                                                <img src="{{ asset('storage/' . $item->image) }}" class="img-fluid object-cover rounded" alt="...">
+                                            </div>
+                                            <div class="col-8 p-0">
+                                                <div class="pl-2 d-flex align-items-between flex-column h-100">
+                                                    <p class="mb-auto card-text lh-1 text-sm">{{ $item->title }}</p>
+                                                    <div class="text-xs mt-2 d-flex justify-content-between">
+                                                        <p class="text-muted p-0">{{ date('d F Y', strtotime($item->created_at)) }}</p>
+                                                        <p class="text-muted p-0">Penulis: {{ $item->writer }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mt-3 d-flex">
-                                <div class="col-4 p-0">
-                                    <img src="{{ asset('images/agricultural.png') }}" class="img-fluid object-cover rounded" alt="...">
-                                </div>
-                                <div class="col-8 p-0">
-                                    <div class="pl-2 d-flex align-items-between flex-column h-100">
-                                        <p class="mb-auto card-text lh-1 text-sm">Perbedaan Reseller dan Dropshiper ? Berikut Kelebihan dan Kekurangannya</p>
-                                        <div class="text-xs mt-2 d-flex justify-content-between">
-                                            <p class="text-muted p-0">25 Juli 2022</p>
-                                            <p class="text-muted p-0">Author: Ricardo</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
+                                    </a>
+                                @endforeach
+                            </section>                            
+                        @endif
                         <hr>
                         @if (isset($article_relate_1) || isset($article_relate_2))
                             <section class="mb-5">
@@ -236,28 +228,30 @@
                             </section>
                             <hr>
                         @endif
-                        <section class="mb-5">
-                            <h1 class="fw-bolder fs-4 mb-4">Komentar Terbanyak</h1>
-                            @foreach ($comments_top as $item)
-                                <a href="{{ route('article.show', $item->article->slug) }}" style="text-decoration:none; color:black;">
-                                    <div class="mt-3 d-flex">
-                                        <div class="col-4 p-0 text-center">
-                                            <p class="fs-4 text-primary p-0">{{ $item->count_article_id }}</p>
-                                            <p class="text-xs">Komentar</p>
-                                        </div>
-                                        <div class="col-8 p-0">
-                                            <div class="pl-2 d-flex align-items-between flex-column h-100">
-                                                <p class="mb-auto card-text lh-1 text-sm">{{ $item->article->title }}</p>
-                                                <div class="text-xs mt-2 d-flex justify-content-between">
-                                                    <p class="text-muted p-0">{{ date('d F Y', strtotime($item->article->created_at)) }}</p>
-                                                    <p class="text-muted p-0">Author: {{ $item->article->writer }}</p>
+                        @if (count($comments_top) != 0)
+                            <section class="mb-5">
+                                <h1 class="fw-bolder fs-4 mb-4">Komentar Terbanyak</h1>
+                                @foreach ($comments_top as $item)
+                                    <a href="{{ route('article.show', $item->article->slug) }}" style="text-decoration:none; color:black;">
+                                        <div class="mt-3 d-flex">
+                                            <div class="col-4 p-0 text-center">
+                                                <p class="fs-4 text-primary p-0">{{ $item->count_article_id }}</p>
+                                                <p class="text-xs">Komentar</p>
+                                            </div>
+                                            <div class="col-8 p-0">
+                                                <div class="pl-2 d-flex align-items-between flex-column h-100">
+                                                    <p class="mb-auto card-text lh-1 text-sm">{{ $item->article->title }}</p>
+                                                    <div class="text-xs mt-2 d-flex justify-content-between">
+                                                        <p class="text-muted p-0">{{ date('d F Y', strtotime($item->article->created_at)) }}</p>
+                                                        <p class="text-muted p-0">Author: {{ $item->article->writer }}</p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </a>
-                            @endforeach
-                        </section>
+                                    </a>
+                                @endforeach
+                            </section>
+                        @endif
                     </div>
                 </div>
         </div>
