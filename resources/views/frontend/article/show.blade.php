@@ -33,7 +33,7 @@
                                         </div>
                                         <div class="text-center col-4">
                                             <i class="fa fa-eye fa-3x" aria-hidden="true"></i>
-                                            <p>8.000</p>
+                                            <p>{{ $count_views }}</p>
                                         </div>
                                         <div class="text-center col-4">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-chat-left-text" viewBox="0 0 16 16">
@@ -61,18 +61,21 @@
                         <div class="d-flex justify-content-between">
                             <div class="d-flex">
                                 <div class="lh-xs">
-                                    <p class="text-muted p-0">Editor</p>
-                                    <p class="fw-bold p-0">{{ $article->editor_id->name }}</p>
+                                    <p class="text-muted p-0 text-sm">Editor</p>
+                                    <p class="text-muted fw-bold p-0 text-sm">{{ $article->editor_id->name }}</p>
                                 </div>
                                 <div class="ml-3 lh-xs">
-                                    <p class="text-muted p-0">Penulis</p>
-                                    <p class="fw-bold p-0">{{ $article->writer }}</p>
+                                    <p class="text-muted p-0 text-sm">Penulis</p>
+                                    <p class="text-muted fw-bold p-0 text-sm">{{ $article->writer }}</p>
                                 </div>
                             </div>
                             <div class="lh-xs">
-                                <p class="text-muted p-0">Dipublikasikan</p>
-                                <p class="fw-bold p-0">{{ date('d F Y', strtotime($article->created_at)) }}</p>
+                                <p class="text-muted p-0 text-sm">Dipublikasikan</p>
+                                <p class="text-muted fw-bold p-0 text-sm">{{ date('d F Y', strtotime($article->created_at)) }}</p>
                             </div>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <i class="fa fa-eye mr-2" aria-hidden="true"></i><span class="text-sm">{{ $article->views }}</span>
                         </div>
                         <img src="{{ asset('storage/' . $article->image) }}" class="img-fluid object-cover rounded-shadow-card my-3" style="width: 100%">
                         {!! $article->body !!}
@@ -108,17 +111,24 @@
                         </div>
                         <div class="mt-5">
                             @if (count($comments) != null)
-                                @foreach ($comments as $item)
-                                    <div class="row my-2">
-                                        <div class="card">
+                            <div class="my-2">
+                                <div class="card">
+                                    <div class="card-header py-3">
+                                    Komentar <span class="bg-black rounded-pill text-white" style="padding: 0.5em 0.9em;">{{ count($comments) }}</span>
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                        @foreach ($comments as $item)
+                                        <li class="list-group-item">
                                             <p>{{ $item->comment }}</p>
                                             <div class="d-flex justify-content-between">
-                                                <p class="text-muted text-sm">{{ date('d F Y', strtotime($item->created_at)) }}</p>
-                                                <p class="text-sm">from : <span class="text-muted">{{ $item->user->name }}</span></p>
+                                                <span class="text-muted text-sm">{{ date('d F Y', strtotime($item->created_at)) }}</span>
+                                                <span class="text-sm">from : <span class="text-muted">{{ $item->user->name }}</span></span>
                                             </div>
-                                        </div>
-                                    </div>
-                                @endforeach
+                                        </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
                             @else
                                 <div class="d-flex justify-content-center">
                                     <p>Belum ada Komentar!</p>

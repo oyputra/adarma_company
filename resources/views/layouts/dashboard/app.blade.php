@@ -96,6 +96,7 @@
       $(document).ready( function () {
           $('#myTable').DataTable({
             // "scrollX": true
+            order: [[0, 'desc']],
           });
       } );
     </script>

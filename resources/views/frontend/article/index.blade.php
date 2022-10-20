@@ -23,17 +23,17 @@
                                         <div class="d-flex justify-content-between">
                                             <div class="d-flex">
                                                 <div class="lh-xs">
-                                                    <p class="text-muted p-0">Editor</p>
-                                                    <p class="fw-bold p-0">{{ $article->editor_id->name }}</p>
+                                                    <p class="text-muted p-0 text-sm text-muted">Editor</p>
+                                                    <p class="fw-bold p-0 text-sm text-muted">{{ $article->editor_id->name }}</p>
                                                 </div>
                                                 <div class="ml-3 lh-xs">
-                                                    <p class="text-muted p-0">Penulis</p>
-                                                    <p class="fw-bold p-0">{{ $article->writer }}</p>
+                                                    <p class="text-muted p-0 text-sm text-muted">Penulis</p>
+                                                    <p class="fw-bold p-0 text-sm text-muted">{{ $article->writer }}</p>
                                                 </div>
                                             </div>
                                             <div class="lh-xs">
-                                                <p class="text-muted p-0">Dipublikasikan</p>
-                                                <p class="fw-bold p-0">{{ date('d F Y', strtotime($article->created_at)) }}</p>
+                                                <p class="text-muted p-0 text-sm text-muted">Dipublikasikan</p>
+                                                <p class="fw-bold p-0 text-sm text-muted">{{ date('d F Y', strtotime($article->created_at)) }}</p>
                                             </div>
                                         </div>
                                         <div class="mt-3">
@@ -77,7 +77,10 @@
                                 <img src="{{ asset('storage/' . $item->image) }}" class="card-img-top rounded-shadow-card-top object-cover" style="height: 250px">
                                 <div class="card-body">
                                     <div>
-                                        <p class="card-text text-muted text-xs-phone">{{ $item->category->name }}</p>
+                                        <div class="d-flex justify-content-between">
+                                            <p class="card-text text-muted text-sm">{{ $item->category->name }}</p>
+                                            <p class="card-text text-muted text-sm">{{ date('d F Y', strtotime($item->created_at)) }}</p>
+                                        </div>
                                         <h5 class="card-title text-sm-phone">{{ $item->title }}</h5>
                                         <a href="{{ route('article.show', $item->slug) }}" class="btn btn-dark text-white rounded-pill mt-3"><span class="px-1 text-sm-phone">Selengkapnya</span></a>
                                     </div>
@@ -90,7 +93,7 @@
         </section>
     @else
         <div class="d-flex justify-content-center" style="margin: 250px 0">
-            <p>Belum ada article</p>
+            <p>Belum ada Articles!</p>
         </div>
     @endif
 

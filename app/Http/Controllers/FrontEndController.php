@@ -37,12 +37,14 @@ class FrontEndController extends Controller
         $article_relate_1 = Article::where('id', $article->relate_article_first)->first();
         $article_relate_2 = Article::where('id', $article->relate_article_second)->first();
         if (auth()->user()) {
-            $count_articles = count(Article::where('editor', auth()->user()->id)->get());
             $article_self = Article::where('editor', auth()->user()->id)->pluck('id');
+            $count_articles = count(Article::where('editor', auth()->user()->id)->get());
             $count_comment = count(Comment::whereIn('article_id', $article_self)->get());
+            $count_views = Article::where('editor', auth()->user()->id)->select('views')->sum('views');
         } else {
             $count_articles = [];
             $count_comment = [];
+            $count_views = [];
         }
         $comments = Comment::latest()->where('article_id', $article->id)->get();
         $comments_top = Comment::selectRaw('count(`article_id`) as `count_article_id`, `article_id`')
@@ -50,10 +52,12 @@ class FrontEndController extends Controller
                                 ->orderBy('count_article_id', 'DESC')
                                 ->limit(3)
                                 ->get();
+        Article::where('id', $article->id)->increment('views', 1);
         
-        return view('frontend.article.show', compact('article', 'articles_latest', 'title', 
-                                                     'article_relate_1', 'article_relate_2', 'count_articles', 
-                                                     'comments', 'comments_top', 'count_comment'));
+        return view('frontend.article.show', compact('article', 'title', 
+                                                     'articles_latest','article_relate_1', 'article_relate_2', 
+                                                     'comments', 'comments_top', 
+                                                     'count_articles', 'count_comment', 'count_views'));
     }
     public function article_filter($name)
     {

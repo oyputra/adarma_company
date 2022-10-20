@@ -24,6 +24,7 @@ class CreateArticlesTable extends Migration
             $table->integer('relate_article_first')->nullable();
             $table->integer('relate_article_second')->nullable();
             $table->longText('body');
+            $table->integer('views')->default(0);
             $table->timestamps();
         });
     }
