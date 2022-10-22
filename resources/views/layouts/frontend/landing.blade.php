@@ -17,10 +17,11 @@
     
   </head>
   <body>
+    @include('layouts.frontend.flash-message')
 
     @yield('content')    
 
-    @include('layouts.footer')
+    @include('layouts.frontend.footer')
 <!-- Optional JavaScript; choose one of the two! -->
 
 <!-- Option 1: Bootstrap Bundle with Popper -->

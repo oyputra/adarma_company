@@ -21,18 +21,28 @@ class DatabaseSeeder extends Seeder
                 'name' => 'Admin',
                 'email' => 'admin@gmail.com',
                 'password' => bcrypt('password'),
+                'role_id' => 3,
             ],
             [
-                'name' => 'Customer',
-                'email' => 'customer@gmail.com',
+                'name' => 'User',
+                'email' => 'user@gmail.com',
                 'password' => bcrypt('password'),
+                'role_id' => 2,
+            ],
+            [
+                'name' => 'Guest',
+                'email' => 'guest@gmail.com',
+                'password' => bcrypt('password'),
+                'role_id' => 1,
             ],
         ];
 
         User::insert($users);
 
         $roles = [
-            'name' => 'users'
+            ['name' => 'guests'],
+            ['name' => 'users'],
+            ['name' => 'admin'],
         ];
 
         Role::insert($roles);

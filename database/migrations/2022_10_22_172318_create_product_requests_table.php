@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLandingPagesTable extends Migration
+class CreateProductRequestsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreateLandingPagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('landing_pages', function (Blueprint $table) {
+        Schema::create('product_requests', function (Blueprint $table) {
             $table->id();
-            $table->string('img_logo')->nullable();
-            $table->string('img_landing')->nullable();
-            $table->string('text_landing_large')->nullable();
-            $table->string('text_landing_small')->nullable();
+            $table->integer('product_id');
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('phone_number');
+            $table->string('address');
+            $table->integer('request_product');
             $table->timestamps();
         });
     }
@@ -30,6 +32,6 @@ class CreateLandingPagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('landing_pages');
+        Schema::dropIfExists('product_requests');
     }
 }

@@ -1,10 +1,10 @@
-@extends('layouts.landing')
+@extends('layouts.frontend.landing')
 
 @section('content')
 
     <section style="background-image: url('images/img\ landing\ page.png'); height: 100%;">
         <nav class="navbar navbar-expand-lg navbar-dark text-white">
-            @include('layouts.navbar')
+            @include('layouts.frontend.navbar')
         </nav>
 
         <div class="container">

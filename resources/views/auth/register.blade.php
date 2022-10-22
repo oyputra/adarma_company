@@ -15,7 +15,7 @@
                             <i class="mdi mdi-account-outline text-primary"></i>
                             </span>
                         </div>
-                        <input id="name" name="name" type="text" value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror form-control-lg border-left-0" placeholder="Your Name" autocomplete="name" autofocus>
+                        <input id="name" name="name" type="text" value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror form-control-lg border-left-0" placeholder="Your Name" autocomplete="name" autofocus required>
                         @error('name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -31,7 +31,7 @@
                             <i class="mdi mdi-email-outline text-primary"></i>
                             </span>
                         </div>
-                        <input id="email" name="email" type="email" class="form-control @error('email') is-invalid @enderror form-control-lg border-left-0" placeholder="Your Email" value="{{ old('email') }}" autocomplete="email">
+                        <input id="email" name="email" type="email" class="form-control @error('email') is-invalid @enderror form-control-lg border-left-0" placeholder="Your Email" value="{{ old('email') }}" autocomplete="email" required>
                         @error('email')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -47,7 +47,7 @@
                             <i class="mdi mdi-lock-outline text-primary"></i>
                             </span>
                         </div>
-                        <input id="password" name="password" type="password" class="form-control @error('password') is-invalid @enderror form-control-lg border-left-0" placeholder="Password">                        
+                        <input id="password" name="password" type="password" class="form-control @error('password') is-invalid @enderror form-control-lg border-left-0" placeholder="Password" required>                        
                         @error('password')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -63,13 +63,13 @@
                         <i class="mdi mdi-lock-outline text-primary"></i>
                         </span>
                     </div>
-                    <input id="password-confirm" name="password_confirmation" type="password" class="form-control form-control-lg border-left-0" placeholder="Confirm Password" autocomplete="new-password">
+                    <input id="password-confirm" name="password_confirmation" type="password" class="form-control form-control-lg border-left-0" placeholder="Confirm Password" autocomplete="new-password" required>
                     </div>
                 </div>
                 <div class="mb-4">
                     <div class="form-check">
                     <label class="form-check-label text-muted">
-                        <input type="checkbox" class="form-check-input">
+                        <input type="checkbox" required class="form-check-input">
                         I agree to all Terms & Conditions
                     </label>
                     </div>
@@ -78,10 +78,13 @@
                     <button type="submit" class="btn btn-block btn-info btn-lg font-weight-medium auth-form-btn">
                         SIGN UP
                     </button>
+                    <a href="{{ url('/login')}}" class="btn btn-block btn-secondary btn-lg font-weight-medium auth-form-btn">
+                        LOGIN
+                    </a>
                 </div>
-                <div class="text-center mt-4 font-weight-light">
+                {{-- <div class="text-center mt-4 font-weight-light">
                     Already have an account? <a href="{{ url('/login')}}" class="text-primary">Login</a>
-                </div>
+                </div> --}}
             </form>
         </div>
     </div>  

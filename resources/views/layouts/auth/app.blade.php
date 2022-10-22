@@ -43,7 +43,7 @@
                             @yield('content')
                             <!-- container-scroller -->
 
-                        <p class="text-white font-weight-medium text-center flex-grow align-self-end">Copyright &copy; 2020  All rights reserved.</p>
+                        <p class="text-white font-weight-medium text-center flex-grow align-self-end">Copyright &copy; {{ date("Y") }}  All rights reserved.</p>
                     </div>
                 </div>
             </div>

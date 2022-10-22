@@ -1,10 +1,10 @@
-@extends('layouts.landing')
+@extends('layouts.frontend.landing')
 
 @section('content')
 
 <section class="bg-green">
     <nav class="navbar navbar-expand-lg navbar-dark text-white">
-        @include('layouts.navbar')
+        @include('layouts.frontend.navbar')
     </nav>
 </section>
 
@@ -55,6 +55,78 @@
                     </div>
                     <div class="col-md-9 d-flex">
                         <span>:&nbsp;</span> {!! $product->description !!}
+                    </div>
+                </div>
+                <div class="row">
+                    <div>
+                        <button class="btn btn-dark mt-3" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Request Product</button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-scrollable">
+                                <form action="{{ route('product.request') }}" method="POST" class="modal-content">
+                                    @csrf
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="staticBackdropLabel">Request Product</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <img src="{{ asset('storage/' . $product->image) }}" class="img-fluid object-cover rounded-md">
+                                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="name" class="col-form-label">Full Name</label>
+                                            <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" required />
+                                            
+                                            @error('name')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="email" class="col-form-label">Email</label>
+                                            <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" required />
+                                            
+                                            @error('email')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="phone_number" class="col-form-label">Phone Number</label>
+                                            <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ old('phone_number') }}" required />
+                                            
+                                            @error('phone_number')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="address" class="col-form-label">Address</label>
+                                            <input type="text" class="form-control" id="address" name="address" value="{{ old('address') }}" required />
+                                            
+                                            @error('address')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="request_product" class="col-form-label">Request Product</label>
+                                            <div class="row">
+                                                <div class="col-md-12 d-flex align-items-center">
+                                                    <input type="number" min="1" class="form-control col-md-8" id="request_product" name="request_product" value="{{ old('request_product') }}" required />
+                                                    <div class="col-md-4">/ {{ $product->unit }}</div>
+                                                </div>
+                                            </div>
+                                            
+                                            @error('request_product')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-dark">Send</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

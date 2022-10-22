@@ -7,6 +7,7 @@ use App\Model\CategoryArticle;
 use App\Model\CategoryProduct;
 use App\Model\Comment;
 use App\Model\Product;
+use App\Model\ProductRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -108,5 +109,20 @@ class FrontEndController extends Controller
         //     $products = Product::latest()->get();
         // }
         return view('frontend.product.index', compact('title', 'products', 'category'));
+    }
+    public function product_request()
+    {
+        $validated = request()->validate([
+            'product_id' => 'required|string',
+            'name' => 'required|string',
+            'email' => 'required|email|string',
+            'phone_number' => 'required|numeric',
+            'address' => 'required|string',
+            'request_product' => 'required|integer',
+        ]);
+        
+        ProductRequest::create($validated);
+
+        return redirect()->back()->with('success','Produk sukses di request! Tunggu admin menghubungi Anda');
     }
 }

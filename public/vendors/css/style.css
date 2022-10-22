@@ -25201,3 +25201,23 @@ dl li {
 }
 
 /*# sourceMappingURL=maps/style.css.map */
+
+.hover-show:hover {
+  color: blue;
+}
+.hover-edit:hover {
+  color: darkgreen;
+}
+.hover-delete:hover {
+  color: red;
+}
+.position-relative {
+  position: relative;
+}
+.position-absolute {
+  position: absolute;
+}
+.top-6 {
+    top: 6em;
+    margin: 0 2em;
+}

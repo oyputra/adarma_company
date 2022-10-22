@@ -1,10 +1,10 @@
-@extends('layouts.landing')
+@extends('layouts.frontend.landing')
 
 @section('content')
     
     <section class="bg-green">
         <nav class="navbar navbar-expand-lg navbar-dark text-white">
-            @include('layouts.navbar')
+            @include('layouts.frontend.navbar')
         </nav>
     </section>  
 

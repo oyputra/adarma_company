@@ -17,10 +17,13 @@
                 <div class="col-xl-4 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Customers</h4>
+                            <h4 class="card-title">Users</h4>
                             <p>Total</p>
-                            <h4 class="text-dark font-weight-bold mb-2">{{ count($user) }} User</h4>
-                            {{-- <a href="">View</a> --}}
+                            <div class="d-flex justify-content-between">
+                                <h4 class="text-dark font-weight-bold mb-2">{{ count($editor) }} Editor</h4>
+                                <h4 class="text-dark font-weight-bold mb-2">{{ count($guest) }} Guest</h4>
+                            </div>
+                            <a href="{{ route('users') }}">View</a>
                         </div>
                     </div>
                 </div>
@@ -50,9 +53,25 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Roles</h4>
-                            <p>Total</p>
-                            <h4 class="text-dark font-weight-bold mb-2">{{ count($roles) }} Role</h4>
-                            {{-- <a href="">View</a> --}}
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <p>Role</p>
+                                    <ul class="list-ticked">
+                                        @foreach ($roles as $item)
+                                            <li> <span class="text-white bg-dark p-1">{{ $item->name }}</span></li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                                <div>
+                                    <p>Level</p>
+                                    <ul style="list-style-type: none;">
+                                        @foreach ($roles as $item)
+                                            <li> <span class="text-white bg-dark p-1">{{ $item->id }}</span></li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
                 </div>
