@@ -33,7 +33,7 @@
                                         </div>
                                         <div class="text-center col-4">
                                             <i class="fa fa-eye fa-3x" aria-hidden="true"></i>
-                                            <p>{{ $count_views }}</p>
+                                            <p>@if ($count_views != 0) {{ $count_views += 1 }} @else {{ $count_views }} @endif</p>
                                         </div>
                                         <div class="text-center col-4">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-chat-left-text" viewBox="0 0 16 16">
@@ -75,7 +75,7 @@
                             </div>
                         </div>
                         <div class="d-flex align-items-center">
-                            <i class="fa fa-eye mr-2" aria-hidden="true"></i><span class="text-sm">{{ $article->views }}</span>
+                            <i class="fa fa-eye mr-2" aria-hidden="true"></i><span class="text-sm">{{ $article->views += 1 }}</span>
                         </div>
                         <img src="{{ asset('storage/' . $article->image) }}" class="img-fluid object-cover rounded-shadow-card my-3" style="width: 100%">
                         {!! $article->body !!}

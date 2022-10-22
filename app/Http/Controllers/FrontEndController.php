@@ -93,7 +93,7 @@ class FrontEndController extends Controller
     public function product_show(Product $product)
     {
         $title = 'Products - ' . $product->name;
-        $products = Product::latest()->limit(4)->where('id', '!=', $product->id)->get();
+        $products = Product::latest()->limit(4)->where('id', '!=', $product->id)->where('category_id', $product->category_id)->get();
 
         return view('frontend.product.show', compact('title', 'product', 'products'));
     }

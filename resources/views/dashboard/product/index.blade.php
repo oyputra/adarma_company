@@ -64,7 +64,7 @@
                                         </td>
                                         <td>
                                             <div class="d-flex align-items-center">
-                                                <a href="{{ route('product.show', $row->id) }}" class="mr-3">
+                                                <a href="{{ route('product.show', $row->slug) }}" target="_blank" class="mr-3">
                                                     <i class="fa fa-eye fa-lg text-black hover-show"></i>
                                                 </a>
                                                 <a href="{{ route('product.edit', $row->id) }}" class="mr-2">

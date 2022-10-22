@@ -33,7 +33,7 @@ class ArticleController extends Controller
             'image' => 'required|file|image|mimes:jpeg,jpg,png,gif|max:1024',
             'title' => 'required|string',
             'category_id' => 'required|integer',
-            'slug' => 'required|string',
+            'slug' => 'required|string|unique:articles,slug',
             'editor' => 'required|integer',
             'writer' => 'required|string',
             'relate_article_first' => 'integer',
@@ -43,6 +43,8 @@ class ArticleController extends Controller
         
         $validated['image'] = $request->file('image')->store('article');
         $validated['slug'] = str_replace(' ', '-', strtolower($validated['slug']));
+        $validated['slug'] = preg_replace("/[^a-zA-Z0-9-]/", "", $validated['slug']);
+
         Article::create($validated);
 
         return redirect()->route('article.index');
@@ -66,23 +68,39 @@ class ArticleController extends Controller
     {
         $article = Article::find($id);
 
-        $validated = request()->validate([
-            'image' => 'file|image|mimes:jpeg,jpg,png,gif|max:1024',
-            'title' => 'required|string',
-            'category_id' => 'required|integer',
-            'slug' => 'required|string',
-            'editor' => 'required|integer',
-            'writer' => 'required|string',
-            'relate_article_first' => 'integer',
-            'relate_article_second' => 'integer',
-            'body' => 'required|string',
-        ]);
+        if ($request->slug !== $article->slug) {
+            $validated = request()->validate([
+                'image' => 'file|image|mimes:jpeg,jpg,png,gif|max:1024',
+                'title' => 'required|string',
+                'category_id' => 'required|integer',
+                'slug' => 'required|string|unique:articles,slug',
+                'editor' => 'required|integer',
+                'writer' => 'required|string',
+                'relate_article_first' => 'integer',
+                'relate_article_second' => 'integer',
+                'body' => 'required|string',
+            ]);
+        } else {
+            $validated = request()->validate([
+                'image' => 'file|image|mimes:jpeg,jpg,png,gif|max:1024',
+                'title' => 'required|string',
+                'category_id' => 'required|integer',
+                'slug' => 'required|string',
+                'editor' => 'required|integer',
+                'writer' => 'required|string',
+                'relate_article_first' => 'integer',
+                'relate_article_second' => 'integer',
+                'body' => 'required|string',
+            ]);
+        }
+
 
         if ($request->file('image')) {
             $validated['image'] = $request->file('image')->store('article');
             unlink(public_path('storage/' . $article->image));
         }
         $validated['slug'] = str_replace(' ', '-', strtolower($validated['slug']));
+        $validated['slug'] = preg_replace("/[^a-zA-Z0-9-]/", "", $validated['slug']);
         
         Article::where('id', $article->id)->update($validated);
 

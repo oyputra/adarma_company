@@ -62,36 +62,37 @@
     </div>
 </section>
 
-<section class="my-5">
-    <div class="container">
-        <div class="row">
-            <div class="d-flex justify-content-between">
-                <h3 class="font-weight-bold">Product Related</h3>
-                <p><a href="{{ route('product') }}">View All <i class="fa fa-long-arrow-right"></i></a></p>
+@if (count($products) > 0)
+    <section class="my-5">
+        <div class="container">
+            <div class="row">
+                <div class="d-flex justify-content-between">
+                    <h3 class="font-weight-bold">Product Related</h3>
+                    <p><a href="{{ route('product') }}">View All <i class="fa fa-long-arrow-right"></i></a></p>
+                </div>
             </div>
-        </div>
-        <div class="row row-cols-md-4 row-cols-2" style="min-height: 400px">
-            @foreach ($products as $item)
-                <div class="col my-3">
-                    <div class="card rounded-shadow-card">
-                        <img src="{{ asset('storage/' . $item->image) }}" class="card-img-top rounded-shadow-card-top object-cover" style="height: 250px;">
-                        <div class="card-body">
-                            <p class="card-title text-muted">{{ $item->category->name }}</p>
-                            <p class="card-title">{{ strip_tags(Str::limit($item->name, 50, '...')) }}</p>
-                            <div class="d-flex">
-                                <h5>{{ $item->price }}</h5><span>/{{ $item->unit }}</span>
-                            </div>
-                            <p class="text-white"><span class="@if($item->status == 'Available') bg-primary @else bg-secondary @endif rounded px-2">{{ $item->status }}</span></p>
-                            <div class="d-grid">
-                                <a href="{{ route('product.show', $item->slug) }}" class="btn btn-dark text-white mt-3"><span class="px-1">Selengkapnya</span></a>
+            <div class="row row-cols-md-4 row-cols-2" style="min-height: 400px">
+                @foreach ($products as $item)
+                    <div class="col my-3">
+                        <div class="card rounded-shadow-card">
+                            <img src="{{ asset('storage/' . $item->image) }}" class="card-img-top rounded-shadow-card-top object-cover" style="height: 250px;">
+                            <div class="card-body">
+                                <p class="card-title text-muted">{{ $item->category->name }}</p>
+                                <p class="card-title">{{ strip_tags(Str::limit($item->name, 50, '...')) }}</p>
+                                <div class="d-flex">
+                                    <h5>{{ $item->price }}</h5><span>/{{ $item->unit }}</span>
+                                </div>
+                                <p class="text-white"><span class="@if($item->status == 'Available') bg-primary @else bg-secondary @endif rounded px-2">{{ $item->status }}</span></p>
+                                <div class="d-grid">
+                                    <a href="{{ route('product.show', $item->slug) }}" class="btn btn-dark text-white mt-3"><span class="px-1">Selengkapnya</span></a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            </div>
         </div>
-    </div>
-</section>
-
+    </section>
+@endif
 
 @endsection

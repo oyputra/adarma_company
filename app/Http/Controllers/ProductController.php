@@ -55,6 +55,7 @@ class ProductController extends Controller
 
         $validated['image'] = $request->file('image')->store('product');
         $validated['slug'] = str_replace(' ', '-', strtolower($validated['slug']));
+        $validated['slug'] = preg_replace("/[^a-zA-Z0-9-]/", "", $validated['slug']);
 
         Product::create($validated);
 
@@ -132,6 +133,7 @@ class ProductController extends Controller
             unlink(public_path('storage/' . $product->image));
         }
         $validated['slug'] = str_replace(' ', '-', strtolower($validated['slug']));
+        $validated['slug'] = preg_replace("/[^a-zA-Z0-9-]/", "", $validated['slug']);
 
         Product::where('id', $product->id)->update($validated);
 
