@@ -41,6 +41,8 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'role:admin']], 
     Route::get('index', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('users', [DashboardController::class, 'users'])->name('users');
     Route::get('landingpage', [DashboardController::class, 'landingpage'])->name('landingpage');
+    Route::post('landingpage', [DashboardController::class, 'landingpage_store'])->name('landingpage.store');
+    Route::delete('landingpage', [DashboardController::class, 'landingpage_destroy'])->name('landingpage.destroy');
     
     // CRUD Product
     Route::get('/product/item', [ProductController::class, 'index'])->name('product.index');

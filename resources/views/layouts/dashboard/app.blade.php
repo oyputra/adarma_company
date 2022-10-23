@@ -6,7 +6,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Adarma Mandiri | {{ $title }}</title>
-  <link rel="icon" type="image/x-icon" href="{{ asset('images/logo.png') }}">
+  <link rel="icon" type="image/x-icon" href="@if (isset($landingpage->img_logo))
+        {{ asset('storage/' . $landingpage->img_logo) }}
+        @else
+        {{ asset('images/logo.png') }}
+        @endif">
   <!-- base:css -->
   <link rel="stylesheet" href="{{ asset('vendors/mdi/css/materialdesignicons.min.css') }}">
   <link rel="stylesheet" href="{{ asset('vendors/feather/feather.css') }}">

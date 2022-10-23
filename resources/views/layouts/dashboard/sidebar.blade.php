@@ -16,7 +16,7 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ route('landingpage') }}">
-                <i class="icon-box menu-icon"></i>
+                <i class="icon-content-left menu-icon"></i>
                 <span class="menu-title">Landing Page</span>
             </a>
         </li>

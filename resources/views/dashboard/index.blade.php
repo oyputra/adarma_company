@@ -75,10 +75,10 @@
                         </div>
                     </div>
                 </div>
-                {{-- <div class="col-xl-4 grid-margin stretch-card">
+                <div class="col-xl-4 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Products</h4>
+                            <h4 class="card-title">Product Request</h4>
                             <p>Total</p>
                             <h4 class="text-dark font-weight-bold mb-2">{{ count($products) }} Product</h4>
                             <a href="{{ route('product.index') }}">View</a>
@@ -88,13 +88,13 @@
                 <div class="col-xl-4 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Articles</h4>
+                            <h4 class="card-title">Editor Request</h4>
                             <p>Total</p>
-                            <h4 class="text-dark font-weight-bold mb-2">{{ count($articles) }} Article</h4>
+                            <h4 class="text-dark font-weight-bold mb-2">{{ count($articles) }} Guest</h4>
                             <a href="{{ route('article.index') }}">View</a>
                         </div>
                     </div>
-                </div> --}}
+                </div>
             </div>
         </div>
         {{-- <div class="col-xl-9 d-flex grid-margin stretch-card">

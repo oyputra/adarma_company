@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\Article;
 use App\Model\CategoryArticle;
+use App\Model\LandingPage;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -17,7 +18,9 @@ class ArticleController extends Controller
         $title = 'Article';
 
         $article = Article::latest()->get();
-        return view('dashboard.article.index', compact('article', 'title'));
+        $landingpage = LandingPage::latest()->first();
+
+        return view('dashboard.article.index', compact('landingpage', 'article', 'title'));
     }
     public function create()
     {
@@ -25,7 +28,9 @@ class ArticleController extends Controller
 
         $category = CategoryArticle::get();
         $article = Article::get();
-        return view('dashboard.article.create', compact('category', 'article', 'title'));
+        $landingpage = LandingPage::latest()->first();
+
+        return view('dashboard.article.create', compact('landingpage', 'category', 'article', 'title'));
     }
     public function store(Request $request)
     {
@@ -53,7 +58,9 @@ class ArticleController extends Controller
     {
         $title = 'Show Article';
 
-        return view('dashboard.article.show', compact('article', 'title'));
+        $landingpage = LandingPage::latest()->first();
+
+        return view('dashboard.article.show', compact('landingpage', 'article', 'title'));
     }
     public function edit(Article $article)
     {
@@ -61,8 +68,9 @@ class ArticleController extends Controller
 
         $articles = Article::get();
         $category = CategoryArticle::get();
+        $landingpage = LandingPage::latest()->first();
 
-        return view('dashboard.article.edit', compact('article', 'articles', 'category', 'title'));
+        return view('dashboard.article.edit', compact('landingpage', 'article', 'articles', 'category', 'title'));
     }
     public function update(Request $request, $id)
     {

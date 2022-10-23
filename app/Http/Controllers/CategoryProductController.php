@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\CategoryProduct;
+use App\Model\LandingPage;
 use App\Model\Product;
 use Illuminate\Http\Request;
 
@@ -18,7 +19,9 @@ class CategoryProductController extends Controller
         $title = 'Category Product';
 
         $category = CategoryProduct::latest()->get();
-        return view('dashboard.product.category.index', compact('category', 'title'));
+        $landingpage = LandingPage::latest()->first();
+        
+        return view('dashboard.product.category.index', compact('landingpage', 'category', 'title'));
     }
 
     /**
@@ -30,7 +33,9 @@ class CategoryProductController extends Controller
     {
         $title = 'Add Category Product';
 
-        return view('dashboard.product.category.create', compact('title'));
+        $landingpage = LandingPage::latest()->first();
+
+        return view('dashboard.product.category.create', compact('landingpage', 'title'));
     }
 
     /**
@@ -64,7 +69,9 @@ class CategoryProductController extends Controller
         $title = 'Show Category Product';
 
         $category = CategoryProduct::find($id);
-        return view('dashboard.product.category.show', compact('category', 'title'));
+        $landingpage = LandingPage::latest()->first();
+
+        return view('dashboard.product.category.show', compact('landingpage', 'category', 'title'));
     }
 
     /**
@@ -78,7 +85,9 @@ class CategoryProductController extends Controller
         $title = 'Edit Category Product';
 
         $category = CategoryProduct::find($id);
-        return view('dashboard.product.category.edit', compact('category', 'title'));
+        $landingpage = LandingPage::latest()->first();
+        
+        return view('dashboard.product.category.edit', compact('landingpage', 'category', 'title'));
     }
 
     /**

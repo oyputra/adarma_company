@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\Article;
 use App\Model\CategoryArticle;
+use App\Model\LandingPage;
 use Illuminate\Http\Request;
 
 class CategoryArticleController extends Controller
@@ -18,7 +19,9 @@ class CategoryArticleController extends Controller
         $title = 'Category Article';
 
         $category = CategoryArticle::latest()->get();
-        return view('dashboard.article.category.index', compact('category', 'title'));
+        $landingpage = LandingPage::latest()->first();
+
+        return view('dashboard.article.category.index', compact('landingpage', 'category', 'title'));
     }
 
     /**
@@ -30,7 +33,9 @@ class CategoryArticleController extends Controller
     {
         $title = 'Add Category Article';
 
-        return view('dashboard.article.category.create', compact('title'));
+        $landingpage = LandingPage::latest()->first();
+
+        return view('dashboard.article.category.create', compact('landingpage', 'title'));
     }
 
     /**
@@ -64,7 +69,9 @@ class CategoryArticleController extends Controller
         $title = 'Show Category Article';
 
         $category = CategoryArticle::find($id);
-        return view('dashboard.article.category.show', compact('category', 'title'));
+        $landingpage = LandingPage::latest()->first();
+
+        return view('dashboard.article.category.show', compact('landingpage', 'category', 'title'));
     }
 
     /**
@@ -78,7 +85,9 @@ class CategoryArticleController extends Controller
         $title = 'Edit Category Article';
 
         $category = CategoryArticle::find($id);
-        return view('dashboard.article.category.edit', compact('category', 'title'));
+        $landingpage = LandingPage::latest()->first();
+
+        return view('dashboard.article.category.edit', compact('landingpage', 'category', 'title'));
     }
 
     /**

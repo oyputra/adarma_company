@@ -2,7 +2,14 @@
 
 @section('content')
 
-    <section style="background-image: url('images/img\ landing\ page.png'); height: 100%;">
+    <section style="background-image: url(@if (isset($landingpage->img_landing)) 
+        {{ 'storage/' . $landingpage->img_landing }}
+    @else    
+        {{ 'images/img landing page.png' }}
+    @endif); 
+    background-repeat: no-repeat;
+    background-size: 100%;
+    ">
         <nav class="navbar navbar-expand-lg navbar-dark text-white">
             @include('layouts.frontend.navbar')
         </nav>

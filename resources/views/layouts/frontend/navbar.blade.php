@@ -3,12 +3,20 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <a class="navbar-toggler my-4" href="{{ url('/') }}">
-        <img src="{{ asset('images/logo.png') }}" width="50" height="50" class="d-inline-block align-text-top">
+        <img src="@if (isset($landingpage->img_logo))
+            {{ asset('storage/' . $landingpage->img_logo) }}
+        @else
+            {{ asset('images/logo.png') }}
+        @endif" width="50" height="50" class="d-inline-block align-text-top">
     </a>
     <div class="collapse navbar-collapse bg-navbar-responsive" id="navbarTogglerDemo03">
         <div class="d-flex me-auto">
             <a class="navbar-brand hidden-responsive" href="{{ url('/') }}">
-                <img src="{{ asset('images/logo.png') }}" width="50" height="50" class="d-inline-block align-text-top">
+                <img src="@if (isset($landingpage->img_logo))
+                    {{ asset('storage/' . $landingpage->img_logo) }}
+                @else
+                    {{ asset('images/logo.png') }}
+                @endif" width="50" height="50" class="d-inline-block align-text-top">
             </a>
             <div>
                 <div class="fw-bolder fs-3">CV. Arta Mandiri</div>

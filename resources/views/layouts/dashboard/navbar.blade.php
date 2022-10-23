@@ -2,11 +2,19 @@
     <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
         <a class="brand-logo nav-link" href="{{ url('/') }}">
             <div class="d-flex align-items-center justify-content-center">
-                <img src="{{ asset('images/logo.png') }}" width="40" height="40" alt="logo"/>
+                <img src="@if (isset($landingpage->img_logo))
+                                        {{ asset('storage/' . $landingpage->img_logo) }}
+                                    @else
+                                        {{ asset('images/logo.png') }}
+                                    @endif" width="40" height="40" alt="logo"/>
                 {{-- <span class="text-light ml-2 text-uppercase text-monospace">CV. Arta Mandiri</span> --}}
             </div>
         </a>
-        <a class="navbar-brand brand-logo-mini" href="{{ url('/') }}"><img src="{{ asset('images/logo.png') }}" alt="logo"/></a>
+        <a class="navbar-brand brand-logo-mini" href="{{ url('/') }}"><img src="@if (isset($landingpage->img_logo))
+                                        {{ asset('storage/' . $landingpage->img_logo) }}
+                                    @else
+                                        {{ asset('images/logo.png') }}
+                                    @endif" alt="logo"/></a>
     </div>
     <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -77,6 +85,9 @@
                     <p class="mb-0 font-weight-normal float-left dropdown-header">Settings</p>
                     <a class="dropdown-item preview-item" href="#">               
                         <i class="icon-head"></i> Profile
+                    </a>
+                    <a class="dropdown-item preview-item" href="{{ route('home') }}" target="_blank">               
+                        <i class="icon-monitor"></i> Website
                     </a>
                     <a class="dropdown-item preview-item"  href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="icon-inbox"></i> Logout

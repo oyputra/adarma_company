@@ -6,6 +6,7 @@ use App\Model\Article;
 use App\Model\CategoryArticle;
 use App\Model\CategoryProduct;
 use App\Model\Comment;
+use App\Model\LandingPage;
 use App\Model\Product;
 use App\Model\ProductRequest;
 use Illuminate\Http\Request;
@@ -16,8 +17,9 @@ class FrontEndController extends Controller
     public function home()
     {
         $category = CategoryProduct::latest()->limit(3)->get();
+        $landingpage = LandingPage::latest()->first();
         
-        return view('frontend.home', compact('category'));
+        return view('frontend.home', compact('category', 'landingpage'));
     }
     public function article()
     {
@@ -29,7 +31,9 @@ class FrontEndController extends Controller
         } else {
             $articles = $article;
         }
-        return view('frontend.article.index', compact('article', 'title', 'articles', 'category'));
+        $landingpage = LandingPage::latest()->first();
+
+        return view('frontend.article.index', compact('article', 'title', 'articles', 'category', 'landingpage'));
     }
     public function article_show(Article $article)
     {
@@ -55,8 +59,9 @@ class FrontEndController extends Controller
                                 ->get();
         Article::where('id', $article->id)->increment('views', 1);
         $articles_popular = Article::orderBy('views', 'DESC')->limit(3)->get();
+        $landingpage = LandingPage::latest()->first();
 
-        return view('frontend.article.show', compact('article', 'title', 
+        return view('frontend.article.show', compact('article', 'title', 'landingpage', 
                                                      'articles_latest', 'articles_popular','article_relate_1', 'article_relate_2', 
                                                      'comments', 'comments_top', 
                                                      'count_articles', 'count_comment', 'count_views'));
@@ -72,7 +77,9 @@ class FrontEndController extends Controller
         } else {
             $articles = $article;
         }
-        return view('frontend.article.index', compact('article', 'title', 'articles', 'category'));
+        $landingpage = LandingPage::latest()->first();
+        
+        return view('frontend.article.index', compact('article', 'title', 'articles', 'category', 'landingpage'));
     }
     public function comment_article(Request $request)
     {
@@ -89,14 +96,17 @@ class FrontEndController extends Controller
         $title = 'Products';
         $category = CategoryProduct::get();
         $products = Product::latest()->get();
-        return view('frontend.product.index', compact('title', 'products', 'category'));
+        $landingpage = LandingPage::latest()->first();
+
+        return view('frontend.product.index', compact('title', 'products', 'category', 'landingpage'));
     }
     public function product_show(Product $product)
     {
         $title = 'Products - ' . $product->name;
         $products = Product::latest()->limit(4)->where('id', '!=', $product->id)->where('category_id', $product->category_id)->get();
+        $landingpage = LandingPage::latest()->first();
 
-        return view('frontend.product.show', compact('title', 'product', 'products'));
+        return view('frontend.product.show', compact('title', 'product', 'products', 'landingpage'));
     }
     public function product_filter(Request $request, $name)
     {
@@ -104,11 +114,9 @@ class FrontEndController extends Controller
         $category = CategoryProduct::get();
         $category_filter = CategoryProduct::where('name', $name)->first();
         $products = Product::where('category_id', $category_filter->id)->latest()->get();
-        // if ($request->has('filter')) {
-        // } else {
-        //     $products = Product::latest()->get();
-        // }
-        return view('frontend.product.index', compact('title', 'products', 'category'));
+        $landingpage = LandingPage::latest()->first();
+
+        return view('frontend.product.index', compact('title', 'products', 'category', 'landingpage'));
     }
     public function product_request()
     {
