@@ -38,6 +38,7 @@
                                         <p class="text-dark font-weight-bold mb-2">{{ count($super_admin) }}</p>
                                     </div>
                                 </div>
+                                <a href="{{ route('users') }}">View</a>
                             </div>
                         </div>
                     </div>
@@ -60,7 +61,7 @@
                             <div class="card-body">
                                 <h4 class="card-title">Articles</h4>
                                 <p>Total</p>
-                                <h4 class="text-dark font-weight-bold mb-2">{{ count($articles) }} Article</h4>
+                                <h4 class="text-dark font-weight-bold mb-2">{{ count($articles_editor) }} Article</h4>
                                 <a href="{{ route('article.index') }}">View</a>
                             </div>
                         </div>
@@ -70,6 +71,16 @@
                     auth()->user()->role->name == 'super_admin'
                     || auth()->user()->role->name == 'admin'
                     )
+                    <div class="grid-margin stretch-card p-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Articles</h4>
+                                <p>Total</p>
+                                <h4 class="text-dark font-weight-bold mb-2">{{ count($articles) }} Article</h4>
+                                <a href="{{ route('article.index') }}">View</a>
+                            </div>
+                        </div>
+                    </div>
                     <div class="grid-margin stretch-card p-2">
                         <div class="card">
                             <div class="card-body">

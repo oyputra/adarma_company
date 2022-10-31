@@ -7,6 +7,7 @@ use App\Model\CategoryArticle;
 use App\Model\LandingPage;
 use App\Model\Writer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
@@ -18,7 +19,12 @@ class ArticleController extends Controller
     {
         $title = 'Article';
 
-        $article = Article::latest()->get();
+        if ( Auth::user()->role->name === 'editor'  ) {
+            $article = Article::latest()->where('editor', Auth::user()->id)->get();
+        } else {
+            $article = Article::latest()->get();
+        }
+
         $landingpage = LandingPage::latest()->first();
 
         return view('dashboard.article.index', compact('landingpage', 'article', 'title'));

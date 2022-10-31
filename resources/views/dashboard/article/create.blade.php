@@ -17,7 +17,7 @@
                         </div>
                     @elseif ( auth()->user()->role->name != 'admin' && count($writers) === 0 )
                         <div class="d-flex justify-content-center my-5">
-                            <p>Silahkan minta tolong dibuatkan <strong>Penulis</strong> ke Admin ya!</p>
+                            <p><strong>Kategori</strong> sudah dibuat, Sekarang silahkan minta tolong dibuatkan <strong>Penulis</strong> ke Admin ya!</p>
                         </div>
                     @else
                         @if (count($category) === 0)

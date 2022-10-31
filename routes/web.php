@@ -45,10 +45,14 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function () {
     Route::put('password', [DashboardController::class, 'password'])->name('password');
 });
 
-// Dashboard User & Product Request
-Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'role:super_admin']], function () {    
+// Dashboard Roles User & Product Request
+Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'role:super_admin|admin']], function () {    
     Route::get('users', [DashboardController::class, 'users'])->name('users');
     Route::get('product/request', [DashboardController::class, 'product_request_list'])->name('product.request.list');
+});
+Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'role:super_admin']], function () {    
+    Route::get('users/roles/{id}/edit', [DashboardController::class, 'roles_edit'])->name('roles.edit');
+    Route::put('users/roles/{id}/update', [DashboardController::class, 'roles_update'])->name('roles.update');
 });
 
 // Dashboard CRUD Landing Page

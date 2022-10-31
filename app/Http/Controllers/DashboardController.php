@@ -30,10 +30,11 @@ class DashboardController extends Controller
         $super_admin = User::where('role_id', 4)->get();
         $products = Product::get();
         $articles = Article::get();
+        $articles_editor = Article::where('editor', Auth::user()->id)->get();
         $landingpage = LandingPage::latest()->first();
         $product_request = ProductRequest::get();
 
-        return view('dashboard.index', compact('title', 'user', 'editor', 'admin', 'super_admin', 'products', 'articles', 'landingpage', 'product_request'));
+        return view('dashboard.index', compact('title', 'user', 'editor', 'articles_editor', 'admin', 'super_admin', 'products', 'articles', 'landingpage', 'product_request'));
     }
 
     public function profile()
@@ -101,10 +102,33 @@ class DashboardController extends Controller
     {
         $title = 'Users';
 
-        $users = User::get();
+        $users = User::where('role_id', '!=', 4)->get();
         $landingpage = LandingPage::latest()->first();
 
         return view('dashboard.users', compact('title', 'users', 'landingpage'));
+    }
+
+    public function roles_edit($id)
+    {
+        $title = 'Edit Role';
+
+        $user = User::find($id);
+        $roles = Role::where('name', '!=', 'super_admin')->get();
+        $landingpage = LandingPage::latest()->first();
+
+        return view('dashboard.edit_roles', compact('title', 'user', 'roles', 'landingpage'));
+    }
+
+    public function roles_update($id)
+    {
+        $user = User::find($id);
+
+        $validated = request()->validate([
+            'role_id' => 'required|numeric',
+        ]);
+
+        User::where('id', $user->id)->update($validated);
+        return redirect()->route('users')->with('success', 'Role berhasil diperbarui!');
     }
 
     public function landingpage()

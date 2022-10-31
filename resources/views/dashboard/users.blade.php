@@ -51,8 +51,12 @@
                                         <td>
                                             {{ $row->email }}
                                         </td>
-                                        <td>
-                                            {{ $row->role->name }}
+                                        <td class="d-flex">
+                                            @if ( auth()->user()->role->name == 'super_admin' )
+                                                <a href="{{ route('roles.edit', $row->id) }}" class="mr-2">
+                                                    <i class="fa fa-pencil-square-o fa-lg text-black hover-edit"></i>
+                                                </a>
+                                            @endif {{ $row->role->name }}
                                         </td>
                                     </tr>
                                 @endforeach

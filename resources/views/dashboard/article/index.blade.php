@@ -36,7 +36,7 @@
                                             Category
                                         </th>
                                         <th class="font-weight-bold text-black">
-                                            Editor / Writer
+                                            @if (auth()->user()->role->name != 'editor') Editor / @endif Writer
                                         </th>
                                         <th class="font-weight-bold text-black">
                                             Views
@@ -59,7 +59,7 @@
                                                 {{ $row->category->name }}
                                             </td>
                                             <td>
-                                                {{ $row->editor_id->name }} / {{ $row->writer_id->first_name }} {{ $row->writer_id->last_name }}
+                                                @if (auth()->user()->role->name != 'editor') {{ $row->editor_id->name }} / @endif{{ $row->writer_id->name }}
                                             </td>
                                             <td>
                                                 {{ $row->views }}

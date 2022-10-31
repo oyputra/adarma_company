@@ -53,10 +53,10 @@
                                         </td>
                                         <td>
                                             <div class="d-flex align-items-center">
-                                                <a href="" target="_blank" class="mr-3">
+                                                <a href="#" class="mr-3">
                                                     <i class="fa fa-eye fa-lg text-black hover-show"></i>
                                                 </a>
-                                                <a href="" class="mr-2">
+                                                <a href="#" class="mr-2">
                                                     <i class="fa fa-pencil-square-o fa-lg text-black hover-edit"></i>
                                                 </a>
                                             </div>
