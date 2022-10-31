@@ -18,20 +18,26 @@ class DatabaseSeeder extends Seeder
 
         $users = [
             [
+                'name' => 'Super Admin',
+                'email' => 'superadmin@gmail.com',
+                'password' => bcrypt('password'),
+                'role_id' => 4,
+            ],
+            [
                 'name' => 'Admin',
                 'email' => 'admin@gmail.com',
                 'password' => bcrypt('password'),
                 'role_id' => 3,
             ],
             [
-                'name' => 'User',
-                'email' => 'user@gmail.com',
+                'name' => 'Editor',
+                'email' => 'editor@gmail.com',
                 'password' => bcrypt('password'),
                 'role_id' => 2,
             ],
             [
-                'name' => 'Guest',
-                'email' => 'guest@gmail.com',
+                'name' => 'User',
+                'email' => 'user@gmail.com',
                 'password' => bcrypt('password'),
                 'role_id' => 1,
             ],
@@ -40,9 +46,10 @@ class DatabaseSeeder extends Seeder
         User::insert($users);
 
         $roles = [
-            ['name' => 'guests'],
             ['name' => 'users'],
+            ['name' => 'editor'],
             ['name' => 'admin'],
+            ['name' => 'super_admin'],
         ];
 
         Role::insert($roles);

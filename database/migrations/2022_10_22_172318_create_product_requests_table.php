@@ -21,6 +21,7 @@ class CreateProductRequestsTable extends Migration
             $table->string('phone_number');
             $table->string('address');
             $table->integer('request_product');
+            $table->string('status')->default('pending');
             $table->timestamps();
         });
     }

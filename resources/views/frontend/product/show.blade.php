@@ -16,50 +16,52 @@
                     <img src="{{ asset('storage/' . $product->image) }}" class="img-fluid object-cover rounded-md">
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 mt-md-0 mt-3">
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-3">
                         <p>Name</p>
                     </div>
-                    <div class="col-md-9">
+                    <div class="col-9">
                         <p>: {{ $product->name }}</p>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-3">
                         <p>Category</p>
                     </div>
-                    <div class="col-md-9">
+                    <div class="col-9">
                         <p>: {{ $product->category->name }}</p>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-3">
                         <p>Price/Unit</p>
                     </div>
-                    <div class="col-md-9">
+                    <div class="col-9">
                         <p>: {{ $product->price }} / {{ $product->unit }}</p>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-3">
                         <p>Status</p>
                     </div>
-                    <div class="col-md-9">
+                    <div class="col-9">
                         <p>: {{ $product->status }}</p>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-3">
                         <p>Description</p>
                     </div>
-                    <div class="col-md-9 d-flex">
+                    <div class="col-9 d-flex">
                         <span>:&nbsp;</span> {!! $product->description !!}
                     </div>
                 </div>
                 <div class="row">
                     <div>
-                        <button class="btn btn-dark mt-3" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Request Product</button>
+                        @if ($product->status == 'Available')
+                            <button class="btn btn-dark mt-3" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Request Product</button>                        
+                        @endif
                         <!-- Modal -->
                         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-scrollable">

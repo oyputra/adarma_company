@@ -13,88 +13,74 @@
     </div>
     <div class="row mt-3">
         <div class="col-xl-12 flex-column d-flex grid-margin stretch-card">
-            <div class="row flex-grow">
-                <div class="col-xl-4 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">Users</h4>
-                            <p>Total</p>
-                            <div class="d-flex justify-content-between">
-                                <h4 class="text-dark font-weight-bold mb-2">{{ count($editor) }} Editor</h4>
-                                <h4 class="text-dark font-weight-bold mb-2">{{ count($guest) }} Guest</h4>
-                            </div>
-                            <a href="{{ route('users') }}">View</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">Products</h4>
-                            <p>Total</p>
-                            <h4 class="text-dark font-weight-bold mb-2">{{ count($products) }} Product</h4>
-                            <a href="{{ route('product.index') }}">View</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">Articles</h4>
-                            <p>Total</p>
-                            <h4 class="text-dark font-weight-bold mb-2">{{ count($articles) }} Article</h4>
-                            <a href="{{ route('article.index') }}">View</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row flex-grow">
-                <div class="col-xl-4 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">Roles</h4>
-                            <div class="d-flex justify-content-between">
-                                <div>
-                                    <p>Role</p>
-                                    <ul class="list-ticked">
-                                        @foreach ($roles as $item)
-                                            <li> <span class="text-white bg-dark p-1">{{ $item->name }}</span></li>
-                                        @endforeach
-                                    </ul>
+            <div class="row flex-grow row-cols-md-3">
+                @if (
+                    auth()->user()->role->name == 'super_admin'
+                    || auth()->user()->role->name == 'admin'
+                )
+                    <div class="grid-margin stretch-card p-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Users</h4>
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <p>Role</p>
+                                        <p class="text-dark font-weight-bold mb-2">User</p>
+                                        <p class="text-dark font-weight-bold mb-2">Editor</p>
+                                        <p class="text-dark font-weight-bold mb-2">Admin</p>
+                                        <p class="text-dark font-weight-bold mb-2">Super Admin</p>
+                                    </div>
+                                    <div>
+                                        <p>Total</p>
+                                        <p class="text-dark font-weight-bold mb-2">{{ count($user) }}</p>
+                                        <p class="text-dark font-weight-bold mb-2">{{ count($editor) }}</p>
+                                        <p class="text-dark font-weight-bold mb-2">{{ count($admin) }}</p>
+                                        <p class="text-dark font-weight-bold mb-2">{{ count($super_admin) }}</p>
+                                    </div>
                                 </div>
-                                <div>
-                                    <p>Level</p>
-                                    <ul style="list-style-type: none;">
-                                        @foreach ($roles as $item)
-                                            <li> <span class="text-white bg-dark p-1">{{ $item->id }}</span></li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-xl-4 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">Product Request</h4>
-                            <p>Total</p>
-                            <h4 class="text-dark font-weight-bold mb-2">{{ count($products) }} Product</h4>
-                            <a href="{{ route('product.index') }}">View</a>
+                    <div class="grid-margin stretch-card p-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Products</h4>
+                                <p>Total</p>
+                                <h4 class="text-dark font-weight-bold mb-2">{{ count($products) }} Product</h4>
+                                <a href="{{ route('product.index') }}">View</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-xl-4 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">Editor Request</h4>
-                            <p>Total</p>
-                            <h4 class="text-dark font-weight-bold mb-2">{{ count($articles) }} Guest</h4>
-                            <a href="{{ route('article.index') }}">View</a>
+                @endif
+                @if (
+                    auth()->user()->role->name == 'editor'
+                )
+                    <div class="grid-margin stretch-card p-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Articles</h4>
+                                <p>Total</p>
+                                <h4 class="text-dark font-weight-bold mb-2">{{ count($articles) }} Article</h4>
+                                <a href="{{ route('article.index') }}">View</a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endif
+                @if (
+                    auth()->user()->role->name == 'super_admin'
+                    || auth()->user()->role->name == 'admin'
+                    )
+                    <div class="grid-margin stretch-card p-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Product Request</h4>
+                                <p>Total</p>
+                                <h4 class="text-dark font-weight-bold mb-2">{{ count($product_request) }} Product</h4>
+                                <a href="{{ route('product.request.list') }}">View</a>
+                            </div>
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
         {{-- <div class="col-xl-9 d-flex grid-margin stretch-card">

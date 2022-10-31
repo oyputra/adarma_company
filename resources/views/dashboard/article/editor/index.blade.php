@@ -11,14 +11,11 @@
                     <div class="card-body">
                         <div>
                             <div class="d-flex align-items-center justify-content-between">
-                                <h4 class="card-title">Product</h4>
-                                <a href="{{ route('product.create') }}" class="btn btn-primary">
-                                    Add
-                                </a>
+                                <h4 class="card-title">Editors</h4>
                             </div>
                         </div>
                         <p class="card-description">
-                            {{ count($product) }} Products
+                            {{ count($editors) }} Editor
                         </p>
                         <div class="table-responsive">
                             <table id="myTable" class="table table-striped">
@@ -31,13 +28,7 @@
                                         Name
                                     </th>
                                     <th class="font-weight-bold text-black">
-                                        Category
-                                    </th>
-                                    <th class="font-weight-bold text-black">
-                                        Price/Unit
-                                    </th>
-                                    <th class="font-weight-bold text-black">
-                                        Status
+                                        Email
                                     </th>
                                     <th class="font-weight-bold text-black">
                                         Action
@@ -45,39 +36,29 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($product as $row)
+                                @foreach ($editors as $row)
                                     <tr>
                                         <td>
-                                            {{ $row->created_at }}
+                                            @if ($row->created_at != null)
+                                                {{ $row->created_at }}
+                                            @else
+                                                Created Automatically
+                                            @endif
                                         </td>
                                         <td>
                                             {{ $row->name }}
                                         </td>
                                         <td>
-                                            {{ $row->category->name }}
-                                        </td>
-                                        <td>
-                                            {{ $row->price }}/{{ $row->unit }}
-                                        </td>
-                                        <td style="white-space: nowrap;">
-                                            {{-- <span class="@if($row->status ===  'Available') bg-primary @else bg-danger @endif py-2 px-3 text-white rounded-pill">{{ $row->status }}</span> --}}
-                                            {{ $row->status }}
+                                            {{ $row->email }}
                                         </td>
                                         <td>
                                             <div class="d-flex align-items-center">
-                                                <a href="{{ route('product.show', $row->slug) }}" target="_blank" class="mr-3">
+                                                <a href="" target="_blank" class="mr-3">
                                                     <i class="fa fa-eye fa-lg text-black hover-show"></i>
                                                 </a>
-                                                <a href="{{ route('product.edit', $row->id) }}" class="mr-2">
+                                                <a href="" class="mr-2">
                                                     <i class="fa fa-pencil-square-o fa-lg text-black hover-edit"></i>
                                                 </a>
-                                                <form action="{{ route('product.destroy', $row->id) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                    <button type="submit" style="border: none; background-color:transparent;">
-                                                        <i class="fa fa-trash-o fa-lg text-black hover-delete"></i>
-                                                    </button>
-                                                </form>
                                             </div>
                                         </td>
                                     </tr>

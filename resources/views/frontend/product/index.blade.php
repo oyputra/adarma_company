@@ -29,7 +29,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row row-cols-md-4 row-cols-2" style="min-height: 400px">
+                <div class="row row-cols-md-4" style="min-height: 400px">
                     @foreach ($products as $item)
                         <div class="col my-3">
                             <div class="card rounded-shadow-card">

@@ -28,7 +28,7 @@
                                                 </div>
                                                 <div class="ml-3 lh-xs">
                                                     <p class="text-muted p-0 text-sm text-muted">Penulis</p>
-                                                    <p class="fw-bold p-0 text-sm text-muted">{{ $article->writer }}</p>
+                                                    <p class="fw-bold p-0 text-sm text-muted">{{ $article->writer_id->first_name }} {{ $article->writer_id->last_name }}</p>
                                                 </div>
                                             </div>
                                             <div class="lh-xs">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Model\Article;
 use App\Model\CategoryArticle;
 use App\Model\LandingPage;
+use App\Model\Writer;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -29,8 +30,9 @@ class ArticleController extends Controller
         $category = CategoryArticle::get();
         $article = Article::get();
         $landingpage = LandingPage::latest()->first();
+        $writers = Writer::get();
 
-        return view('dashboard.article.create', compact('landingpage', 'category', 'article', 'title'));
+        return view('dashboard.article.create', compact('landingpage', 'category', 'article', 'title', 'writers'));
     }
     public function store(Request $request)
     {
@@ -40,7 +42,7 @@ class ArticleController extends Controller
             'category_id' => 'required|integer',
             'slug' => 'required|string|unique:articles,slug',
             'editor' => 'required|integer',
-            'writer' => 'required|string',
+            'writer' => 'required|integer',
             'relate_article_first' => 'integer',
             'relate_article_second' => 'integer',
             'body' => 'required|string',
@@ -83,7 +85,7 @@ class ArticleController extends Controller
                 'category_id' => 'required|integer',
                 'slug' => 'required|string|unique:articles,slug',
                 'editor' => 'required|integer',
-                'writer' => 'required|string',
+                'writer' => 'required|integer',
                 'relate_article_first' => 'integer',
                 'relate_article_second' => 'integer',
                 'body' => 'required|string',

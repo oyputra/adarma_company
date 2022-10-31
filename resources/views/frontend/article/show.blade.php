@@ -66,7 +66,7 @@
                                 </div>
                                 <div class="ml-3 lh-xs">
                                     <p class="text-muted p-0 text-sm">Penulis</p>
-                                    <p class="text-muted fw-bold p-0 text-sm">{{ $article->writer }}</p>
+                                    <p class="text-muted fw-bold p-0 text-sm">{{ $article->writer_id->name }}</p>
                                 </div>
                             </div>
                             <div class="lh-xs">
@@ -152,7 +152,7 @@
                                                     <p class="mb-auto card-text lh-1 text-sm">{{ $item->title }}</p>
                                                     <div class="text-xs mt-2 d-flex justify-content-between">
                                                         <p class="text-muted p-0">{{ date('d F Y', strtotime($item->created_at)) }}</p>
-                                                        <p class="text-muted p-0">Penulis: {{ $item->writer }}</p>
+                                                        <p class="text-muted p-0">Penulis: {{ explode(' ', trim($item->writer_id->name))[0] }}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -176,7 +176,7 @@
                                                     <p class="mb-auto card-text lh-1 text-sm">{{ $item->title }}</p>
                                                     <div class="text-xs mt-2 d-flex justify-content-between">
                                                         <p class="text-muted p-0">{{ date('d F Y', strtotime($item->created_at)) }}</p>
-                                                        <p class="text-muted p-0">Penulis: {{ $item->writer }}</p>
+                                                        <p class="text-muted p-0">Penulis: {{ explode(' ', trim($item->writer_id->name))[0] }}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -184,8 +184,8 @@
                                     </a>
                                 @endforeach
                             </section>                            
+                            <hr>
                         @endif
-                        <hr>
                         @if (isset($article_relate_1) || isset($article_relate_2))
                             <section class="mb-5">
                                 <h1 class="fw-bolder fs-4 mb-4">Artikel Terkait</h1>
@@ -200,7 +200,7 @@
                                                     <p class="mb-auto card-text lh-1 text-sm">{{ $article_relate_1->title }}</p>
                                                     <div class="text-xs mt-2 d-flex justify-content-between">
                                                         <p class="text-muted p-0">{{ date('d F Y', strtotime($article_relate_1->created_at)) }}</p>
-                                                        <p class="text-muted p-0">Penulis: {{ $article_relate_1->writer }}</p>
+                                                        <p class="text-muted p-0">Penulis: {{ explode(' ', trim($article_relate_1->writer_id->name))[0] }}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -218,7 +218,7 @@
                                                     <p class="mb-auto card-text lh-1 text-sm">{{ $article_relate_2->title }}</p>
                                                     <div class="text-xs mt-2 d-flex justify-content-between">
                                                         <p class="text-muted p-0">{{ date('d F Y', strtotime($article_relate_2->created_at)) }}</p>
-                                                        <p class="text-muted p-0">Penulis: {{ $article_relate_2->writer }}</p>
+                                                        <p class="text-muted p-0">Penulis: {{ explode(' ', trim($article_relate_2->writer_id->name))[0] }}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -243,7 +243,7 @@
                                                     <p class="mb-auto card-text lh-1 text-sm">{{ $item->article->title }}</p>
                                                     <div class="text-xs mt-2 d-flex justify-content-between">
                                                         <p class="text-muted p-0">{{ date('d F Y', strtotime($item->article->created_at)) }}</p>
-                                                        <p class="text-muted p-0">Author: {{ $item->article->writer }}</p>
+                                                        <p class="text-muted p-0">Author: {{ explode(' ', trim($item->article->writer_id->name))[0] }}</p>
                                                     </div>
                                                 </div>
                                             </div>

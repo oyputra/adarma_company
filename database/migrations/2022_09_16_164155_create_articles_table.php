@@ -20,7 +20,7 @@ class CreateArticlesTable extends Migration
             $table->integer('category_id');
             $table->string('slug')->unique();
             $table->integer('editor');
-            $table->string('writer');
+            $table->integer('writer');
             $table->integer('relate_article_first')->nullable();
             $table->integer('relate_article_second')->nullable();
             $table->longText('body');

@@ -43,7 +43,7 @@
 
             @guest
             <li class="border-left-nav pl-3 margin-top-1">
-                <a class="px-4 btn btn-light rounded-3" aria-current="page" href="{{ url('login') }}">Login</a>
+                <a class="px-4 btn btn-outline-light rounded-3" aria-current="page" href="{{ url('login') }}">Login</a>
             </li>
             @else
             <li class="border-left-nav pl-3 margin-top-1">
@@ -52,7 +52,7 @@
                     Account
                     </a>
                     <ul class="dropdown-menu mt-2" aria-labelledby="navbarDropdown">
-                        <li class="text-green px-3">{{ Auth::user()->name }}</li>
+                        <li class="text-green px-3">{{ explode(' ', trim(Auth::user()->name))[0] }}</li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
                             <a class="dropdown-item d-flex align-items-center" href="{{ route('dashboard') }}">

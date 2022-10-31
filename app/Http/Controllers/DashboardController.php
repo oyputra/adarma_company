@@ -5,9 +5,13 @@ namespace App\Http\Controllers;
 use App\Model\Article;
 use App\Model\LandingPage;
 use App\Model\Product;
+use App\Model\ProductRequest;
 use App\Model\Role;
+use App\Model\Writer;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class DashboardController extends Controller
 {
@@ -20,14 +24,77 @@ class DashboardController extends Controller
     {
         $title = 'Dashboard';
 
-        $guest = User::where('role_id', 1)->get();
+        $user = User::where('role_id', 1)->get();
         $editor = User::where('role_id', 2)->get();
+        $admin = User::where('role_id', 3)->get();
+        $super_admin = User::where('role_id', 4)->get();
         $products = Product::get();
         $articles = Article::get();
-        $roles = Role::get();
         $landingpage = LandingPage::latest()->first();
+        $product_request = ProductRequest::get();
 
-        return view('dashboard.index', compact('title', 'editor', 'guest', 'products', 'articles', 'roles', 'landingpage'));
+        return view('dashboard.index', compact('title', 'user', 'editor', 'admin', 'super_admin', 'products', 'articles', 'landingpage', 'product_request'));
+    }
+
+    public function profile()
+    {
+        $title = 'Profile';
+
+        return view('dashboard.profile', compact('title'));
+    }
+
+    public function profile_update(Request $request)
+    {
+        $user = User::find(Auth::user()->id);
+
+        if ($request->email !== $user->email) {
+            $validated = request()->validate([
+                'image' => 'nullable|file|image|mimes:jpeg,jpg,png,gif|max:1024',
+                'name' => 'nullable|string',
+                'email' => 'nullable|string|email|unique:users',
+            ]);
+        } else {
+            $validated = request()->validate([
+                'image' => 'nullable|file|image|mimes:jpeg,jpg,png,gif|max:1024',
+                'name' => 'nullable|string',
+                'email' => 'nullable|string|email',
+            ]);
+        }
+
+        if ($request->file('image')) {
+            $validated['image'] = $request->file('image')->store('profile-image');
+            if ($user->image !== null) {
+                unlink(public_path('storage/' . $user->image));
+            }
+        }
+
+        User::where('id', $user->id)->update($validated);
+
+        return redirect()->back()->with('success', 'Profil kamu sudah diperbarui!');
+    }
+    
+    public function password(Request $request)
+    {
+        $user = User::find(Auth::user()->id);
+                
+        $request->validate([
+            'current_password' => 'required',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+        
+        if( !(Hash::check($request->current_password, $user->password)) ) {
+            return redirect()->back()->with('error', 'Password lama kamu tidak sesuai!');
+        } else {
+            if(strcmp($request->get('current_password'), $request->get('password')) == 0){
+                return redirect()->back()->with('error', 'Password lama kamu tidak boleh sama dengan password baru!');
+            } else {
+                $user->password = bcrypt($request->get('password'));
+                $user->save();
+                
+                return redirect()->back()->with('success', 'Password kamu berhasil diubah');
+            }
+        }        
+
     }
 
     public function users()
@@ -83,7 +150,7 @@ class DashboardController extends Controller
                 }
             }
             
-            LandingPage::latest()->update($validated);
+            LandingPage::where('id', $landingpage->id)->update($validated);
         }
         
         return redirect()->back();
@@ -103,4 +170,24 @@ class DashboardController extends Controller
 
         return redirect()->back();
     }
+
+    public function product_request_list()
+    {
+        $title = 'Product Request';
+
+        $landingpage = LandingPage::latest()->first();
+        $product_request = ProductRequest::get();
+
+        return view('dashboard.product_request', compact('title', 'landingpage', 'product_request'));
+    }
+
+    public function editor()
+    {
+        $title = 'Editor';
+        $landingpage = LandingPage::latest()->first();
+        $editors = User::where('role_id', 2)->get();
+
+        return view('dashboard.article.editor.index', compact('title', 'landingpage', 'editors'));
+    }
+
 }

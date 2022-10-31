@@ -12,9 +12,11 @@
                         <div>
                             <div class="d-flex align-items-center justify-content-between">
                                 <h4 class="card-title">Article</h4>
-                                <a href="{{ route('article.create') }}" class="btn btn-primary">
-                                    Add
-                                </a>
+                                @if ( auth()->user()->role->name == 'editor' )
+                                    <a href="{{ route('article.create') }}" class="btn btn-primary">
+                                        Add
+                                    </a>
+                                @endif
                             </div>
                         </div>
                         <p class="card-description">
@@ -34,13 +36,10 @@
                                             Category
                                         </th>
                                         <th class="font-weight-bold text-black">
-                                            Slug
+                                            Editor / Writer
                                         </th>
                                         <th class="font-weight-bold text-black">
-                                            Editor
-                                        </th>
-                                        <th class="font-weight-bold text-black">
-                                            Writer
+                                            Views
                                         </th>
                                         <th class="font-weight-bold text-black">
                                             Action
@@ -60,13 +59,10 @@
                                                 {{ $row->category->name }}
                                             </td>
                                             <td>
-                                                {{ $row->slug }}
+                                                {{ $row->editor_id->name }} / {{ $row->writer_id->first_name }} {{ $row->writer_id->last_name }}
                                             </td>
                                             <td>
-                                                {{ $row->editor_id->name }}
-                                            </td>
-                                            <td>
-                                                {{ $row->writer }}
+                                                {{ $row->views }}
                                             </td>
                                             <td>
                                                 <div class="d-flex align-items-center">

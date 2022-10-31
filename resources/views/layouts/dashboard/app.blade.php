@@ -35,35 +35,19 @@
         @include('layouts.dashboard.navbar')
         <!-- partial -->
         <div class="container-fluid page-body-wrapper">
-        <!-- partial:partials/_sidebar.html -->
-        @include('layouts.dashboard.sidebar')
-        
-        <div class="main-panel">
-            {{-- <div class="position-relative">
-                <div class="position-absolute">
-                    <div class="content-wrapper">
-                        <div class="row w-100 mx-auto">
-                            <div class="d-flex justify-content-end">
-                                <div class="col-lg-12">
-                                    <div class="alert alert-warning alert-dismissible fade show" role="alert" style="z-index: 1">
-                                        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                          <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
-            <!-- partial -->
-            @yield('content')
-            @include('layouts.dashboard.footer')
-            <!-- partial -->
-        </div>
-        <!-- main-panel ends -->
-        
+            <!-- partial:partials/_sidebar.html -->
+            @include('layouts.dashboard.sidebar')
+
+            <div class="main-panel">
+
+                @include('layouts.dashboard.flash-message')
+
+                <!-- partial -->
+                @yield('content')
+                @include('layouts.dashboard.footer')
+                <!-- partial -->
+            </div>
+            <!-- main-panel ends -->
         </div>
         <!-- page-body-wrapper ends -->
     </div>
@@ -105,33 +89,33 @@
         <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
         <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
         <script>
-        $(document).ready( function () {
-            $('#myTable').DataTable({
-                // "scrollX": true
-                order: [[0, 'desc']],
-            });
-        } );
+            $(document).ready( function () {
+                $('#myTable').DataTable({
+                    // "scrollX": true
+                    order: [[0, 'desc']],
+                });
+            } );
         </script>
     {{-- DataTables End --}}
     {{-- Format IDR --}}
     <script>
         document.querySelectorAll('input[type-currency="IDR"]').forEach((element) => {
-        element.addEventListener('keyup', function(e) {
-        let cursorPostion = this.selectionStart;
-            let value = parseInt(this.value.replace(/[^,\d]/g, ''));
-            let originalLenght = this.value.length;
-            if (isNaN(value)) {
-            this.value = "";
-            } else {    
-            this.value = value.toLocaleString('id-ID', {
-                currency: 'IDR',
-                style: 'currency',
-                minimumFractionDigits: 0
+            element.addEventListener('keyup', function(e) {
+            let cursorPostion = this.selectionStart;
+                let value = parseInt(this.value.replace(/[^,\d]/g, ''));
+                let originalLenght = this.value.length;
+                if (isNaN(value)) {
+                this.value = "";
+                } else {    
+                this.value = value.toLocaleString('id-ID', {
+                    currency: 'IDR',
+                    style: 'currency',
+                    minimumFractionDigits: 0
+                });
+                cursorPostion = this.value.length - originalLenght + cursorPostion;
+                this.setSelectionRange(cursorPostion, cursorPostion);
+                }
             });
-            cursorPostion = this.value.length - originalLenght + cursorPostion;
-            this.setSelectionRange(cursorPostion, cursorPostion);
-            }
-        });
         });
     </script>
     {{-- Format IDR End --}}

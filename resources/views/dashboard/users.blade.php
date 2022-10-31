@@ -11,7 +11,7 @@
                     <div class="card-body">
                         <div>
                             <div class="d-flex align-items-center justify-content-between">
-                                <h4 class="card-title">Manager Users</h4>
+                                <h4 class="card-title">Users</h4>
                             </div>
                         </div>
                         <p class="card-description">

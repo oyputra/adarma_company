@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use App\User;
+use App\Model\Writer;
 use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model
@@ -27,5 +28,10 @@ class Article extends Model
     public function relate_article2()
     {
         return $this->belongsTo(Article::class, 'relate_article_second', 'id');
+    }
+
+    public function writer_id()
+    {
+        return $this->belongsTo(Writer::class, 'writer', 'id');
     }
 }

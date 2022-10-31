@@ -48,6 +48,13 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="d-flex align-items-center justify-content-end">
+                                @if (isset($landingpage))
+                                    <form action="{{ route('landingpage.destroy') }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger mr-2">Reset</button>
+                                    </form>
+                                @endif
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Change</button>
 
                                 <!-- Modal -->
@@ -64,7 +71,7 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <div class="mb-3">
-                                                        <label for="img_logo" class="col-form-label">Image Logo <span class="text-muted">(Dimension: Square)</span></label>
+                                                        <label for="img_logo" class="col-form-label">Logo Image <span class="text-muted">(Dimension: Square)</span></label>
                                                         <input id="img_logo" name="img_logo" type="file" class="form-control @error('img_logo') is-invalid @enderror">
                 
                                                         @error('img_logo')
@@ -72,7 +79,7 @@
                                                         @enderror
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="img_landing" class="col-sm-12 col-form-label">Image Landing Page <span class="text-muted">(Dimension: 1440 x 968)</span></label>
+                                                        <label for="img_landing" class="col-sm-12 col-form-label">Landing Page Image <span class="text-muted">(Dimension: 1440 x 968)</span></label>
                                                         <input id="img_landing" name="img_landing" type="file" class="form-control @error('img_landing') is-invalid @enderror">
                 
                                                         @error('img_landing')
@@ -97,15 +104,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    @if (isset($landingpage))
-                                                        <form action="{{ route('landingpage.destroy') }}" method="POST">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="btn btn-danger">Reset</button>
-                                                        </form>
-                                                    @else
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    @endif
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                     <button type="submit" class="btn btn-primary">Save changes</button>
                                                 </div>
                                             </div>

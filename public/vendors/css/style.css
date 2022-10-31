@@ -25221,6 +25221,9 @@ dl li {
     top: 6em;
     margin: 0 2em;
 }
+body, nav {
+    font-family: Quicksand, sans-serif !important;
+}
 
 @media screen and (max-width: 600px) {
   h1 {

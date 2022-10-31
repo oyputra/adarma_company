@@ -5,10 +5,10 @@
     <section style="background-image: url(@if (isset($landingpage->img_landing)) 
         {{ 'storage/' . $landingpage->img_landing }}
     @else    
-        {{ 'images/img landing page.png' }}
-    @endif); 
+        'images/img landing page.png'
+    @endif);
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: cover;
     ">
         <nav class="navbar navbar-expand-lg navbar-dark text-white">
             @include('layouts.frontend.navbar')
@@ -19,7 +19,7 @@
                 <div class="col-md-8">
                     <h1 class="fw-bold fs-md-1 fs-landing">High Quality Product from trusted Farmer</h1>
                     <p>The raw materials we use are genuine coconut shells taken from local Farm with guaranteed quality</p>
-                    <a href="#about" class="btn btn-lg bg-light fw-bold my-5 py-3 px-5"><span class="text-green">About Us</span></a>
+                    <a href="#about" class="btn btn-lg bg-light fw-bold my-5 p-landing"><span class="text-green">About Us</span></a>
                 </div>
             </div>
         </div>
@@ -125,7 +125,7 @@
                         <p><a href="{{ route('product') }}">View All <i class="fa fa-long-arrow-right"></i></a></p>
                     </div>
                 </div>
-                <div class="row row-cols-3">
+                <div class="row row-cols-md-3">
                     @foreach ($category as $item)
                         <div class="col">
                             <a href="{{ route('product.filter', $item->name) }}">
