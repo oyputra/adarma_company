@@ -2,7 +2,13 @@
     <div class="user-profile">
         <div class="user-image">
             <a href="{{ route('profile') }}">
-                <img src="{{ asset('images/user.png') }}">
+                <img src=" 
+                @if (isset(auth()->user()->image))
+                    {{ asset('storage/' . auth()->user()->image) }}
+                @else
+                    {{ asset('images/user.png') }}
+                @endif
+                ">
             </a>
         </div>
         <div class="user-name">
@@ -28,7 +34,7 @@
             </li>
         @endif
         @if (
-            auth()->user()->role->name != 'users'
+            auth()->user()->role->name != 'user'
         )
             <li class="nav-item">
                 <a class="nav-link" data-toggle="collapse" href="#article" aria-expanded="false" aria-controls="article">
@@ -44,8 +50,8 @@
                             || auth()->user()->role->name == 'admin'
                         )
                             <li class="nav-item"> <a class="nav-link" href="{{ route('category_article.index') }}">Category</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('editor') }}">Editor</a></li>
                             <li class="nav-item"> <a class="nav-link" href="{{ route('writer.index') }}">Writer</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('editor') }}">Editor</a></li>
                         @endif
                     </ul>
                 </div>

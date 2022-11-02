@@ -30,9 +30,9 @@
                                     <th class="font-weight-bold text-black">
                                         Email
                                     </th>
-                                    <th class="font-weight-bold text-black">
+                                    {{-- <th class="font-weight-bold text-black">
                                         Action
-                                    </th>
+                                    </th> --}}
                                 </tr>
                             </thead>
                             <tbody>
@@ -51,7 +51,7 @@
                                         <td>
                                             {{ $row->email }}
                                         </td>
-                                        <td>
+                                        {{-- <td>
                                             <div class="d-flex align-items-center">
                                                 <a href="#" class="mr-3">
                                                     <i class="fa fa-eye fa-lg text-black hover-show"></i>
@@ -60,7 +60,7 @@
                                                     <i class="fa fa-pencil-square-o fa-lg text-black hover-edit"></i>
                                                 </a>
                                             </div>
-                                        </td>
+                                        </td> --}}
                                     </tr>
                                 @endforeach
                             </tbody>

@@ -46,7 +46,7 @@ class DatabaseSeeder extends Seeder
         User::insert($users);
 
         $roles = [
-            ['name' => 'users'],
+            ['name' => 'user'],
             ['name' => 'editor'],
             ['name' => 'admin'],
             ['name' => 'super_admin'],

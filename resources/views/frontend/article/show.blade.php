@@ -15,13 +15,25 @@
                                 <div class="mb-5">
                                     <h1 class="fw-bolder fs-4 mb-4">Profil</h1>
                                     <div class="d-flex align-items-center">
-                                        <img src="{{ asset('images/user.png') }}" class="object-cover rounded-full" alt="...">
+                                        <img src=" 
+                                        @if (isset(auth()->user()->image))
+                                            {{ asset('storage/' . auth()->user()->image) }}
+                                        @else
+                                            {{ asset('images/user.png') }}
+                                        @endif
+                                        " class="object-cover rounded-full" alt="...">
                                         <div>
                                             <p class="fw-bold ml-3 p-0">{{ auth()->user()->name }}</p>
-                                            {{-- <p class="fw-bold ml-3 text-sm text-muted p-0">Marketing Komunikasi</p> --}}
+                                            <p class="fw-bold ml-3 text-sm text-muted p-0">{{ auth()->user()->role->name }}</p>
                                         </div>
                                     </div>
-                                    <p class="mt-3 text-sm text-muted">Bergabung {{ date('d F Y', strtotime(auth()->user()->created_at)) }}</p>
+                                    <p class="mt-3 text-sm text-muted">Bergabung 
+                                        @if ( auth()->user()->created_at !== null )
+                                            {{ date('d F Y', strtotime(auth()->user()->created_at)) }}                                    
+                                        @else
+                                            <strong>Created Automatically</strong>
+                                        @endif
+                                    </p>
                                 </div>
                                 <hr>
                                 <div>

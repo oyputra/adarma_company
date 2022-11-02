@@ -16,7 +16,6 @@
             <div class="row flex-grow row-cols-md-3">
                 @if (
                     auth()->user()->role->name == 'super_admin'
-                    || auth()->user()->role->name == 'admin'
                 )
                     <div class="grid-margin stretch-card p-2">
                         <div class="card">
