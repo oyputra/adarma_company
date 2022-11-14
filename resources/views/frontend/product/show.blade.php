@@ -33,14 +33,16 @@
                         <p>: {{ $product->category->name }}</p>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-3">
-                        <p>Price/Unit</p>
+                @if ($product->status == 'Available')
+                    <div class="row">
+                        <div class="col-3">
+                            <p>Price/Unit</p>
+                        </div>
+                        <div class="col-9">
+                            <p>: {{ $product->price }} / {{ $product->unit }}</p>
+                        </div>
                     </div>
-                    <div class="col-9">
-                        <p>: {{ $product->price }} / {{ $product->unit }}</p>
-                    </div>
-                </div>
+                @endif
                 <div class="row">
                     <div class="col-3">
                         <p>Status</p>

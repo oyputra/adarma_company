@@ -72,8 +72,5 @@
             Don't have an account? <a href="{{ url('/register') }}" class="text-primary">Create</a>
             </div> --}}
         </form>
-    </div>
-    </div>  
-    <div class="col-lg-6 d-flex flex-row" style="background-image: url('images/img\ landing\ page.png');">
     
 @endsection

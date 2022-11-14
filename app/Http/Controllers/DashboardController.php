@@ -195,16 +195,6 @@ class DashboardController extends Controller
         return redirect()->back();
     }
 
-    public function product_request_list()
-    {
-        $title = 'Product Request';
-
-        $landingpage = LandingPage::latest()->first();
-        $product_request = ProductRequest::get();
-
-        return view('dashboard.product_request', compact('title', 'landingpage', 'product_request'));
-    }
-
     public function editor()
     {
         $title = 'Editor';

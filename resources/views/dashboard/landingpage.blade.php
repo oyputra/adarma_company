@@ -31,11 +31,13 @@
                             <div class="form-group row">
                                 <label for="image" class="col-md-12 col-form-label">Landing Page</label>
                                 <div class="col-md-12 position-relative">
-                                    <img src="@if (isset($landingpage->img_landing)) 
+                                    <img src="
+                                        @if (isset($landingpage->img_landing)) 
                                             {{ asset('storage/' . $landingpage->img_landing) }}
                                         @else    
                                             {{ asset('images/img landing page.png') }}
-                                        @endif" class="img-fluid">
+                                        @endif
+                                        " class="img-fluid">
                                     <div class="py-1 position-absolute top-6 col-md-7 col-10">
                                         <h1 class="fw-bold text-white" style="font-weight: 700;">@if (isset($landingpage->text_landing_large)) {{ $landingpage->text_landing_large }} @else High Quality Product from trusted Farmer @endif</h1>
                                         <p class="text-white text-xs">@if (isset($landingpage->text_landing_small)) {{ $landingpage->text_landing_small }} @else The raw materials we use are genuine coconut shells taken from local Farm with guaranteed quality @endif</p>

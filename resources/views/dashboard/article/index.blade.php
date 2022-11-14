@@ -12,7 +12,7 @@
                         <div>
                             <div class="d-flex align-items-center justify-content-between">
                                 <h4 class="card-title">Article</h4>
-                                @if ( auth()->user()->role->name == 'editor' )
+                                @if ( auth()->user()->role->name == 'editor' || auth()->user()->role->name == 'super_admin')
                                     <a href="{{ route('article.create') }}" class="btn btn-primary">
                                         Add
                                     </a>
@@ -69,9 +69,11 @@
                                                     <a href="{{ route('article.show', $row->slug) }}" target="_blank" class="mr-3">
                                                         <i class="fa fa-eye fa-lg text-black hover-show"></i>
                                                     </a>
-                                                    <a href="{{ route('article.edit', $row->slug) }}" class="mr-2">
-                                                        <i class="fa fa-pencil-square-o fa-lg text-black hover-edit"></i>
-                                                    </a>
+                                                    @if (auth()->user()->role->name == 'editor' || auth()->user()->role->name == 'super_admin')
+                                                        <a href="{{ route('article.edit', $row->slug) }}" class="mr-2">
+                                                            <i class="fa fa-pencil-square-o fa-lg text-black hover-edit"></i>
+                                                        </a>
+                                                    @endif
                                                     <form action="{{ route('article.destroy', $row->slug) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')

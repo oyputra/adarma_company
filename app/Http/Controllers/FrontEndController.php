@@ -71,15 +71,15 @@ class FrontEndController extends Controller
         $title = 'Articles - Category: ' . $name;
         $category = CategoryArticle::get();
         $category_name = CategoryArticle::where('name', $name)->first();
-        $article = Article::latest()->first();
-        if (isset($article)) {
-            $articles = Article::where('id', '!=', $article->id)->where('category_id', $category_name->id)->latest()->get();
-        } else {
-            $articles = $article;
-        }
+        $articles = Article::where('category_id', $category_name->id)->latest()->get();
+        // $article = Article::latest()->first();
+        // if (isset($article)) {
+        // } else {
+        //     $articles = $article;
+        // }
         $landingpage = LandingPage::latest()->first();
         
-        return view('frontend.article.index', compact('article', 'title', 'articles', 'category', 'landingpage'));
+        return view('frontend.article.index', compact('title', 'articles', 'category', 'landingpage'));
     }
     public function comment_article(Request $request)
     {

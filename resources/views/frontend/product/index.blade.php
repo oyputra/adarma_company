@@ -23,7 +23,7 @@
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                 <li><a class="dropdown-item" href="{{ route('product') }}">All Product</a></li>
                                 @foreach ($category as $row)
-                                    <li><a class="dropdown-item" href="{{ route('product.filter', $row->name) }}">{{ $row->name }}</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('product.filter', strtolower($row->name)) }}">{{ $row->name }}</a></li>
                                 @endforeach
                             </ul>
                         </div>
@@ -37,9 +37,11 @@
                                 <div class="card-body">
                                     <p class="card-title text-muted">{{ $item->category->name }}</p>
                                     <p class="card-title">{{ strip_tags(Str::limit($item->name, 50, '...')) }}</p>
-                                    <div class="d-flex">
-                                        <h5>{{ $item->price }}</h5><span>/{{ $item->unit }}</span>
-                                    </div>
+                                    @if ($item->status == 'Available')
+                                        <div class="d-flex">
+                                            <h5>{{ $item->price }}</h5><span>/{{ $item->unit }}</span>
+                                        </div>
+                                    @endif
                                     <p class="text-white"><span class="@if($item->status == 'Available') bg-primary @else bg-secondary @endif rounded px-2">{{ $item->status }}</span></p>
                                     <div class="d-grid">
                                         <a href="{{ route('product.show', $item->slug) }}" class="btn btn-dark text-white mt-3"><span class="px-1">Selengkapnya</span></a>

@@ -6,7 +6,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Adarma Mandiri - Dashboard Admin</title>
-  <link rel="icon" type="image/x-icon" href="images/logo.png">
+  <link rel="icon" type="image/x-icon" href="
+  @if (isset($landingpage->img_logo))
+      {{ asset('storage/' . $landingpage->img_logo) }}
+  @else
+      {{ asset('images/logo.png') }}
+  @endif
+  ">
   <!-- base:css -->
   <link rel="stylesheet" href="{{ asset('vendors/mdi/css/materialdesignicons.min.css') }}">
   <link rel="stylesheet" href="{{ asset('vendors/feather/feather.css') }}">
@@ -32,7 +38,13 @@
                         <div class="auth-form-transparent text-left py-3">
                             <div class="mb-3 d-flex">
                                 <a href="{{ url('/') }}">
-                                    <img src="images/logo.png" width="50" height="50" alt="logo">
+                                    <img src="
+                                    @if (isset($landingpage->img_logo))
+                                        {{ asset('storage/' . $landingpage->img_logo) }}
+                                    @else
+                                        {{ asset('images/logo.png') }}
+                                    @endif
+                                    " width="50" height="50" alt="logo">
                                 </a>
                                 <div class="ml-3">
                                     <h5 class="font-weight-bold text-black">CV. Arta Mandiri</h5>
@@ -41,7 +53,15 @@
                             </div>
 
                             @yield('content')
-                            <!-- container-scroller -->
+
+                        </div>
+                    </div>
+                    <div class="col-lg-6 d-flex flex-row" style="background-image: url(@if (isset($landingpage->img_landing)) 
+                            {{ 'storage/' . $landingpage->img_landing }}
+                        @else    
+                            'images/img landing page.png'
+                        @endif);">
+                        <!-- container-scroller -->
 
                         <p class="text-white font-weight-medium text-center flex-grow align-self-end">Copyright &copy; {{ date("Y") }}  All rights reserved.</p>
                     </div>

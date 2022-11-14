@@ -16,26 +16,31 @@
             <div class="row flex-grow row-cols-md-3">
                 @if (
                     auth()->user()->role->name == 'super_admin'
+                    || auth()->user()->role->name == 'admin'
                 )
                     <div class="grid-margin stretch-card p-2">
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Users</h4>
                                 <div class="d-flex justify-content-between">
+                                    <p>Role</p>
+                                    <p>Total</p>
+                                </div>
+                                <div class="d-flex justify-content-between border-bottom border-black">
                                     <div>
-                                        <p>Role</p>
                                         <p class="text-dark font-weight-bold mb-2">User</p>
                                         <p class="text-dark font-weight-bold mb-2">Editor</p>
                                         <p class="text-dark font-weight-bold mb-2">Admin</p>
-                                        <p class="text-dark font-weight-bold mb-2">Super Admin</p>
                                     </div>
                                     <div>
-                                        <p>Total</p>
                                         <p class="text-dark font-weight-bold mb-2">{{ count($user) }}</p>
                                         <p class="text-dark font-weight-bold mb-2">{{ count($editor) }}</p>
                                         <p class="text-dark font-weight-bold mb-2">{{ count($admin) }}</p>
-                                        <p class="text-dark font-weight-bold mb-2">{{ count($super_admin) }}</p>
                                     </div>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <p class="text-dark font-weight-bold mb-2">Total</p>
+                                    <p class="text-dark font-weight-bold mb-2">{{ count($user) + count($editor) + count($admin) }}</p>
                                 </div>
                                 <a href="{{ route('users') }}">View</a>
                             </div>
@@ -86,7 +91,7 @@
                                 <h4 class="card-title">Product Request</h4>
                                 <p>Total</p>
                                 <h4 class="text-dark font-weight-bold mb-2">{{ count($product_request) }} Product</h4>
-                                <a href="{{ route('product.request.list') }}">View</a>
+                                <a href="{{ route('product.request.index') }}">View</a>
                             </div>
                         </div>
                     </div>

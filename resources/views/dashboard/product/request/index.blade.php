@@ -55,24 +55,35 @@
                                             {{ $row->product->name }}
                                         </td>
                                         <td>
-                                            {{ $row->request_product }}/{{ $row->product->unit }}
+                                            {{ $row->request_product }} {{ $row->product->unit }}
                                         </td>
                                         <td>
                                             {{ $row->name }}/{{ $row->phone_number }}
                                         </td>
                                         <td>
-                                            {{ $row->status }}
+                                            @if ($row->status == 'proccess')
+                                                processed
+                                            @elseif ($row->status == 'complete')
+                                                completed
+                                            @elseif ($row->status == 'reject')
+                                                rejected
+                                            @else
+                                                {{ $row->status }}
+                                            @endif
                                         </td>
                                         <td>
-                                            @if ($row->status == 'pending')
-                                                <span class="btn btn-sm btn-danger">Reject</span>
-                                                <input type="submit" class="btn btn-sm btn-primary" value="Admit"/>
-                                            @elseif ($row->status == 'processed')
-                                                <span class="btn btn-sm btn-danger">Reject</span>
-                                                <span class="btn btn-sm btn-info">Completed</span>
-                                            @else
-                                                Status Unknown
-                                            @endif
+                                            <div class="d-flex align-items-center">
+                                                <a href="{{ route('product.request.show', $row->id) }}" class="mr-3">
+                                                    <i class="fa fa-eye fa-lg text-black hover-show"></i>
+                                                </a>
+                                                <form action="{{ route('product.request.destroy', $row->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                    <button type="submit" style="border: none; background-color:transparent;">
+                                                        <i class="fa fa-trash-o fa-lg text-black hover-delete"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach

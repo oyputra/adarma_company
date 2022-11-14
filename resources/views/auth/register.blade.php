@@ -86,8 +86,5 @@
                     Already have an account? <a href="{{ url('/login')}}" class="text-primary">Login</a>
                 </div> --}}
             </form>
-        </div>
-    </div>  
-    <div class="col-lg-6 d-flex flex-row" style="background-image: url('images/img\ landing\ page.png');">
 
 @endsection

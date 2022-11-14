@@ -118,19 +118,19 @@
         </div> 
 
         @if (count($category) != 0)
-            <div class="py-5 row">
+            <div class="py-5">
                 <div class="row">
                     <div class="d-flex justify-content-between">
                         <h3 class="font-weight-bold">Category Product</h3>
                         <p><a href="{{ route('product') }}">View All <i class="fa fa-long-arrow-right"></i></a></p>
                     </div>
                 </div>
-                <div class="row row-cols-md-3">
+                <div class="row row-cols-md-3 row-cols-1">
                     @foreach ($category as $item)
                         <div class="col">
                             <a href="{{ route('product.filter', $item->name) }}">
                                 <div class="position-relative my-3">
-                                    <img src="{{ asset('storage/' . $item->image) }}" class="img-fluid" style="height:250px; object-fit: cover;">
+                                    <img src="{{ asset('storage/' . $item->image) }}" class="img-fluid" style="height:250px; width:100%; object-fit: cover;">
                                     <h1 class="position-absolute text-center text-white z-10 fw-bold fs-landing-4" style="inset: 100px 0;">{{ $item->name }}</h1>
                                     <div class="position-absolute card-link"></div>
                                 </div>

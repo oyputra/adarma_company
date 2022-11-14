@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Model\CategoryProduct;
 use App\Model\LandingPage;
 use App\Model\Product;
+use App\Model\ProductRequest;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -135,11 +136,11 @@ class ProductController extends Controller
             ]);
         }
 
-
         if ($request->file('image')) {
             $validated['image'] = $request->file('image')->store('product');
             unlink(public_path('storage/' . $product->image));
         }
+        
         $validated['slug'] = str_replace(' ', '-', strtolower($validated['slug']));
         $validated['slug'] = preg_replace("/[^a-zA-Z0-9-]/", "", $validated['slug']);
 

@@ -6,7 +6,9 @@ use App\Http\Controllers\CategoryProductController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FrontEndController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductRequestController;
 use App\Http\Controllers\WriterController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -37,20 +39,31 @@ Route::get('/article', [FrontEndController::class, 'article'])->name('article');
 Route::get('/article/{article:slug}', [FrontEndController::class, 'article_show'])->name('article.show');
 Route::get('/article/category/{name}', [FrontEndController::class, 'article_filter'])->name('article.filter');
 
+// Frontend Comments
+Route::group(['middleware' => ['auth']], function () {
+    Route::post('/article/comment', [FrontEndController::class, 'comment_article'])->name('comment.article');
+});
+
 // Dashboard General User
 Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function () {    
     Route::get('index', [DashboardController::class, 'index'])->name('dashboard');
+    
+    // Profile
     Route::get('profile', [DashboardController::class, 'profile'])->name('profile');
     Route::put('profile', [DashboardController::class, 'profile_update'])->name('profile.update');
     Route::put('password', [DashboardController::class, 'password'])->name('password');
+    
+    // Storage Link
+    Route::get('/storage-link', function () {
+        Artisan::call('storage:link');
+    });
 });
 
-// Dashboard Roles User & Product Request
+// Dashboard Roles User
 Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'role:super_admin|admin']], function () {    
-    Route::get('product/request', [DashboardController::class, 'product_request_list'])->name('product.request.list');
+    Route::get('users', [DashboardController::class, 'users'])->name('users');
 });
 Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'role:super_admin']], function () {    
-    Route::get('users', [DashboardController::class, 'users'])->name('users');
     Route::get('users/roles/{id}/edit', [DashboardController::class, 'roles_edit'])->name('roles.edit');
     Route::put('users/roles/{id}/update', [DashboardController::class, 'roles_update'])->name('roles.update');
 });
@@ -63,7 +76,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'role:super_admi
 });
 
 // Dashboard CRUD Article
-Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'role:editor']], function () {
+Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'role:super_admin|editor']], function () {
     Route::get('/article/create', [ArticleController::class, 'create'])->name('article.create');
     Route::post('/article/store', [ArticleController::class, 'store'])->name('article.store');
     Route::get('/article/edit/{article:slug}', [ArticleController::class, 'edit'])->name('article.edit');
@@ -100,8 +113,9 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'role:super_admi
     Route::put('/writer/{id}/update', [WriterController::class, 'update'])->name('writer.update');
 });
 
-// Dashboard CRUD Product
+// Dashboard Product
 Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'role:super_admin|admin']], function () {
+    // Dashboard CRUD Product
     Route::get('/product/item', [ProductController::class, 'index'])->name('product.index');
     Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
     Route::post('/product/store', [ProductController::class, 'store'])->name('product.store');
@@ -109,10 +123,8 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'role:super_admi
     Route::get('/product/{id}/edit', [ProductController::class, 'edit'])->name('product.edit');
     Route::put('/product/{id}/update', [ProductController::class, 'update'])->name('product.update');
     Route::delete('/product/{id}/destroy', [ProductController::class, 'destroy'])->name('product.destroy');
-});
-
-// Dashboard CRUD Product Category
-Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'role:super_admin|admin']], function () {
+    
+    // Dashboard CRUD Product Category
     Route::get('/category-product', [CategoryProductController::class, 'index'])->name('category_product.index');
     Route::get('/category-product/create', [CategoryProductController::class, 'create'])->name('category_product.create');
     Route::post('/category-product/store', [CategoryProductController::class, 'store'])->name('category_product.store');
@@ -120,11 +132,12 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'role:super_admi
     Route::get('/category-product/{id}/edit', [CategoryProductController::class, 'edit'])->name('category_product.edit');
     Route::put('/category-product/{id}/update', [CategoryProductController::class, 'update'])->name('category_product.update');
     Route::delete('/category-product/{id}/destroy', [CategoryProductController::class, 'destroy'])->name('category_product.destroy');
-});
-
-// Frontend Comments
-Route::group(['middleware' => ['auth']], function () {
-    Route::post('/article/comment', [FrontEndController::class, 'comment_article'])->name('comment.article');
+    
+    // Dashboard CRUD Product Request
+    Route::get('product/request', [ProductRequestController::class, 'index'])->name('product.request.index');
+    Route::get('product/{id}/request', [ProductRequestController::class, 'show'])->name('product.request.show');
+    Route::post('product/{id}/request/update', [ProductRequestController::class, 'update'])->name('product.request.update');
+    Route::delete('product/{id}/request/destroy', [ProductRequestController::class, 'destroy'])->name('product.request.destroy');
 });
 
 Auth::routes();

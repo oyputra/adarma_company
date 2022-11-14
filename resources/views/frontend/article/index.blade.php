@@ -2,7 +2,7 @@
 
 @section('content')
     
-    <section class="pb-landing bg-green">
+    <section class="@if (isset($article)) pb-landing @endif bg-green">
         <nav class="navbar navbar-expand-lg navbar-dark text-white">
             @include('layouts.frontend.navbar')
         </nav>
@@ -28,7 +28,7 @@
                                                 </div>
                                                 <div class="ml-3 lh-xs">
                                                     <p class="text-muted p-0 text-sm text-muted">Penulis</p>
-                                                    <p class="fw-bold p-0 text-sm text-muted">{{ $article->writer_id->first_name }} {{ $article->writer_id->last_name }}</p>
+                                                    <p class="fw-bold p-0 text-sm text-muted">{{ $article->writer_id->name }}</p>
                                                 </div>
                                             </div>
                                             <div class="lh-xs">
@@ -49,11 +49,11 @@
             </div>
         @endif
     </section>  
-    @if (isset($article))
-        <section class="mt-landing-3">
+    @if (count($articles) != 0)
+        <section class="@if (isset($article)) mt-landing-3 @endif">
             <div class="container">
                 <div class="row">
-                    <div class="my-3 d-flex justify-content-between">
+                    <div class="my-5 d-flex justify-content-between">
                         <div>
                             <h3 class="mr-3">{{ count($articles) }} Article</h3>
                         </div>
@@ -64,7 +64,7 @@
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                 <li><a class="dropdown-item" href="{{ route('article') }}">All Product</a></li>
                                 @foreach ($category as $row)
-                                    <li><a class="dropdown-item" href="{{ route('article.filter', $row->name) }}">{{ $row->name }}</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('article.filter', strtolower($row->name)) }}">{{ $row->name }}</a></li>
                                 @endforeach
                             </ul>
                         </div>

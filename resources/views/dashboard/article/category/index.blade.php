@@ -11,14 +11,14 @@
                     <div class="card-body">
                         <div>
                             <div class="d-flex align-items-center justify-content-between">
-                                <h4 class="card-title">Category Product</h4>
+                                <h4 class="card-title">Category Article</h4>
                                 <a href="{{ route('category_article.create') }}" class="btn btn-primary">
                                     Add
                                 </a>
                             </div>
                         </div>
                         <p class="card-description">
-                            {{ count($category) }} Category Products
+                            {{ count($category) }} Category Article
                         </p>
                         <div class="table-responsive">
                             <table id="myTable" class="table table-striped">
