@@ -8,7 +8,7 @@
                 @else
                     {{ asset('images/user.png') }}
                 @endif
-                ">
+                " style="object-fit: cover;">
             </a>
         </div>
         <div class="user-name">

@@ -10,9 +10,9 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Manager Landing Page</h4>
-                    <p class="card-description">
-                        {{-- Fill in the input form below to upload an <code>Category Product</code> --}}
-                    </p>
+                    {{-- <p class="card-description">
+                        Fill in the input form below to upload an <code>Category Product</code>
+                    </p> --}}
                     
                     <div class="row">
                         <div class="col-md-2">
@@ -34,7 +34,7 @@
                                     <img src="
                                         @if (isset($landingpage->img_landing)) 
                                             {{ asset('storage/' . $landingpage->img_landing) }}
-                                        @else    
+                                        @else
                                             {{ asset('images/img landing page.png') }}
                                         @endif
                                         " class="img-fluid">
@@ -119,7 +119,100 @@
                     </div>
                 </div>
             </div>
-          </div>
+        </div>
+        <div class="col-12 grid-margin" id="carousel">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <h4 class="card-title">Carousel</h4>
+                        {{-- <p class="card-description">
+                            Fill in the input form below to upload an <code>Category Product</code>
+                        </p> --}}
+                        @if (isset($carousel))
+                            <form action="{{ route('landingpage.carousel.destroy') }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm">Reset</button>
+                            </form>
+                        @endif
+                    </div>
+
+                    <div class="row row-cols-md-3 row-cols-1 my-3">
+                        <div class="col">
+                            @if (isset($carousel->img_first))
+                                <img src="{{ asset('storage/' . $carousel->img_first) }}" class="img-fluid">
+                                <span>Image First</span>
+                            @endif
+                            </div>
+                        <div class="col">
+                            @if (isset($carousel->img_second))
+                                <img src="{{ asset('storage/' . $carousel->img_second) }}" class="img-fluid">
+                                <span>Image Second</span>
+                            @endif
+                        </div>
+                        <div class="col">
+                            @if (isset($carousel->img_third))
+                                <img src="{{ asset('storage/' . $carousel->img_third) }}" class="img-fluid">
+                                <span>Image Third</span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <form action="{{ route('landingpage.carousel') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <label for="img_first" class="col-sm-2 col-form-label">Image First</label>
+                                            <div class="col-sm-10">
+                                                <input id="img_first" name="img_first" type="file" class="form-control @error('img_first') is-invalid @enderror">
+        
+                                                @error('img_first')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="img_second" class="col-sm-2 col-form-label">Image Second</label>
+                                            <div class="col-sm-10">
+                                                <input id="img_second" name="img_second" type="file" class="form-control @error('img_second') is-invalid @enderror">
+        
+                                                @error('img_second')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="img_third" class="col-sm-2 col-form-label">Image Third</label>
+                                            <div class="col-sm-10">
+                                                <input id="img_third" name="img_third" type="file" class="form-control @error('img_third') is-invalid @enderror">
+        
+                                                @error('img_third')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="d-flex align-items-center justify-content-end">
+                                    <button type="submit" class="btn btn-primary">
+                                        Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
 
     </div>
   </div>

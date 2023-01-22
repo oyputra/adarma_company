@@ -73,6 +73,9 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'role:super_admi
     Route::get('landingpage', [DashboardController::class, 'landingpage'])->name('landingpage');
     Route::post('landingpage', [DashboardController::class, 'landingpage_store'])->name('landingpage.store');
     Route::delete('landingpage', [DashboardController::class, 'landingpage_destroy'])->name('landingpage.destroy');
+    
+    Route::post('landingpage/carousel', [DashboardController::class, 'carousel'])->name('landingpage.carousel');
+    Route::delete('landingpage/carousel', [DashboardController::class, 'carousel_destroy'])->name('landingpage.carousel.destroy');
 });
 
 // Dashboard CRUD Article
@@ -135,7 +138,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'role:super_admi
     
     // Dashboard CRUD Product Request
     Route::get('product/request', [ProductRequestController::class, 'index'])->name('product.request.index');
-    Route::get('product/{id}/request', [ProductRequestController::class, 'show'])->name('product.request.show');
+    Route::get('product/{id}/request/show', [ProductRequestController::class, 'show'])->name('product.request.show');
     Route::post('product/{id}/request/update', [ProductRequestController::class, 'update'])->name('product.request.update');
     Route::delete('product/{id}/request/destroy', [ProductRequestController::class, 'destroy'])->name('product.request.destroy');
 });

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\Article;
 use App\Model\LandingPage;
+use App\Model\LandingPageCarousel;
 use App\Model\Product;
 use App\Model\ProductRequest;
 use App\Model\Role;
@@ -136,8 +137,9 @@ class DashboardController extends Controller
         $title = 'Landing Page';
 
         $landingpage = LandingPage::latest()->first();
+        $carousel = LandingPageCarousel::latest()->first();
 
-        return view('dashboard.landingpage', compact('title', 'landingpage'));
+        return view('dashboard.landingpage', compact('title', 'landingpage', 'carousel'));
     }
 
     public function landingpage_store(Request $request)
@@ -177,7 +179,7 @@ class DashboardController extends Controller
             LandingPage::where('id', $landingpage->id)->update($validated);
         }
         
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Landing Page berhasil diperbarui!');
     }
 
     public function landingpage_destroy()
@@ -192,7 +194,72 @@ class DashboardController extends Controller
         
         $landingpage->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Landing Page berhasil disetel ulang!');
+    }
+
+    public function carousel(Request $request)
+    {
+        $carousel = LandingPageCarousel::latest()->first();
+
+        $validated = request()->validate([
+            'img_first' => 'nullable|file|image|mimes:jpeg,jpg,png,gif|max:1024',
+            'img_second' => 'nullable|file|image|mimes:jpeg,jpg,png,gif|max:1024',
+            'img_third' => 'nullable|file|image|mimes:jpeg,jpg,png,gif|max:1024',
+        ]);
+
+        if ($carousel == null) {           
+            if ($request->file('img_first')) {
+                $validated['img_first'] = $request->file('img_first')->store('carousel');
+            }
+            if ($request->file('img_second')) {
+                $validated['img_second'] = $request->file('img_second')->store('carousel');
+            }
+            if ($request->file('img_third')) {
+                $validated['img_third'] = $request->file('img_third')->store('carousel');
+            }
+            LandingPageCarousel::create($validated);
+        } else {
+            if ($request->file('img_first')) {
+                $validated['img_first'] = $request->file('img_first')->store('carousel');
+                if ($carousel->img_first != null) {
+                    unlink(public_path('storage/' . $carousel->img_first));
+                }
+            }
+            if ($request->file('img_second')) {
+                $validated['img_second'] = $request->file('img_second')->store('carousel');
+                if ($carousel->img_second != null) {
+                    unlink(public_path('storage/' . $carousel->img_second));
+                }
+            }
+            if ($request->file('img_third')) {
+                $validated['img_third'] = $request->file('img_third')->store('carousel');
+                if ($carousel->img_third != null) {
+                    unlink(public_path('storage/' . $carousel->img_third));
+                }
+            }
+
+            LandingPageCarousel::where('id', $carousel->id)->update($validated);
+        }
+
+        return redirect()->back()->with('success', 'Carousel berhasil diperbarui!');
+    }
+
+    public function carousel_destroy()
+    {
+        $carousel = LandingPageCarousel::latest()->first();
+        if ($carousel->img_first != null) {
+            unlink(public_path('storage/' . $carousel->img_first));
+        }
+        if ($carousel->img_second != null) {
+            unlink(public_path('storage/' . $carousel->img_second));
+        }
+        if ($carousel->img_third != null) {
+            unlink(public_path('storage/' . $carousel->img_third));
+        }
+        
+        $carousel->delete();
+
+        return redirect()->back()->with('success', 'Carousel berhasil disetel ulang!');
     }
 
     public function editor()

@@ -1,7 +1,7 @@
 @extends('layouts.frontend.landing')
 
 @section('content')
-    
+
     <section class="bg-green">
         <nav class="navbar navbar-expand-lg navbar-dark text-white">
             @include('layouts.frontend.navbar')
@@ -10,7 +10,7 @@
 
     <section>
         <div class="container">
-            @if (count($products) > 0)
+            @if (count($category) > 0)
                 <div class="row">
                     <div class="my-3 d-flex justify-content-between">
                         <div>

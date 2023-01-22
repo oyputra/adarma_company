@@ -61,20 +61,16 @@
                                             {{ $row->name }}/{{ $row->phone_number }}
                                         </td>
                                         <td>
-                                            @if ($row->status == 'proccess')
-                                                processed
-                                            @elseif ($row->status == 'complete')
-                                                completed
-                                            @elseif ($row->status == 'reject')
-                                                rejected
-                                            @else
-                                                {{ $row->status }}
-                                            @endif
+                                            {{ $row->status }}
                                         </td>
                                         <td>
                                             <div class="d-flex align-items-center">
                                                 <a href="{{ route('product.request.show', $row->id) }}" class="mr-3">
-                                                    <i class="fa fa-eye fa-lg text-black hover-show"></i>
+                                                    <i class="fa @if ($row->status == 'complete' || $row->status == 'reject')
+                                                        fa-eye
+                                                    @else
+                                                        fa-pencil-square-o
+                                                    @endif fa-lg text-black hover-show"></i>
                                                 </a>
                                                 <form action="{{ route('product.request.destroy', $row->id) }}" method="POST">
                                                 @csrf

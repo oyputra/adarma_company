@@ -38,17 +38,17 @@
                     <i class="icon-bell mx-0"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
-                    <p class="mb-0 font-weight-normal float-left dropdown-header">Messages</p>
+                    <p class="mb-0 font-weight-normal float-left dropdown-header">No Messages</p>
+                    {{-- <p class="mb-0 font-weight-normal float-left dropdown-header">Messages</p>
                     <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                        <img src="{{ asset('images/faces/face4.jpg') }}" alt="image" class="profile-pic">
-                    </div>
-                    <div class="preview-item-content flex-grow">
-                        <h6 class="preview-subject ellipsis font-weight-normal weight-light small-text text-muted mb-0">David Grey</h6>
-                        <p class="font-weight-light small-text text-muted mb-0">The meeting is cancelled</p>
-                    </div>
-                    </a>
-                    </a>
+                        <div class="preview-thumbnail">
+                            <img src="{{ asset('images/faces/face4.jpg') }}" alt="image" class="profile-pic">
+                        </div>
+                        <div class="preview-item-content flex-grow">
+                            <h6 class="preview-subject ellipsis font-weight-normal weight-light small-text text-muted mb-0">David Grey</h6>
+                            <p class="font-weight-light small-text text-muted mb-0">The meeting is cancelled</p>
+                        </div>
+                    </a> --}}
                 </div>
             </li>
             <li class="nav-item dropdown d-flex mr-4 ">

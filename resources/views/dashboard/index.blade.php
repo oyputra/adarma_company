@@ -21,26 +21,21 @@
                     <div class="grid-margin stretch-card p-2">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Users</h4>
-                                <div class="d-flex justify-content-between">
-                                    <p>Role</p>
-                                    <p>Total</p>
-                                </div>
                                 <div class="d-flex justify-content-between border-bottom border-black">
+                                    <h4 class="card-title">Users</h4>
+                                    <div class="text-dark font-weight-bold">{{ count($user) + count($editor) + count($admin) }}</div>
+                                </div>
+                                <div class="d-flex justify-content-between mt-3">
                                     <div>
                                         <p class="text-dark font-weight-bold mb-2">User</p>
                                         <p class="text-dark font-weight-bold mb-2">Editor</p>
                                         <p class="text-dark font-weight-bold mb-2">Admin</p>
                                     </div>
                                     <div>
-                                        <p class="text-dark font-weight-bold mb-2">{{ count($user) }}</p>
-                                        <p class="text-dark font-weight-bold mb-2">{{ count($editor) }}</p>
-                                        <p class="text-dark font-weight-bold mb-2">{{ count($admin) }}</p>
+                                        <p class="text-dark mb-2">{{ count($user) }}</p>
+                                        <p class="text-dark mb-2">{{ count($editor) }}</p>
+                                        <p class="text-dark mb-2">{{ count($admin) }}</p>
                                     </div>
-                                </div>
-                                <div class="d-flex justify-content-between">
-                                    <p class="text-dark font-weight-bold mb-2">Total</p>
-                                    <p class="text-dark font-weight-bold mb-2">{{ count($user) + count($editor) + count($admin) }}</p>
                                 </div>
                                 <a href="{{ route('users') }}">View</a>
                             </div>

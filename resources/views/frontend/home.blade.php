@@ -2,14 +2,93 @@
 
 @section('content')
 
-    <section style="background-image: url(@if (isset($landingpage->img_landing)) 
-        {{ 'storage/' . $landingpage->img_landing }}
-    @else    
-        'images/img landing page.png'
-    @endif);
-    background-repeat: no-repeat;
-    background-size: cover;
-    ">
+    {{-- carousell --}}
+    <div>
+        <div class="row">
+            <nav class="navbar navbar-expand-lg navbar-light bg-successs position-absolute" style="z-index: 10">
+                @include('layouts.frontend.navbar')
+            </nav>
+        </div>
+
+        @if (isset($carousel->img_first))
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="{{ 'storage/' . $carousel->img_first }}" class="d-block w-100 img-height-car" alt="...">
+                </div>
+                <div class="carousel-item">
+                    @if (isset($carousel->img_second))
+                        <img src="{{ 'storage/' . $carousel->img_second }}" class="d-block w-100 img-height-car" alt="...">            
+                    @elseif (isset($carousel->img_third))
+                        <img src="{{ 'storage/' . $carousel->img_third }}" class="d-block w-100 img-height-car" alt="...">
+                    @else
+                        <img src="{{ 'storage/' . $carousel->img_first }}" class="d-block w-100 img-height-car" alt="...">
+                    @endif
+                </div>
+                <div class="carousel-item">
+                    @if (isset($carousel->img_third))
+                        <img src="{{ 'storage/' . $carousel->img_third }}" class="d-block w-100 img-height-car" alt="...">  
+                    @else
+                        <img src="{{ 'storage/' . $carousel->img_first }}" class="d-block w-100 img-height-car" alt="...">
+                    @endif
+                </div>
+            </div>
+            {{-- <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button> --}}
+        </div>
+        @endif
+        
+        <div @if (isset($carousel->img_first))
+            class="container"
+            @endif>
+            <section
+                @if (isset($carousel->img_first))
+                    class="position-absolute top-0"
+                @else
+                    style="background-image: url(
+                    @if (isset($landingpage->img_landing)) 
+                        {{ 'storage/' . $landingpage->img_landing }}
+                    @else    
+                        'images/img landing page.png'
+                    @endif);
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    ">        
+                @endif
+        
+                <div class="container">
+                    <div class="text-white py-landing">
+                        <div class="col-md-8 mt-5">
+                            <h1 class="fw-bold fs-first-title">High Quality Product from trusted Farmer</h1>
+                            <p class="">The raw materials we use are genuine coconut shells taken from local Farm with guaranteed quality</p>
+                            <a href="#about" class="btn btn-lg bg-light fw-bold my-5 p-landing"><span class="text-green">About Us</span></a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    {{-- carousell end --}}
+
+    {{-- <section style="background-image: url(@if (isset($landingpage->img_landing)) 
+            {{ 'storage/' . $landingpage->img_landing }}
+        @else    
+            'images/img landing page.png'
+        @endif);
+        background-repeat: no-repeat;
+        background-size: cover;
+        ">
         <nav class="navbar navbar-expand-lg navbar-dark text-white">
             @include('layouts.frontend.navbar')
         </nav>
@@ -17,13 +96,13 @@
         <div class="container">
             <div class="text-white py-landing">
                 <div class="col-md-8">
-                    <h1 class="fw-bold fs-md-1 fs-landing">High Quality Product from trusted Farmer</h1>
+                    <h1 class="fw-bold fs-md-1 fs-landing">2 High Quality Product from trusted Farmer</h1>
                     <p>The raw materials we use are genuine coconut shells taken from local Farm with guaranteed quality</p>
                     <a href="#about" class="btn btn-lg bg-light fw-bold my-5 p-landing"><span class="text-green">About Us</span></a>
                 </div>
             </div>
         </div>
-    </section>        
+    </section>         --}}
 
     <section class="container" id="about">
         <div class="py-5">

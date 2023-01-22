@@ -7,6 +7,7 @@ use App\Model\CategoryArticle;
 use App\Model\CategoryProduct;
 use App\Model\Comment;
 use App\Model\LandingPage;
+use App\Model\LandingPageCarousel;
 use App\Model\Product;
 use App\Model\ProductRequest;
 use Illuminate\Http\Request;
@@ -18,18 +19,19 @@ class FrontEndController extends Controller
     {
         $category = CategoryProduct::latest()->limit(3)->get();
         $landingpage = LandingPage::latest()->first();
+        $carousel = LandingPageCarousel::latest()->first();
         
-        return view('frontend.home', compact('category', 'landingpage'));
+        return view('frontend.home', compact('category', 'landingpage', 'carousel'));
     }
     public function article()
     {
         $title = 'Articles';
         $article = Article::latest()->first();
         $category = CategoryArticle::get();
-        if (isset($article)) {
+        if ($article != null) {
             $articles = Article::where('id', '!=', $article->id)->latest()->get();
         } else {
-            $articles = $article;
+            $articles = 0;
         }
         $landingpage = LandingPage::latest()->first();
 

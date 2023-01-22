@@ -6,15 +6,15 @@
                     <img src="{{ asset('images/logo.png') }}" width="70" height="70">
                 </div>
                 <div class="d-flex mt-md-4">
-                    <div class="mx-3">
+                    <a href="https://www.instagram.com/" target="_blank" class="mx-3" style="text-decoration: none; color:black;">
                         <i class="fa fa-instagram fa-lg bg-white rounded-circle" style="padding: 0.5em 0.5em;" aria-hidden="true"></i>
-                    </div>
-                    <div class="mx-3">
+                    </a>
+                    <a href="https://www.facebook.com/" target="_blank" class="mx-3" style="text-decoration: none; color:black;">
                         <i class="fa fa-facebook fa-lg bg-white rounded-circle" style="padding: 0.5em 0.65em;" aria-hidden="true"></i>
-                    </div>
-                    <div class="mx-3">
+                    </a>
+                    <a href="https://twitter.com/" target="_blank" class="mx-3" style="text-decoration: none; color:black;">
                         <i class="fa fa-twitter fa-lg bg-white rounded-circle" style="padding: 0.5em 0.47em;" aria-hidden="true"></i>
-                    </div>
+                    </a>
                 </div>
             </div>
 
@@ -22,22 +22,22 @@
                 <div class="mx-md-5">
                     <p class="fw-bold">About</p>
                     <p>
-                        <a href="#" class="text-white" style="text-decoration: none;">About Us</a>
+                        <a href="{{ url('/#about') }}" class="text-white" style="text-decoration: none;">About Us</a>
                     </p>
                 </div>
                 <div class="mx-md-5">
                     <p class="fw-bold">Information</p>
                     <p>
-                        <a href="#" class="text-white" style="text-decoration: none;">Contact</a>
+                        <p href="#" class="text-muted" style="text-decoration: none;">Contact</p>
                     </p>
                     <p>
-                        <a href="#" class="text-white" style="text-decoration: none;">Partnership</a>
+                        <p href="#" class="text-muted" style="text-decoration: none;">Partnership</p>
                     </p>
                 </div>
                 <div class="mx-md-5">
                     <p class="fw-bold">Bantuan</p>
                     <p>
-                        <a href="#" class="text-white" style="text-decoration: none;">FAQ</a>
+                        <p href="#" class="text-muted" style="text-decoration: none;">FAQ</p>
                     </p>
                 </div>
             </div>
@@ -50,8 +50,8 @@
                         email
                         by the following column</p>
                     <div class="input-group">
-                        <input type="text" name="email-send" class="form-control pl-3 py-4" placeholder="Email Address" style="border-radius: 25px 0 0 25px; box-shadow: none; border: none;">
-                        <button class="btn bg-white" type="button" id="button-addon2"  style="border-radius: 0 25px 25px 0;">
+                        <input type="text" name="email-send" class="form-control" placeholder="Email Address" style="border-radius: 25px 0 0 25px; box-shadow: none; border: none;">
+                        <button class="btn bg-white border-0" type="button" id="button-addon2"  style="border-radius: 0 25px 25px 0;">
                             <img src="{{ asset('images/button-send.png') }}" alt="" class="" width="30">
                         </button>
                     </div>

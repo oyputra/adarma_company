@@ -19,6 +19,12 @@
                                         <div class="pb-4">
                                             <h1 class="fw-bolder fs-2">{{ $article->title }}</h1>
                                             <p class="text-muted">{{ $article->category->name }}</p>
+                                            <div class="d-flex align-items-center">
+                                                <div>
+                                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                                </div>
+                                                <div class="text-sm pl-1">{{ $article->views += 1 }}</div>
+                                            </div>
                                         </div>
                                         <div class="d-flex justify-content-between">
                                             <div class="d-flex">
@@ -49,8 +55,8 @@
             </div>
         @endif
     </section>  
-    @if (count($articles) != 0)
-        <section class="@if (isset($article)) mt-landing-3 @endif">
+    @if ($articles != null)
+        <section class="@if (isset($article)) mt-article-index @endif">
             <div class="container">
                 <div class="row">
                     <div class="my-5 d-flex justify-content-between">
@@ -70,7 +76,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row row-cols-md-3 row-cols-2">
+                <div class="row row-cols-md-3 row-cols-1">
                     @foreach ($articles as $item)
                         <div class="col my-3">
                             <div class="card rounded-shadow-card">

@@ -1,13 +1,13 @@
 <div class="container">
     <button class="navbar-toggler bg-black my-4" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon fs-6"></span>
     </button>
     <a class="navbar-toggler my-4" href="{{ url('/') }}">
         <img src="@if (isset($landingpage->img_logo))
             {{ asset('storage/' . $landingpage->img_logo) }}
         @else
             {{ asset('images/logo.png') }}
-        @endif" width="50" height="50" class="d-inline-block align-text-top">
+        @endif" width="30" height="30" class="d-inline-block align-text-top">
     </a>
     <div class="collapse navbar-collapse bg-navbar-responsive" id="navbarTogglerDemo03">
         <div class="d-flex me-auto">
@@ -18,7 +18,7 @@
                     {{ asset('images/logo.png') }}
                 @endif" width="50" height="50" class="d-inline-block align-text-top">
             </a>
-            <div>
+            <div class="text-white">
                 <div class="fw-bolder fs-3">CV. Arta Mandiri</div>
                 <div class="lead fs-6">Agricultural And Industrial Export Company</div>
             </div>
