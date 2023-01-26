@@ -55,7 +55,7 @@ class CategoryArticleController extends Controller
 
         CategoryArticle::create($validated);
 
-        return redirect()->route('category_article.index');
+        return redirect()->route('category_article.index')->with('success', 'Kategori artikel berhasil dibuat!');
     }
 
     /**
@@ -119,7 +119,7 @@ class CategoryArticleController extends Controller
         }
 
         CategoryArticle::where('id', $category->id)->update($validated);
-        return redirect()->route('category_article.index');
+        return redirect()->route('category_article.index')->with('success', 'Kategori artikel berhasil diperbarui!');
     }
 
     /**
@@ -146,6 +146,6 @@ class CategoryArticleController extends Controller
             $category->delete();
         }
 
-        return redirect()->route('category_article.index');
+        return redirect()->route('category_article.index')->with('danger', 'Kategori artikel berhasil dihapus!');
     }
 }

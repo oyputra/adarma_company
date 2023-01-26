@@ -17,7 +17,7 @@ class FrontEndController extends Controller
 {
     public function home()
     {
-        $category = CategoryProduct::latest()->limit(3)->get();
+        $category = CategoryProduct::latest()->get();
         $landingpage = LandingPage::latest()->first();
         $carousel = LandingPageCarousel::latest()->first();
         
@@ -91,7 +91,7 @@ class FrontEndController extends Controller
             'article_id' => 'required|numeric',
         ]);
         Comment::create($validated);
-        return redirect()->back();
+        return redirect()->back()->with('success','Komentar anda telah terkirim!');
     }
     public function product()
     {

@@ -1,5 +1,5 @@
 @if ($message = Session::get('success'))
-    <div class="position-relative container">
+    <div class="position-relative container" style="z-index: 1">
         <div class="row">
             <div class="position-absolute">
                 <div class="mt-5 d-flex justify-content-center">
@@ -16,7 +16,7 @@
 @endif
 
 @if ($message = Session::get('error'))
-    <div class="position-relative container">
+    <div class="position-relative container" style="z-index: 1">
         <div class="row">
             <div class="position-absolute">
                 <div class="mt-5 d-flex justify-content-center">
@@ -33,7 +33,7 @@
 @endif
 
 @if ($errors->any())
-    <div class="position-relative container">
+    <div class="position-relative container" style="z-index: 1">
         <div class="row">
             <div class="position-absolute">
                 <div class="mt-5 d-flex justify-content-center">

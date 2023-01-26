@@ -55,7 +55,7 @@ class CategoryProductController extends Controller
 
         CategoryProduct::create($validated);
 
-        return redirect()->route('category_product.index');
+        return redirect()->route('category_product.index')->with('success', 'Kategori produk berhasil dibuat!');
     }
 
     /**
@@ -119,7 +119,7 @@ class CategoryProductController extends Controller
         }
 
         CategoryProduct::where('id', $category->id)->update($validated);
-        return redirect()->route('category_product.index');
+        return redirect()->route('category_product.index')->with('success', 'Kategori produk berhasil diperbarui!');
     }
 
     /**
@@ -146,6 +146,6 @@ class CategoryProductController extends Controller
             $category->delete();
         }
 
-        return redirect()->route('category_product.index');
+        return redirect()->route('category_product.index')->with('success', 'Kategori produk berhasil dihapus!');
     }
 }

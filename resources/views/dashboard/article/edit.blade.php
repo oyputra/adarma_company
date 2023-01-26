@@ -101,7 +101,13 @@
                                     <div class="form-group row">
                                     <label for="writer" class="col-sm-4 col-form-label">Writer</label>
                                     <div class="col-sm-8">
-                                        <input id="writer" name="writer" type="text" class="form-control @error('writer') is-invalid @enderror" value="{{ $article->writer }}" />
+                                        <select id="writer" name="writer" class="form-control py-3 @error('writer') is-invalid border-danger @enderror">
+                                            <option selected disabled>--- Choose Category ---</option>
+                                            @foreach ($writers as $row)
+                                                <option value="{{ $row->id }}" @if($article->writer === $row->id) selected @endif>{{ $row->name }}</option>                                        
+                                            @endforeach
+                                        </select>
+                                        {{-- <input id="writer" name="writer" type="text" class="form-control @error('writer') is-invalid @enderror" value="{{ $article->writer }}" /> --}}
                                         @error('writer')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror

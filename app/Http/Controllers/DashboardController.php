@@ -74,6 +74,19 @@ class DashboardController extends Controller
 
         return redirect()->back()->with('success', 'Profil kamu sudah diperbarui!');
     }
+
+    public function profile_image_destroy()
+    {
+        $profile = User::find(Auth::user()->id);
+        if ($profile->image != null) {
+            unlink(public_path('storage/' . $profile->image));
+        }
+        
+        $profile->image = null;
+        $profile->save();
+
+        return redirect()->back()->with('success', 'Profile berhasil dihapus!');
+    }
     
     public function password(Request $request)
     {

@@ -70,8 +70,20 @@
                 <div class="container">
                     <div class="text-white py-landing">
                         <div class="col-md-8 mt-5">
-                            <h1 class="fw-bold fs-first-title">High Quality Product from trusted Farmer</h1>
-                            <p class="">The raw materials we use are genuine coconut shells taken from local Farm with guaranteed quality</p>
+                            <h1 class="fw-bold fs-first-title">
+                                @if (isset($landingpage->text_landing_large))
+                                    {{ $landingpage->text_landing_large }}
+                                @else
+                                    High Quality Product from trusted Farmer
+                                @endif
+                            </h1>
+                            <p>
+                                @if (isset($landingpage->text_landing_small))
+                                    {{ $landingpage->text_landing_small }}
+                                @else
+                                    The raw materials we use are genuine coconut shells taken from local Farm with guaranteed quality                                
+                                @endif
+                            </p>
                             <a href="#about" class="btn btn-lg bg-light fw-bold my-5 p-landing"><span class="text-green">About Us</span></a>
                         </div>
                     </div>

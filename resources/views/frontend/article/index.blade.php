@@ -23,7 +23,7 @@
                                                 <div>
                                                     <i class="fa fa-eye" aria-hidden="true"></i>
                                                 </div>
-                                                <div class="text-sm pl-1">{{ $article->views += 1 }}</div>
+                                                <div class="text-sm pl-1">{{ $article->views }}</div>
                                             </div>
                                         </div>
                                         <div class="d-flex justify-content-between">
@@ -55,7 +55,7 @@
             </div>
         @endif
     </section>  
-    @if ($articles != null)
+    @if (count($articles) >= 1)
         <section class="@if (isset($article)) mt-article-index @endif">
             <div class="container">
                 <div class="row">

@@ -35,35 +35,37 @@
                                         @endif
                                     </p>
                                 </div>
-                                <hr>
-                                <div>
-                                    <h1 class="fw-bolder fs-4 mb-4">Statistik</h1>
-                                    <div class="row col-12">
-                                        <div class="text-center col-4">
-                                            <i class="fa fa-newspaper-o fa-3x" aria-hidden="true"></i>
-                                            <p>{{ $count_articles }}</p>
+                                @if (auth()->user()->role->name != 'user')
+                                    <hr>
+                                    <div>
+                                        <h1 class="fw-bolder fs-4 mb-4">Statistik</h1>
+                                        <div class="row col-12">
+                                            <div class="text-center col-4">
+                                                <i class="fa fa-newspaper-o fa-3x" aria-hidden="true"></i>
+                                                <p>{{ $count_articles }}</p>
+                                            </div>
+                                            <div class="text-center col-4">
+                                                <i class="fa fa-eye fa-3x" aria-hidden="true"></i>
+                                                <p>@if ($count_views != 0) {{ $count_views += 1 }} @else {{ $count_views }} @endif</p>
+                                            </div>
+                                            <div class="text-center col-4">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-chat-left-text" viewBox="0 0 16 16">
+                                                    <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                                    <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6zm0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
+                                                </svg>
+                                                <p>{{ $count_comment }}</p>
+                                            </div>
                                         </div>
-                                        <div class="text-center col-4">
-                                            <i class="fa fa-eye fa-3x" aria-hidden="true"></i>
-                                            <p>@if ($count_views != 0) {{ $count_views += 1 }} @else {{ $count_views }} @endif</p>
-                                        </div>
-                                        <div class="text-center col-4">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-chat-left-text" viewBox="0 0 16 16">
-                                                <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-                                                <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6zm0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
-                                            </svg>
-                                            <p>{{ $count_comment }}</p>
-                                        </div>
-                                    </div>
-                                    {{-- <div class="input-group">
-                                        <input type="text" class="form-control radius-left border-green" placeholder="Search..." aria-label="Recipient's username" aria-describedby="button-addon2">
-                                        <button class="btn btn-success bg-green col-2 p-0 d-flex align-items-center justify-content-center" type="button" id="button-addon2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                                            </svg>
-                                        </button>
-                                    </div> --}}
-                                </div>
+                                        {{-- <div class="input-group">
+                                            <input type="text" class="form-control radius-left border-green" placeholder="Search..." aria-label="Recipient's username" aria-describedby="button-addon2">
+                                            <button class="btn btn-success bg-green col-2 p-0 d-flex align-items-center justify-content-center" type="button" id="button-addon2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                                </svg>
+                                            </button>
+                                        </div> --}}
+                                    </div>                                    
+                                @endif
                             </div>
                         </div>
                     @endauth
@@ -162,7 +164,7 @@
                                             <div class="col-4 p-0">
                                                 <img src="{{ asset('storage/' . $item->image) }}" class="img-fluid object-cover rounded" alt="...">
                                             </div>
-                                            <div class="col-8 p-0">
+                                            <div class="col-8 p-0 ml-3">
                                                 <div class="pl-2 d-flex align-items-between flex-column h-100">
                                                     <p class="mb-auto card-text lh-1 text-sm">{{ $item->title }}</p>
                                                     <div class="text-xs mt-2 d-flex justify-content-between">
@@ -186,7 +188,7 @@
                                             <div class="col-4 p-0">
                                                 <img src="{{ asset('storage/' . $item->image) }}" class="img-fluid object-cover rounded" alt="...">
                                             </div>
-                                            <div class="col-8 p-0">
+                                            <div class="col-8 p-0 ml-3">
                                                 <div class="pl-2 d-flex align-items-between flex-column h-100">
                                                     <p class="mb-auto card-text lh-1 text-sm">{{ $item->title }}</p>
                                                     <div class="text-xs mt-2 d-flex justify-content-between">
@@ -210,7 +212,7 @@
                                             <div class="col-4 p-0">
                                                 <img src="{{ asset('storage/' . $article_relate_1->image) }}" class="img-fluid object-cover rounded" alt="...">
                                             </div>
-                                            <div class="col-8 p-0">
+                                            <div class="col-8 p-0 ml-3">
                                                 <div class="pl-2 d-flex align-items-between flex-column h-100">
                                                     <p class="mb-auto card-text lh-1 text-sm">{{ $article_relate_1->title }}</p>
                                                     <div class="text-xs mt-2 d-flex justify-content-between">
@@ -228,7 +230,7 @@
                                             <div class="col-4 p-0">
                                                 <img src="{{ asset('storage/' . $article_relate_2->image) }}" class="img-fluid object-cover rounded" alt="...">
                                             </div>
-                                            <div class="col-8 p-0">
+                                            <div class="col-8 p-0 ml-3">
                                                 <div class="pl-2 d-flex align-items-between flex-column h-100">
                                                     <p class="mb-auto card-text lh-1 text-sm">{{ $article_relate_2->title }}</p>
                                                     <div class="text-xs mt-2 d-flex justify-content-between">
@@ -253,7 +255,7 @@
                                                 <p class="fs-4 text-primary p-0">{{ $item->count_article_id }}</p>
                                                 <p class="text-xs">Komentar</p>
                                             </div>
-                                            <div class="col-8 p-0">
+                                            <div class="col-8 p-0 ml-3">
                                                 <div class="pl-2 d-flex align-items-between flex-column h-100">
                                                     <p class="mb-auto card-text lh-1 text-sm">{{ $item->article->title }}</p>
                                                     <div class="text-xs mt-2 d-flex justify-content-between">

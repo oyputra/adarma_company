@@ -17,7 +17,7 @@ class CreateProductRequestsTable extends Migration
             $table->id();
             $table->integer('product_id');
             $table->string('name');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('phone_number');
             $table->string('address');
             $table->integer('request_product');

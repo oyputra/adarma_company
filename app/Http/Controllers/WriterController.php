@@ -50,7 +50,7 @@ class WriterController extends Controller
 
         Writer::create($validated);
 
-        return redirect()->route('writer.index');
+        return redirect()->route('writer.index')->with('success', 'Penulis berhasil dibuat!');
     }
 
     /**
@@ -105,7 +105,7 @@ class WriterController extends Controller
 
         Writer::find($id)->update($validated);
         
-        return redirect()->route('writer.index');
+        return redirect()->route('writer.index')->with('success', 'Penulis berhasil diperbarui!');
     }
 
     /**

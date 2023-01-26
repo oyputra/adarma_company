@@ -14,11 +14,11 @@
         <div class="user-name">
             {{ auth()->user()->name }}
         </div>
-        <div class="user-designation mt-3 text-sm">
-            <span class="p-2 bg-secondary rounded text-black">
+        {{-- <div class="user-designation mt-3" style="font-size: 0.7em">
+            <span class="p-1 bg-secondary rounded text-black">
                 {{ auth()->user()->role->name }}
             </span>
-        </div>
+        </div> --}}
     </div>
     <ul class="nav">
         <li class="nav-item mb-1 @if ($title == 'Dashboard') active @endif">

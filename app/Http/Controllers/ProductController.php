@@ -65,7 +65,7 @@ class ProductController extends Controller
 
         Product::create($validated);
 
-        return redirect()->route('product.index');
+        return redirect()->route('product.index')->with('success', 'Produk berhasil dibuat!');
     }
 
     /**
@@ -146,7 +146,7 @@ class ProductController extends Controller
 
         Product::where('id', $product->id)->update($validated);
 
-        return redirect()->route('product.index');
+        return redirect()->route('product.index')->with('success', 'Produk berhasil diperbarui!');
     }
 
     /**
@@ -161,6 +161,6 @@ class ProductController extends Controller
         unlink(public_path('storage/' . $product->image));
         $product->delete();
 
-        return redirect()->route('product.index');
+        return redirect()->route('product.index')->with('success', 'Produk berhasil dihapus!');
     }
 }

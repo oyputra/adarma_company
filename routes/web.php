@@ -51,6 +51,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function () {
     // Profile
     Route::get('profile', [DashboardController::class, 'profile'])->name('profile');
     Route::put('profile', [DashboardController::class, 'profile_update'])->name('profile.update');
+    Route::delete('profile', [DashboardController::class, 'profile_image_destroy'])->name('profile.image.destroy');
     Route::put('password', [DashboardController::class, 'password'])->name('password');
     
     // Storage Link

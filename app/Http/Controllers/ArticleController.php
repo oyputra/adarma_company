@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\Article;
 use App\Model\CategoryArticle;
+use App\Model\Comment;
 use App\Model\LandingPage;
 use App\Model\Writer;
 use Illuminate\Http\Request;
@@ -60,7 +61,7 @@ class ArticleController extends Controller
 
         Article::create($validated);
 
-        return redirect()->route('article.index');
+        return redirect()->route('article.index')->with('success', 'Artikel berhasil dibuat!');
     }
     public function show(Article $article)
     {
@@ -77,8 +78,9 @@ class ArticleController extends Controller
         $articles = Article::get();
         $category = CategoryArticle::get();
         $landingpage = LandingPage::latest()->first();
+        $writers = Writer::get();
 
-        return view('dashboard.article.edit', compact('landingpage', 'article', 'articles', 'category', 'title'));
+        return view('dashboard.article.edit', compact('landingpage', 'article', 'articles', 'category', 'title', 'writers'));
     }
     public function update(Request $request, $id)
     {
@@ -120,12 +122,17 @@ class ArticleController extends Controller
         
         Article::where('id', $article->id)->update($validated);
 
-        return redirect()->route('article.index');
+        return redirect()->route('article.index')->with('success', 'Artikel berhasil diperbarui!');
     }
     public function destroy(Article $article)
     {
         $articles = Article::get();
-
+        $comments = Comment::where('article_id', $article->id)->get();
+        
+        foreach ($comments as $row) {
+            $row->delete();   
+        }
+        
         foreach ($articles as $row) {
             $row->where('relate_article_first', $article->id)->update([
                 'relate_article_first' => null,
@@ -139,6 +146,6 @@ class ArticleController extends Controller
         unlink(public_path('storage/' . $article->image));
         $article->delete();
 
-        return redirect()->route('article.index');
+        return redirect()->route('article.index')->with('success', 'Artikel berhasil dihapus!');
     }
 }

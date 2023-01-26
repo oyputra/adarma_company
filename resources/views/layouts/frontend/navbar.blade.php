@@ -10,7 +10,7 @@
         @endif" width="30" height="30" class="d-inline-block align-text-top">
     </a>
     <div class="collapse navbar-collapse bg-navbar-responsive" id="navbarTogglerDemo03">
-        <div class="d-flex me-auto">
+        <div class="d-flex me-auto my-2">
             <a class="navbar-brand hidden-responsive" href="{{ url('/') }}">
                 <img src="@if (isset($landingpage->img_logo))
                     {{ asset('storage/' . $landingpage->img_logo) }}

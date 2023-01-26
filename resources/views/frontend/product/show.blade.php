@@ -113,9 +113,11 @@
                                         <div class="mb-3">
                                             <label for="request_product" class="col-form-label">Request Product</label>
                                             <div class="row">
-                                                <div class="col-md-12 d-flex align-items-center">
-                                                    <input type="number" min="1" class="form-control col-md-8" id="request_product" name="request_product" value="{{ old('request_product') }}" required />
-                                                    <div class="col-md-4">/ {{ $product->unit }}</div>
+                                                <div class="col-md-12 col-12 d-flex align-items-center">
+                                                    <div class="col-md-9 col-9">
+                                                        <input type="number" min="1" class="form-control" id="request_product" name="request_product" value="{{ old('request_product') }}" required />
+                                                    </div>
+                                                    <div class="col-md-3 col-3 ml-3">/ {{ $product->unit }}</div>
                                                 </div>
                                             </div>
                                             

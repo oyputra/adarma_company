@@ -87,7 +87,7 @@ class ProductRequestController extends Controller
 
         ProductRequest::where('id', $product_request->id)->update($validated);
 
-        return redirect()->route('product.request.index')->with('success', 'Product request status has been changed successfully!');
+        return redirect()->route('product.request.index')->with('success', 'Permintaan produk berhasil diperbarui!');
     }
 
     /**
@@ -101,6 +101,6 @@ class ProductRequestController extends Controller
         $product_request = ProductRequest::find($id);
         $product_request->delete();
 
-        return redirect()->route('product.request.index')->with('success', 'Product request has been deleted successfully!');
+        return redirect()->route('product.request.index')->with('success', 'Permintaan produk berhasil dihapus!');
     }
 }
