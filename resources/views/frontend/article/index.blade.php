@@ -54,49 +54,56 @@
                 </div>
             </div>
         @endif
-    </section>  
-    @if (count($articles) >= 1)
-        <section class="@if (isset($article)) mt-article-index @endif">
-            <div class="container">
-                <div class="row">
-                    <div class="my-5 d-flex justify-content-between">
-                        <div>
-                            <h3 class="mr-3">{{ count($articles) }} Article</h3>
-                        </div>
-                        <div class="dropdown">
-                            <button class="border-category dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                              Filter Category
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" href="{{ route('article') }}">All Product</a></li>
-                                @foreach ($category as $row)
-                                    <li><a class="dropdown-item" href="{{ route('article.filter', strtolower($row->name)) }}">{{ $row->name }}</a></li>
-                                @endforeach
-                            </ul>
+    </section>
+
+    @if (isset($article))
+        @if (count($articles) >= 1 && isset($article))
+            <section class="@if (isset($article)) mt-article-index @endif">
+                <div class="container">
+                    <div class="row">
+                        <div class="my-5 d-flex justify-content-between">
+                            <div>
+                                <h3 class="mr-3">{{ count($articles) }} Article</h3>
+                            </div>
+                            <div class="dropdown">
+                                <button class="border-category dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                Filter Category
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li><a class="dropdown-item" href="{{ route('article') }}">All Product</a></li>
+                                    @foreach ($category as $row)
+                                        <li><a class="dropdown-item" href="{{ route('article.filter', strtolower($row->name)) }}">{{ $row->name }}</a></li>
+                                    @endforeach
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row row-cols-md-3 row-cols-1">
-                    @foreach ($articles as $item)
-                        <div class="col my-3">
-                            <div class="card rounded-shadow-card">
-                                <img src="{{ asset('storage/' . $item->image) }}" class="card-img-top rounded-shadow-card-top object-cover" style="height: 250px">
-                                <div class="card-body">
-                                    <div>
-                                        <div class="d-flex justify-content-between">
-                                            <p class="card-text text-muted text-sm">{{ $item->category->name }}</p>
-                                            <p class="card-text text-muted text-sm">{{ date('d F Y', strtotime($item->created_at)) }}</p>
+                    <div class="row row-cols-md-3 row-cols-1">
+                        @foreach ($articles as $item)
+                            <div class="col my-3">
+                                <div class="card rounded-shadow-card">
+                                    <img src="{{ asset('storage/' . $item->image) }}" class="card-img-top rounded-shadow-card-top object-cover" style="height: 250px">
+                                    <div class="card-body">
+                                        <div>
+                                            <div class="d-flex justify-content-between">
+                                                <p class="card-text text-muted text-sm">{{ $item->category->name }}</p>
+                                                <p class="card-text text-muted text-sm">{{ date('d F Y', strtotime($item->created_at)) }}</p>
+                                            </div>
+                                            <h5 class="card-title text-sm-phone">{{ $item->title }}</h5>
+                                            <a href="{{ route('article.show', $item->slug) }}" class="btn btn-dark text-white rounded-pill mt-3"><span class="px-1 text-sm-phone">Selengkapnya</span></a>
                                         </div>
-                                        <h5 class="card-title text-sm-phone">{{ $item->title }}</h5>
-                                        <a href="{{ route('article.show', $item->slug) }}" class="btn btn-dark text-white rounded-pill mt-3"><span class="px-1 text-sm-phone">Selengkapnya</span></a>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </div>
                 </div>
+            </section>
+        @else
+            <div class="d-flex justify-content-center" style="margin: 450px 0 250px 0">
+                <p>Belum ada Articles!</p>
             </div>
-        </section>
+        @endif
     @else
         <div class="d-flex justify-content-center" style="margin: 250px 0">
             <p>Belum ada Articles!</p>

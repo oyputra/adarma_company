@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
        
     <!-- Styles -->
     {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
@@ -20,7 +21,7 @@
     <title>Adarma Mandiri @if (isset($title)) | {{ $title }} @endif</title>
     
   </head>
-  <body>
+  <body class="d-flex flex-column min-vh-100">
     @include('layouts.frontend.flash-message')
 
     @yield('content')    

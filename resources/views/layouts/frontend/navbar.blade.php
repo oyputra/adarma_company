@@ -1,13 +1,13 @@
 <div class="container">
-    <button class="navbar-toggler bg-black my-4" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon fs-6"></span>
+    <button class="navbar-toggler custom-toggler my-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-toggler my-4" href="{{ url('/') }}">
+    <a class="navbar-toggler my-2" href="{{ url('/') }}">
         <img src="@if (isset($landingpage->img_logo))
             {{ asset('storage/' . $landingpage->img_logo) }}
         @else
             {{ asset('images/logo.png') }}
-        @endif" width="30" height="30" class="d-inline-block align-text-top">
+        @endif" class="logo-responsive d-inline-block align-text-top">
     </a>
     <div class="collapse navbar-collapse bg-navbar-responsive" id="navbarTogglerDemo03">
         <div class="d-flex me-auto my-2">
@@ -19,43 +19,43 @@
                 @endif" width="50" height="50" class="d-inline-block align-text-top">
             </a>
             <div class="text-white">
-                <div class="fw-bolder fs-3">CV. Arta Mandiri</div>
-                <div class="lead fs-6">Agricultural And Industrial Export Company</div>
+                <div class="fw-bolder subtitle-2">CV. Arta Mandiri</div>
+                <div class="lead subtitle-1">Agricultural And Industrial Export Company</div>
             </div>
         </div>
         
-        <ul class="navbar-nav mb-2 mb-lg-0 topnav my-3">
-            <li class="nav-item">
-                <a class="nav-link px-4 text-white" aria-current="page" href="{{ url('/') }}">Home</a>
+        <ul class="navbar-nav topnav mb-2 mb-lg-0 my-3 subtitle-1 gap-md-4">
+            <li class="nav-item text-center">
+                <a class="nav-link text-white rounded-3" aria-current="page" href="{{ url('/') }}">Home</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link px-4 text-white" aria-current="page" href="{{ url('/#about') }}">About</a>
+            <li class="nav-item text-center">
+                <a class="nav-link text-white rounded-3" aria-current="page" href="{{ url('/#about') }}">About</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link px-4 text-white" aria-current="page" href="{{ url('/#profil') }}">Profile</a>
+            <li class="nav-item text-center">
+                <a class="nav-link text-white" aria-current="page" href="{{ url('/#profil') }}">Profile</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link px-4 text-white" aria-current="page" href="{{ route('product') }}">Product</a>
+            <li class="nav-item text-center">
+                <a class="nav-link text-white rounded-3" aria-current="page" href="{{ route('product') }}">Product</a>
             </li>
-            <li class="nav-item margin-right-1">
-                <a class="nav-link px-4 text-white" aria-current="page" href="{{ route('article') }}">Article</a>
+            <li class="nav-item text-center">
+                <a class="nav-link text-white rounded-3 " aria-current="page" href="{{ route('article') }}">Article</a>
             </li>
 
             @guest
-            <li class="border-left-nav pl-3 margin-top-1">
-                <a class="px-4 btn btn-outline-light rounded-3" aria-current="page" href="{{ url('login') }}">Login</a>
+            <li class="nav-item text-center margin-top-1">
+                <a class="nav-link text-white rounded-3 subtitle-1" aria-current="page" href="{{ url('login') }}">Sign In</a>
             </li>
             @else
-            <li class="border-left-nav pl-3 margin-top-1">
+            <li class="margin-top-1">
                 <div class="dropdown">
-                    <a class="dropdown-toggle px-3 btn btn-light rounded-3" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="dropdown-toggle px-3 btn btn-light rounded-3 subtitle-1" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Account
                     </a>
                     <ul class="dropdown-menu mt-2" aria-labelledby="navbarDropdown">
                         <li class="text-green px-3">{{ explode(' ', trim(Auth::user()->name))[0] }}</li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" href="{{ route('dashboard') }}">
+                            <a class="dropdown-item d-flex align-items-center subtitle-1" href="{{ route('dashboard') }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-patch-check-fill text-green" viewBox="0 0 16 16">
                                     <path d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708z"/>
                                 </svg>
@@ -73,7 +73,7 @@
                         </li> --}}
                         <li><hr class="dropdown-divider"></li>
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <a class="dropdown-item d-flex align-items-center subtitle-1" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
                                     <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>

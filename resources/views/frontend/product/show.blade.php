@@ -149,7 +149,7 @@
                     <p><a href="{{ route('product') }}">View All <i class="fa fa-long-arrow-right"></i></a></p>
                 </div>
             </div>
-            <div class="row row-cols-md-4 row-cols-2" style="min-height: 400px">
+            <div class="row row-cols-lg-4 row-cols-md-2 row-cols-sm-1" style="min-height: 400px">
                 @foreach ($products as $item)
                     <div class="col my-3">
                         <div class="card rounded-shadow-card">

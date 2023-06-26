@@ -31,8 +31,9 @@ class FrontEndController extends Controller
         if ($article != null) {
             $articles = Article::where('id', '!=', $article->id)->latest()->get();
         } else {
-            $articles = 0;
+            $articles = null;
         }
+
         $landingpage = LandingPage::latest()->first();
 
         return view('frontend.article.index', compact('article', 'title', 'articles', 'category', 'landingpage'));
